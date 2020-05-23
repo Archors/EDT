@@ -11,17 +11,17 @@ package Model;
  */
 public class UTILISATEUR {
     //Attributs
-    private int ID=0;
+    protected int ID=0;
     //Email de l'utilisateur, nom@gmail.com
-    private String EMAIL = "";
+    protected String EMAIL = "";
     //mot de passe de l'utilisateur = nom
-    private String PASSWD="";
+    protected String PASSWD="";
     //nom de famille de l'utilisateur, utilisé pour mdp
-    private String NOM="";
+    protected String NOM="";
     //prénom de l'utilisateur
-    private String PRENOM="";
+    protected String PRENOM="";
     // si 1--> admin || 2--> referent || 3--> prof || 4--> etudiant
-    private int DROIT =0;
+    protected int DROIT =0;
     
     //Méthodes
     //constructeur

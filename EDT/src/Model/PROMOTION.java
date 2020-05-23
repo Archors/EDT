@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Model;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -13,6 +15,7 @@ public class PROMOTION {
     private int ID=0;
     //String sous la forme de l'année de la promotion
     private String NOM="";
+    private Set<GROUPE> listGROUPES =new HashSet<GROUPE>();
     
     public PROMOTION(){
     }
@@ -40,4 +43,44 @@ public class PROMOTION {
     public void setNOM(String NOM){
         this.NOM=NOM;
     }
+        public Set<GROUPE> getlistGROUPES(){
+        return listGROUPES;
+    }
+    //setterlistETUDIANT    
+    public void setlistGROUPES(Set<GROUPE> listGROUPES){
+        this.listGROUPES=listGROUPES;
+    }
+    //ajouter un etudiant dans la liste
+    public void addGROUPES (GROUPE groupe){
+        if(this.listGROUPES.contains(groupe)!=true)
+            this.listGROUPES.add(groupe);
+    }
+    
+    public void removeETUDIANT(GROUPE groupe){
+        if(this.listGROUPES.contains(groupe) == true)
+            this.listGROUPES.remove(groupe);
+    }
+    
+    public boolean equals(GROUPE cls){
+        return this.getID()== cls.getID();
+    }
+    int i;
+        public void afficherGROUPE(){
+           
+for (GROUPE groupe : listGROUPES)
+{
+    i++;
+    System.out.println(groupe.getNOM());
+}
+
+}
+public void afficherPROMOTION(){
+           
+for (GROUPE groupe : listGROUPES)
+{
+    System.out.println(groupe.getNOM());
+}
+
+}
+    
 }
