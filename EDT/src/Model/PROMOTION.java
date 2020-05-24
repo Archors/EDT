@@ -64,12 +64,11 @@ public class PROMOTION {
     public boolean equals(GROUPE cls){
         return this.getID()== cls.getID();
     }
-    int i;
+
         public void afficherGROUPE(){
            
 for (GROUPE groupe : listGROUPES)
 {
-    i++;
     System.out.println(groupe.getNOM());
 }
 
