@@ -8,7 +8,13 @@
  *
  * @author Milou
  */
-package Model;
+package requete;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.sql.DataSource;
+import java.sql.SQLException;
+
 public class Main {
 
     /**
@@ -16,7 +22,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        
+    /*    
     PROMOTION vingtdeux = new PROMOTION();
     GROUPE TD01 = new GROUPE(1, "TD01");
     ETUDIANT Delahegue= new ETUDIANT(15,1,"delahegue@gmail.com","delahegue","Delahegue","Emilien",4);
@@ -31,25 +37,25 @@ public class Main {
     SITE E1= new SITE(1,"E1");
     SALLE propre=new SALLE(1,"propre",60);
     SALLE paspropre=new SALLE(2,"paspropre",40);
-    E1.addSALLE(propre);
+   E1.addSALLE(propre);
     E1.addSALLE(paspropre);
     E1.afficherSITE();
     
     COURS Java =new COURS(1,"Java");
-    COURS C=new COURS (2,"C");
+  COURS C=new COURS (2,"C");
     
     TYPE_COURS CI=new TYPE_COURS(1,"CI");
     TYPE_COURS TP=new TYPE_COURS(2,"TP");
     
     SEANCE prems = new SEANCE(1,"ok", "ok", "ok", "ok", 1);
-    prems.addCOURS(Java);
+  prems.addCOURS(Java);
     prems.addCOURS(C);
     prems.addTYPE_COURS(CI);
-    prems.addTYPE_COURS(TP);
+   prems.addTYPE_COURS(TP);
     
     prems.afficherSEANCE();
     
-    
+    */ 
     }
     
 }

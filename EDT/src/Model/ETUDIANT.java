@@ -12,13 +12,13 @@ package Model;
 public class ETUDIANT extends UTILISATEUR{
     private int NUMERO;
     
-    ETUDIANT()
+    public ETUDIANT()
     {
         super();
         NUMERO=0;
     }
 
-    ETUDIANT(int NUMERO, int ID, String EMAIL, String PASSWD, String NOM, String PRENOM, int DROIT){
+   public ETUDIANT(int NUMERO, int ID, String EMAIL, String PASSWD, String NOM, String PRENOM, int DROIT){
         super(ID, EMAIL, PASSWD, NOM, PRENOM, DROIT);
         this.NUMERO=NUMERO;
     }
