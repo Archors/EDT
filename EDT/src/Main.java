@@ -8,7 +8,13 @@
  *
  * @author Milou
  */
-package requete;
+import requete.ETUDIANTDAO;
+import Model.ETUDIANT;
+import Model.UTILISATEUR;
+import requete.UTILISATEURDAO;
+import Model.PROMOTION;
+import requete.PROMOTIONDAO;
+import requete.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +27,21 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+     
+      PROMOTION jacques = new PROMOTION();
+      DAO<PROMOTION> test= new PROMOTIONDAO();
+      jacques=test.find(1);
+      jacques.afficherPROMOTION();
+              
+      
+      
+      
+   // ETUDIANT tiago=new ETUDIANT();
+   // DAO<ETUDIANT> test = new ETUDIANTDAO();
+   // tiago=test.find(8);
+   // tiago.afficher();
+    
+    
         
     /*    
     PROMOTION vingtdeux = new PROMOTION();

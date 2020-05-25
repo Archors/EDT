@@ -73,11 +73,11 @@ for (GROUPE groupe : listGROUPES)
 }
 
 }
-public void afficherPROMOTION(){        
-for (GROUPE groupe : listGROUPES)
-{
-    System.out.println(groupe.getNOM());
-}
+public void afficherPROMOTION(){   
+    if (this.NOM=="")
+
+ 
+    System.out.println(this.NOM);
 
 }
     

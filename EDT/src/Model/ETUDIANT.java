@@ -10,25 +10,25 @@ package Model;
  * @author Milou
  */
 public class ETUDIANT extends UTILISATEUR{
-    private int NUMERO;
+    private String NUMERO;
     
     public ETUDIANT()
     {
         super();
-        NUMERO=0;
+        NUMERO="";
     }
 
-   public ETUDIANT(int NUMERO, int ID, String EMAIL, String PASSWD, String NOM, String PRENOM, int DROIT){
+   public ETUDIANT(int ID,String NUMERO, String EMAIL, String PASSWD, String NOM, String PRENOM, int DROIT){
         super(ID, EMAIL, PASSWD, NOM, PRENOM, DROIT);
         this.NUMERO=NUMERO;
     }
     
     //getter PRENOM
-    public int NUMERO(){
+    public String NUMERO(){
         return NUMERO;
     }
     //setterPRENOM
-    public void setNUMERO(int NUMERO){
+    public void setNUMERO(String NUMERO){
         this.NUMERO=NUMERO;
     }
     

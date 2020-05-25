@@ -5,18 +5,18 @@
  */
 package requete;
 import java.sql.Connection;
+import java.sql.*;
+
 /**
  *
  * @author Milou
  */
 public abstract class DAO <D> {
-    protected Connection connection = null;
+    
+    Connexion conn =new Connexion();
+    protected Connection connection = conn.getConnexion();
     
 
-
-public DAO(Connection connection){
-    this.connection=connection;
-}
 
 public abstract boolean create (D obj);
 public abstract boolean delete(D obj);

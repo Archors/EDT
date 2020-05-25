@@ -7,7 +7,7 @@ package requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import Model.ETUDIANT;
+import Model.UTILISATEUR;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
@@ -15,36 +15,36 @@ import java.sql.SQLException;
  *
  * @author Milou
  */
-public class ETUDIANTDAO extends DAO<ETUDIANT> {
+public class UTILISATEURDAO extends DAO<UTILISATEUR> {
     
-public ETUDIANTDAO(){}
+public UTILISATEURDAO(){}
 
-public boolean create(ETUDIANT obj){
+public boolean create(UTILISATEUR obj){
     return false; 
 }
 
 
-public boolean delete(ETUDIANT obj){
+public boolean delete(UTILISATEUR obj){
     return false; 
 }
 
 
-public boolean update(ETUDIANT obj){
+public boolean update(UTILISATEUR obj){
     return false; 
 }
 
 
-public ETUDIANT find(int ID){
-    ETUDIANT etudiant= new ETUDIANT();
+    public UTILISATEUR find(int ID){
+    UTILISATEUR utilisateur= new UTILISATEUR();
     
     try{
         ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ETUDIANT WHERE ID_UTILISATEUR = " +ID);
         if(result.first())
-             etudiant=new ETUDIANT(ID, result.getString("NUMERO"), result.getString("EMAIL"), result.getString("PASSWD"), result.getString("NOM"), result.getString("PRENOM"), result.getInt("DROIT"));
+             utilisateur=new UTILISATEUR(ID, result.getString("EMAIL"), result.getString("PASSWD"), result.getString("NOM"), result.getString("PRENOM"), result.getInt("DROIT"));
     }catch (SQLException e){
         e.printStackTrace();
     }
-    return etudiant;
+    return utilisateur;
 
     }
 
