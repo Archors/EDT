@@ -74,7 +74,6 @@ for (GROUPE groupe : listGROUPES)
 
 }
 public void afficherPROMOTION(){   
-    if (this.NOM=="")
 
  
     System.out.println(this.NOM);

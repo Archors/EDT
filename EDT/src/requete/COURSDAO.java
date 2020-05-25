@@ -7,7 +7,7 @@ package requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import Model.GROUPE;
+import Model.COURS;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
@@ -15,37 +15,36 @@ import java.sql.SQLException;
  *
  * @author Milou
  */
-public class GROUPEDAO extends DAO<GROUPE> {
+public class COURSDAO extends DAO<COURS> {
     
-public GROUPEDAO(){}
+public COURSDAO(){}
 
-public boolean create(GROUPE obj){
+public boolean create(COURS obj){
+    return false; 
+}
+
+public boolean delete(COURS obj){
     return false; 
 }
 
 
-public boolean delete(GROUPE obj){
+public boolean update(COURS obj){
     return false; 
 }
 
 
-public boolean update(GROUPE obj){
-    return false; 
-}
-
-
-    public GROUPE find(int ID){
-    GROUPE groupe= new GROUPE();
+    public COURS find(int ID){
+    COURS cours= new COURS();
     
     try{
-        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM GROUPE WHERE ID = " +ID);
+        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM COURS WHERE ID = " +ID);
         if(result.first())
-             groupe=new GROUPE(ID, result.getString("Nom"));
+             cours=new COURS(ID, result.getString("Nom"));
     }catch (SQLException e){
         e.printStackTrace();
     }
     
-    return groupe;
+    return cours;
 
     }
 

@@ -64,12 +64,19 @@ public class GROUPE {
         return this.getID()== cls.getID();
     }
     
-        public void afficherGROUPE(){
+        public void afficherLISTEETUDIANT(){
            
 for (ETUDIANT etudiant : listETUDIANT)
 {
     System.out.println(etudiant.getNOM());
 }
+
+}
+        
+public void afficherGROUPE(){
+           
+    System.out.println(this.NOM);
+
 
 }
     

@@ -14,7 +14,20 @@ import Model.UTILISATEUR;
 import requete.UTILISATEURDAO;
 import Model.PROMOTION;
 import requete.PROMOTIONDAO;
+import Model.GROUPE;
+import requete.GROUPEDAO;
+
 import requete.DAO;
+
+import Model.COURS;
+import requete.COURSDAO;
+
+import Model.SITE;
+import requete.SITEDAO;
+
+import Model.SALLE; 
+import requete.SALLEDAO; 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,8 +44,42 @@ public class Main {
       PROMOTION jacques = new PROMOTION();
       DAO<PROMOTION> test= new PROMOTIONDAO();
       jacques=test.find(1);
-      jacques.afficherPROMOTION();
-              
+        jacques.afficherPROMOTION();
+      
+      GROUPE Paul = new GROUPE();
+      DAO <GROUPE> test2 = new  GROUPEDAO();
+      Paul=test2.find(1);
+      Paul.afficherGROUPE();
+      
+      COURS Java =new COURS();
+      DAO <COURS> test3 = new COURSDAO();
+      Java=test3.find(1);
+      Java.afficherCOURS();
+      
+      SALLE E304 = new SALLE();
+      DAO <SALLE> test5 = new SALLEDAO();
+      E304=test5.find(5);
+      E304.afficherSALLE();
+      
+      SALLE E306 = new SALLE();
+      DAO <SALLE> test6 = new SALLEDAO();
+      E306=test6.find(6);
+      E306.afficherSALLE();
+      
+      SITE E1 = new SITE();
+      DAO <SITE> test4 = new SITEDAO();
+      E1=test4.find(1);
+      
+      
+      E1.addSALLE(E304);
+      E1.addSALLE(E306);
+      
+      E1.afficherSITE();
+      
+      
+      
+      
+      
       
       
       

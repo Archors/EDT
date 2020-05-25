@@ -40,4 +40,7 @@ public class SALLE {
         this.NOM=NOM;
     }
     
+    public void afficherSALLE(){
+        System.out.println(this.NOM);
+    }
 }

@@ -7,7 +7,7 @@ package requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import Model.GROUPE;
+import Model.SALLE;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
@@ -15,37 +15,36 @@ import java.sql.SQLException;
  *
  * @author Milou
  */
-public class GROUPEDAO extends DAO<GROUPE> {
+public class SALLEDAO extends DAO<SALLE> {
     
-public GROUPEDAO(){}
+public SALLEDAO(){}
 
-public boolean create(GROUPE obj){
+public boolean create(SALLE obj){
+    return false; 
+}
+
+public boolean delete(SALLE obj){
     return false; 
 }
 
 
-public boolean delete(GROUPE obj){
+public boolean update(SALLE obj){
     return false; 
 }
 
 
-public boolean update(GROUPE obj){
-    return false; 
-}
-
-
-    public GROUPE find(int ID){
-    GROUPE groupe= new GROUPE();
+    public SALLE find(int ID){
+    SALLE salle= new SALLE();
     
     try{
-        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM GROUPE WHERE ID = " +ID);
+        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM SALLE WHERE ID = " +ID);
         if(result.first())
-             groupe=new GROUPE(ID, result.getString("Nom"));
+             salle=new SALLE(ID, result.getString("Nom"), result.getInt("CAPACITE"));
     }catch (SQLException e){
         e.printStackTrace();
     }
     
-    return groupe;
+    return salle;
 
     }
 
