@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import Model.ETUDIANT;
+import Model.UTILISATEUR;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
@@ -38,7 +39,7 @@ public ETUDIANT find(int ID){
     ETUDIANT etudiant= new ETUDIANT();
     
     try{
-        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ETUDIANT WHERE ID_UTILISATEUR = " +ID);
+        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ETUDIANT JOIN UTILISATEUR u ON u.ID = ETUDIANT.ID_UTILISATEUR WHERE u.ID=" +ID);
         if(result.first())
              etudiant=new ETUDIANT(ID, result.getString("NUMERO"), result.getString("EMAIL"), result.getString("PASSWD"), result.getString("NOM"), result.getString("PRENOM"), result.getInt("DROIT"));
     }catch (SQLException e){

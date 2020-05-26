@@ -32,8 +32,12 @@ public class ETUDIANT extends UTILISATEUR{
         this.NUMERO=NUMERO;
     }
     
-    public void afficher(){
-        System.out.print(this.NUMERO);
+    public void afficherETUDIANT(){
+        System.out.println(this.ID);
+        System.out.println(this.NUMERO);
+        System.out.println(this.EMAIL);
+        System.out.println(this.NOM);
+        System.out.println(this.DROIT);
     }
     
    }

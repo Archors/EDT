@@ -89,5 +89,9 @@ public class UTILISATEUR {
     public void SetDROIT(int DROIT){
         this.DROIT= DROIT;
     }
+    
+    public void afficherUTILISATEUR(){
+        System.out.println(this.NOM);
+    }
                 
 }

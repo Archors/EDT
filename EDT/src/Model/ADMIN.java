@@ -10,7 +10,26 @@ package Model;
  * @author Milou
  */
 public class ADMIN extends UTILISATEUR{
-    public ADMIN(){
+    
+    public ADMIN()
+    {
         super();
     }
-}
+
+   public ADMIN(int ID, String EMAIL, String PASSWD, String NOM, String PRENOM, int DROIT){
+        super(ID, EMAIL, PASSWD, NOM, PRENOM, DROIT);
+
+    }
+    
+    //getter PRENOM
+
+    
+    public void afficherADMIN(){
+        System.out.println(this.ID);
+        System.out.println(this.EMAIL);
+        System.out.println(this.NOM);
+        System.out.println(this.DROIT);
+    }
+    
+   }
+

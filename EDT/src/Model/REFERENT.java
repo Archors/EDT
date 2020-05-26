@@ -9,12 +9,27 @@ package Model;
  *
  * @author Milou
  */
-
-//REFERENT hérite d'UTILISATEUR
 public class REFERENT extends UTILISATEUR{
     
-    //constructeur
-    public REFERENT(){
+    public REFERENT()
+    {
         super();
     }
-}
+
+   public REFERENT(int ID, String EMAIL, String PASSWD, String NOM, String PRENOM, int DROIT){
+        super(ID, EMAIL, PASSWD, NOM, PRENOM, DROIT);
+
+    }
+    
+    //getter PRENOM
+
+    
+    public void afficherREFERENT(){
+        System.out.println(this.ID);
+        System.out.println(this.EMAIL);
+        System.out.println(this.NOM);
+        System.out.println(this.DROIT);
+    }
+    
+   }
+

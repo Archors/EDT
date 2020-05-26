@@ -38,7 +38,7 @@ public boolean update(UTILISATEUR obj){
     UTILISATEUR utilisateur= new UTILISATEUR();
     
     try{
-        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ETUDIANT WHERE ID_UTILISATEUR = " +ID);
+        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM UTILISATEUR WHERE ID = " +ID);
         if(result.first())
              utilisateur=new UTILISATEUR(ID, result.getString("EMAIL"), result.getString("PASSWD"), result.getString("NOM"), result.getString("PRENOM"), result.getInt("DROIT"));
     }catch (SQLException e){
