@@ -121,7 +121,6 @@ public class Main {
       ci=test11.find(1);
       
       
-      
       SEANCE zoom = new SEANCE();
       DAO <SEANCE> test12 =new SEANCEDAO();
       zoom=test12.find(1);
