@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package requete;
+package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import Model.ETUDIANT;
-import Model.UTILISATEUR;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 

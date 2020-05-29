@@ -8,43 +8,43 @@
  *
  * @author Milou
  */
-import requete.ETUDIANTDAO;
+import Model.ETUDIANTDAO;
 import Model.ETUDIANT;
 import Model.UTILISATEUR;
-import requete.UTILISATEURDAO;
+import Model.UTILISATEURDAO;
 import Model.PROMOTION;
-import requete.PROMOTIONDAO;
+import Model.PROMOTIONDAO;
 import Model.GROUPE;
-import requete.GROUPEDAO;
+import Model.GROUPEDAO;
 
-import requete.DAO;
+import Model.DAO;
 
 import Model.COURS;
-import requete.COURSDAO;
+import Model.COURSDAO;
 
 import Model.TYPE_COURS;
-import requete.TYPE_COURSDAO;
+import Model.TYPE_COURSDAO;
 
 import Model.SITE;
-import requete.SITEDAO;
+import Model.SITEDAO;
 
 import Model.SALLE; 
-import requete.SALLEDAO; 
+import Model.SALLEDAO; 
 
 import Model.ETUDIANT;
-import requete.ETUDIANTDAO;
+import Model.ETUDIANTDAO;
 
 import Model.UTILISATEUR;
-import requete.UTILISATEURDAO;
+import Model.UTILISATEURDAO;
 
 import Model.REFERENT;
-import requete.REFERENTDAO;
+import Model.REFERENTDAO;
 
 import Model.ADMIN;
-import requete.ADMINDAO;
+import Model.ADMINDAO;
 
 import Model.SEANCE;
-import requete.SEANCEDAO;
+import Model.SEANCEDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
