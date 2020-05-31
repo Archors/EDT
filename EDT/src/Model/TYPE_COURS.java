@@ -40,4 +40,8 @@ public class TYPE_COURS {
     public void setNOM(String NOM){
         this.NOM=NOM;
     }
+    
+    public void afficherTYPE(){
+        System.out.println(this.NOM);
+    }
 }
