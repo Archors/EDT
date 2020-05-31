@@ -46,6 +46,8 @@ import Model.ADMINDAO;
 import Model.SEANCE;
 import Model.SEANCEDAO;
 
+import Controller.GROUPE_EDT;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,6 +61,7 @@ public class Main {
      */
     public static void main(String[] args) {
      
+        /* 
       PROMOTION jacques = new PROMOTION();
       DAO<PROMOTION> test= new PROMOTIONDAO();
       jacques=test.find(1);
@@ -127,7 +130,10 @@ public class Main {
       
       zoom.addCOURS(Java);
       zoom.addTYPE_COURS(ci);
-      zoom.afficherSEANCE();
+      zoom.afficherSEANCE(); */
+
+      GROUPE_EDT test = new GROUPE_EDT();
+      test.voirGROUPE_SEANCE(1);
       
     }
     
