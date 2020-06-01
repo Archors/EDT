@@ -48,23 +48,7 @@ public boolean update(SEANCE obj){
       DAO<GROUPE> groupedaotest = new GROUPEDAO();
       groupetest=groupedaotest.find(result.getInt("ID_GROUPE"));
       
-      PROMOTION promotion = new PROMOTION();
-      DAO <PROMOTION> promotiondao = new PROMOTIONDAO();
-      promotion=promotiondao.find(result.getInt("ID_PROMOTION"));
-      System.out.println("Promotion : ");
-      promotion.afficherPROMOTION();
       
-      SALLE sallete = new SALLE();
-      DAO<SALLE> testsalle =new SALLEDAO();
-      sallete=testsalle.find(result.getInt("ID_SALLE"));
-      System.out.println("Voici la salle de la séance : ");
-      sallete.afficherSALLE();
-      
-      UTILISATEUR saignant = new UTILISATEUR();
-      DAO <UTILISATEUR> testsaignant = new UTILISATEURDAO();
-      saignant=testsaignant.find(result.getInt("ID_ENSEIGNANT"));
-      System.out.println("Voici le prof affecté : ");
-      saignant.afficherUTILISATEUR(); 
       
                 
     }catch (SQLException e){
