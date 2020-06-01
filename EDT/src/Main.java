@@ -64,12 +64,12 @@ public class Main {
      */
     public static void main(String[] args) {
      
-   //   GROUPE_EDT test = new GROUPE_EDT();
-     // test.voirGROUPE_SEANCE(1);
+      GROUPE_EDT test = new GROUPE_EDT();
+      test.voirGROUPE_SEANCE(1);
       
      // EtudiantEDT etudiantedt = new EtudiantEDT();
      // etudiantedt.voirETUDIANT_SEANCE("Bernard");
-      
+    /*  
       PROMOTION_EDT promotionedt =new PROMOTION_EDT();
       promotionedt.voirPROMOTION_SEANCE("2022");
       String SEMAINE = "Semaine";
@@ -81,6 +81,7 @@ public class Main {
       int id_type = 1; 
       ADD_SEANCE add_seance = new ADD_SEANCE();
       add_seance.AJOUTER_SEANCE(SEMAINE, DATE, HEURE_DEBUT, HEURE_FIN, ETAT,id_cours, id_type);
+*/
       
       
     }
