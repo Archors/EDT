@@ -75,8 +75,7 @@ for (ETUDIANT etudiant : listETUDIANT)
         
 public void afficherGROUPE(){
            
-    System.out.println("Le nom du groupe : " + this.NOM);
-
+    System.out.println(this.NOM);
 
 }
     

@@ -18,6 +18,7 @@ public class TYPE_COURSDAO extends DAO<TYPE_COURS> {
     
 public TYPE_COURSDAO(){}
 
+
 public boolean create(TYPE_COURS obj){
     return false; 
 }
@@ -38,7 +39,7 @@ public boolean update(TYPE_COURS obj){
     try{
         ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM TYPE_COURS WHERE ID = " +ID);
         if(result.first())
-             type_cours=new TYPE_COURS(ID, result.getString("Nom"));
+            type_cours=new TYPE_COURS(ID, result.getString("Nom")); 
     }catch (SQLException e){
         e.printStackTrace();
     }

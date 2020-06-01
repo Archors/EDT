@@ -131,16 +131,12 @@ public class SEANCE {
     }
 
     public void afficherSEANCE(){
-System.out.println("Seance du jour:"); 
-for (COURS cours : listCOURS)
-{
-    System.out.println(cours.getNOM());
-}
-
-for(TYPE_COURS type_cours : listTYPE_COURS)
-{
-    System.out.println(type_cours.getNOM());
-}
+        System.out.println("-------------------");  
+        System.out.println("SEMAINE : " + this.SEMAINE);
+        System.out.println("DATE : " + this.DATE);
+        System.out.println("HEURE_DEBUT : " + this.HEURE_DEBUT);
+        System.out.println("HEURE_FIN : " + this.HEURE_FIN);
+        System.out.println("ETAT : " + this.ETAT); 
 
 }
     

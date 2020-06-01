@@ -43,15 +43,15 @@ import java.sql.SQLException;
  *
  * @author Milou
  */
-public class EtudiantEDT extends ETUDIANTDAO {
-    public EtudiantEDT(){}
+public class PROMOTION_EDT extends ETUDIANTDAO {
+    public PROMOTION_EDT(){}
 
-    public void voirETUDIANT_SEANCE(String Nom)
+    public void voirPROMOTION_SEANCE(String Nom)
     {
         //retrouver le groupe en question
-
+/*
         try{ 
-      PreparedStatement ps= this.connection.prepareStatement("SELECT * FROM ETUDIANT JOIN UTILISATEUR u ON ETUDIANT.ID_UTILISATEUR = u.ID WHERE u.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      PreparedStatement ps= this.connection.prepareStatement("SELECT * FROM PROMOTION JOIN UTILISATEUR u ON ETUDIANT.ID_UTILISATEUR = u.ID WHERE u.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
        // ps.setString(Nom);
        ps.setString(1,Nom);
        ResultSet resultat = ps.executeQuery();
@@ -71,7 +71,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
         e.printStackTrace();
     }
         
-
+*/
 
     }
 
