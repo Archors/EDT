@@ -9,42 +9,33 @@ import Model.COURS;
 import Model.COURSDAO;
 
 import Model.DAO;
-import Model.Connexion;
 
 import Model.ETUDIANT;
-import Model.ETUDIANTDAO;
 
 import Model.GROUPE;
 import Model.GROUPEDAO;
 
-import Model.PROMOTION;
-import Model.PROMOTIONDAO;
-
-import Model.SALLE;
-import Model.SALLEDAO;
 
 import Model.SEANCE;
 import Model.SEANCEDAO;
 
-import Model.SITE;
-import Model.SITEDAO;
 
 import Model.TYPE_COURS;
 import Model.TYPE_COURSDAO;
 
-import Model.UTILISATEUR;
-import Model.UTILISATEURDAO;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 /**
  *
  * @author Milou
  */
 public class GROUPE_EDT extends GROUPEDAO {
     public GROUPE_EDT(){}
+
+    private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
 
     public void voirGROUPE_SEANCE(int ID)
     {
@@ -71,27 +62,40 @@ public class GROUPE_EDT extends GROUPEDAO {
         SEANCE seancetest= new SEANCE();
         DAO<SEANCE> seancedaotest = new SEANCEDAO();
         seancetest=seancedaotest.find(result.getInt("ID_SEANCE"));
-        
+        listSEANCE.add(seancetest);
         //affichage du type du cours en récupérant ID_TYPE par la requête SQL
         TYPE_COURS test = new TYPE_COURS();
         DAO<TYPE_COURS> test2 =new TYPE_COURSDAO();
         test=test2.find(result.getInt("ID_TYPE"));
-        test.afficherTYPE();
+        //test.afficherTYPE();
         
         //affichage du cours en récupérant l'ID Cours par la requete SQL
         COURS recupcours=new COURS();
         DAO<COURS> recupcoursdao = new COURSDAO();
         recupcours=recupcoursdao.find(result.getInt("ID_COURS"));
-
+        afficherLISTESEANCE();
         }
 
     }catch (SQLException e){
         e.printStackTrace();
     }
+}
+public void afficherLISTESEANCE(){
+           
+    for (SEANCE seance : listSEANCE)
+    {
+        System.out.println("............"+seance.getSEMAINE());
+    }
+    
+    }
+    public void addSEANCE (SEANCE seance){
+        if(this.listSEANCE.contains(seance)!=true)
+            this.listSEANCE.add(seance);
+    }
 
-
-
+    public Set<ETUDIANT> getlistSeance(){
+        return listSEANCE;
     }
 
 
-}
+    }
