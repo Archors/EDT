@@ -43,24 +43,26 @@ import java.sql.SQLException;
  *
  * @author Milou
  */
-public class PROMOTION_EDT extends ETUDIANTDAO {
-    public PROMOTION_EDT(){}
+public class ADD_SEANCE extends SEANCEDAO {
+    public ADD_SEANCE(){}
 
-    public void voirPROMOTION_SEANCE(String Nom)
+    public void AJOUTER_SEANCE(String SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, int id_cours, int id_type)
     {
         //retrouver le groupe en question
 
         try{ 
-      PreparedStatement ps= this.connection.prepareStatement("SELECT u.ID FROM PROMOTION JOIN GROUPE u ON PROMOTION.ID = u.ID_PROMOTION WHERE PROMOTION.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      PreparedStatement ps= this.connection.prepareStatement("INSERT INTO SEANCE (SEMAINE, DATE, HEURE_DEBUT, HEURE_FIN, ETAT,ID_COURS, ID_TYPE) VALUES (?, ?, ?, ?, ?, ?, ?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
        // ps.setString(Nom);
-       ps.setString(1,Nom);
-       ResultSet resultat = ps.executeQuery();
+       ps.setString(1,SEMAINE);
+       ps.setString(2,DATE);
+       ps.setString(3,HEURE_DEBUT);
+       ps.setString(4,HEURE_FIN);
+       ps.setInt(5,ETAT);
+       ps.setInt(6, id_cours);
+       ps.setInt(7, id_type);
+            int resultat = ps.executeUpdate();
 
-      while(resultat.next())
-        { 
-        GROUPE_EDT groupeedt = new GROUPE_EDT();
-        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID"));
-        }
+
     }catch (SQLException e){
         e.printStackTrace();
     }

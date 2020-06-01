@@ -56,11 +56,16 @@ public class GROUPE_EDT extends GROUPEDAO {
         groupe.afficherGROUPE();
       //retrouver les cours auquel il appartient
       try{
-
-        ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM GROUPE JOIN SEANCE_GROUPE a ON GROUPE.ID = a.ID_GROUPE JOIN SEANCE b ON a.ID_SEANCE = b.ID WHERE GROUPE.ID = " +ID);
-        while(result.next()) 
-        {
+          
+       
+        PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM GROUPE JOIN SEANCE_GROUPE a ON GROUPE.ID = a.ID_GROUPE JOIN SEANCE b ON a.ID_SEANCE = b.ID WHERE GROUPE.ID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ps.setInt(1,ID);
+        ResultSet result = ps.executeQuery();
         
+        while(result.next()) 
+            
+        
+        {    
             
         //on créee un objet séance contenant les informations récupérés (ID_SEANCE) de la BDD
         SEANCE seancetest= new SEANCE();
@@ -77,7 +82,7 @@ public class GROUPE_EDT extends GROUPEDAO {
         COURS recupcours=new COURS();
         DAO<COURS> recupcoursdao = new COURSDAO();
         recupcours=recupcoursdao.find(result.getInt("ID_COURS"));
-        
+
         }
 
     }catch (SQLException e){
