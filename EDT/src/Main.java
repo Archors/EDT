@@ -64,11 +64,11 @@ public class Main {
      */
     public static void main(String[] args) {
      
-      GROUPE_EDT test = new GROUPE_EDT();
-      test.voirGROUPE_SEANCE(1);
+      //GROUPE_EDT test = new GROUPE_EDT();
+      //test.voirGROUPE_SEANCE(1);
       
-     // EtudiantEDT etudiantedt = new EtudiantEDT();
-     // etudiantedt.voirETUDIANT_SEANCE("Bernard");
+      EtudiantEDT etudiantedt = new EtudiantEDT();
+      etudiantedt.voirETUDIANT_SEANCE("Bernard");
       
       /*PROMOTION_EDT promotionedt =new PROMOTION_EDT();
       promotionedt.voirPROMOTION_SEANCE("2022");

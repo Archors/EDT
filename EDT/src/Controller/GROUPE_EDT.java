@@ -84,45 +84,45 @@ public class GROUPE_EDT extends GROUPEDAO {
         UTILISATEUR saignant = new UTILISATEUR();
         DAO <UTILISATEUR> testsaignant = new UTILISATEURDAO();
         saignant=testsaignant.find(result.getInt("ID_ENSEIGNANT"));
-        System.out.println("Voici le prof affecté : ");
-        saignant.afficherUTILISATEUR(); 
+        //System.out.println("Voici le prof affecté : ");
+        //saignant.afficherUTILISATEUR(); 
         listUTILISATEUR.add(saignant);
         
         PROMOTION promotion = new PROMOTION();
         DAO <PROMOTION> promotiondao = new PROMOTIONDAO();
         promotion=promotiondao.find(result.getInt("ID_PROMOTION"));
-        System.out.println("Promotion : ");
-        promotion.afficherPROMOTION();
+        //System.out.println("Promotion : ");
+        //promotion.afficherPROMOTION();
         listPROMOTION.add(promotion);
 
         SALLE sallete = new SALLE();
         DAO<SALLE> testsalle =new SALLEDAO();
         sallete=testsalle.find(result.getInt("ID_SALLE"));
-        System.out.println("Voici la salle de la séance : ");
-        sallete.afficherSALLE();
+        //System.out.println("Voici la salle de la séance : ");
+        //sallete.afficherSALLE();
 
         }
 
     }catch (SQLException e){
         e.printStackTrace();
     }
-    afficherLISTEUTILISATEUR();
+    /*afficherLISTEENSEIGNANT();
     afficherLISTEPROMOTION();
-    afficherLISTESEANCE();
+    afficherLISTESEANCE();*/
 }
 public void afficherLISTESEANCE(){
            
     for (SEANCE seance : listSEANCE)
     {
-        System.out.println("............"+seance.getSEMAINE());
+        System.out.println(seance.getSEMAINE());
     }
     
     }
-public void afficherLISTEUTILISATEUR(){
+public void afficherLISTEENSEIGNANT(){
            
-    for (UTILISATEUR utilisateur : listUTILISATEUR)
+    for (UTILISATEUR enseignant : listUTILISATEUR)
     {
-        System.out.println("............"+utilisateur.getEMAIL());
+        System.out.println(enseignant.getEMAIL());
     }
     
 }
@@ -130,7 +130,7 @@ public void afficherLISTEPROMOTION(){
            
     for (PROMOTION promotion : listPROMOTION)
     {
-        System.out.println("............"+promotion.getNOM());
+        System.out.println(promotion.getNOM());
     }
     
     }
