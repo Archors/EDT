@@ -42,6 +42,8 @@ public class GROUPE_EDT extends GROUPEDAO {
     public GROUPE_EDT(){}
 
     private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+    private Set<UTILISATEUR> listUTILISATEUR =new HashSet<UTILISATEUR>();
+    private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
 
     public void voirGROUPE_SEANCE(int ID)
     {
@@ -78,19 +80,20 @@ public class GROUPE_EDT extends GROUPEDAO {
         COURS recupcours=new COURS();
         DAO<COURS> recupcoursdao = new COURSDAO();
         recupcours=recupcoursdao.find(result.getInt("ID_COURS"));
-        afficherLISTESEANCE();
         
         UTILISATEUR saignant = new UTILISATEUR();
         DAO <UTILISATEUR> testsaignant = new UTILISATEURDAO();
         saignant=testsaignant.find(result.getInt("ID_ENSEIGNANT"));
         System.out.println("Voici le prof affecté : ");
         saignant.afficherUTILISATEUR(); 
+        listUTILISATEUR.add(saignant);
         
         PROMOTION promotion = new PROMOTION();
         DAO <PROMOTION> promotiondao = new PROMOTIONDAO();
         promotion=promotiondao.find(result.getInt("ID_PROMOTION"));
         System.out.println("Promotion : ");
         promotion.afficherPROMOTION();
+        listPROMOTION.add(promotion);
 
         SALLE sallete = new SALLE();
         DAO<SALLE> testsalle =new SALLEDAO();
@@ -103,6 +106,9 @@ public class GROUPE_EDT extends GROUPEDAO {
     }catch (SQLException e){
         e.printStackTrace();
     }
+    afficherLISTEUTILISATEUR();
+    afficherLISTEPROMOTION();
+    afficherLISTESEANCE();
 }
 public void afficherLISTESEANCE(){
            
@@ -112,13 +118,45 @@ public void afficherLISTESEANCE(){
     }
     
     }
+public void afficherLISTEUTILISATEUR(){
+           
+    for (UTILISATEUR utilisateur : listUTILISATEUR)
+    {
+        System.out.println("............"+utilisateur.getEMAIL());
+    }
+    
+}
+public void afficherLISTEPROMOTION(){
+           
+    for (PROMOTION promotion : listPROMOTION)
+    {
+        System.out.println("............"+promotion.getNOM());
+    }
+    
+    }
     public void addSEANCE (SEANCE seance){
         if(this.listSEANCE.contains(seance)!=true)
             this.listSEANCE.add(seance);
     }
 
-    public Set<SEANCE> getlistSeance(){
+    public void addUTILISATEUR (UTILISATEUR utilisateur){
+        if(this.listUTILISATEUR.contains(utilisateur)!=true)
+            this.listUTILISATEUR.add(utilisateur);
+    }
+
+    public void addPROMOTION (PROMOTION promotion){
+        if(this.listPROMOTION.contains(promotion)!=true)
+            this.listPROMOTION.add(promotion);
+    }
+
+    public Set<UTILISATEUR> getlistUTILISATEUR(){
+        return listUTILISATEUR;
+    }
+    public Set<SEANCE> getlistSEANCE(){
         return listSEANCE;
+    }
+    public Set<PROMOTION> getlistPROMOTION(){
+        return listPROMOTION;
     }
 
 
