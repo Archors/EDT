@@ -49,9 +49,6 @@ public class Fenetre extends JFrame {
 
     connexion();
 
-    if(id == 1){
-        eleve();
-    }
 
     this.setVisible(true);
   }
@@ -82,7 +79,7 @@ public class Fenetre extends JFrame {
             public void actionPerformed(ActionEvent e){
               
                 String uname = username.getText();
-                char[] pwd = password.getPassword();
+                String pwd = password.getText();
                 CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
     connect.VERIFCONNEXION_UTILISATEUR(uname, pwd);
     if (connect.isConnexion()==false)
@@ -94,10 +91,13 @@ public class Fenetre extends JFrame {
     else {
         if(connect.getDroit()==4)
         {
+          System.out.println("test 3:");
     ETUDIANT etudiant = new ETUDIANT();
     etudiant=connect.getEtudiant();
     etudiant.afficherETUDIANT();
-    eleve(); 
+    System.out.println("test 1 :");
+
+    eleve(etudiant); 
         }
         else if (connect.getDroit()==1)
         {
@@ -131,11 +131,11 @@ public class Fenetre extends JFrame {
         this.setVisible(true);
     }
 
-  public void eleve(){
+  public void eleve(ETUDIANT etudiant){
 
     JTabbedPane onglet;
         //Création de plusieurs Panneau
-    Panneau tPan = new Panneau();
+    Panneau tPan = new Panneau(etudiant);
     Recapitulatif recap = new Recapitulatif();
       
     //Création de notre conteneur d'onglets
@@ -147,6 +147,8 @@ public class Fenetre extends JFrame {
       
     //On passe ensuite les onglets au content pane
     this.getContentPane().add(onglet);
+    System.out.println("test :");
+    etudiant.afficherETUDIANT();
     }
    
   public static void main(String[] args){

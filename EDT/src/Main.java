@@ -48,7 +48,7 @@ public class Main {
       Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
       Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
       listSEANCE = test.getlistSEANCE(); 
-      listTYPE_COURS = test.getListTYPE_COURS();
+    listTYPE_COURS = test.getListTYPE_COURS();
 
           for (SEANCE seance : listSEANCE)
     {

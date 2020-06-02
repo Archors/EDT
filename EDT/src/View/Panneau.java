@@ -25,6 +25,9 @@ import javax.swing.JComboBox;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JTextField;
+
+import Model.ETUDIANT;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
@@ -40,9 +43,11 @@ public class Panneau extends JPanel{
   private JPanel pan2 = new JPanel();
   private JPanel pan3 = new JPanel();
   private JComboBox combo = new JComboBox();
+  private ETUDIANT etudiant;
+
    
-  public Panneau(){
-    
+  public Panneau(ETUDIANT recupEtudiant){
+    etudiant = recupEtudiant;
     pan.add(menu());
     pan.add(semaine());
     pan.add(edt());
@@ -126,7 +131,7 @@ public JPanel edt(){
     //top.add(new JScrollPane(tableau));
 
 Object[][] data1 = {
-      {""},
+      {etudiant.NUMERO()},
       {""}
     };
 
