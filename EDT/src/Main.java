@@ -69,6 +69,7 @@ public class Main {
       
     EtudiantEDT etudiantedt = new EtudiantEDT();
     etudiantedt.voirETUDIANT_SEANCE("Bernard");
+
       
      // PROMOTION_EDT promotionedt =new PROMOTION_EDT();
      // promotionedt.voirPROMOTION_SEANCE("2022");

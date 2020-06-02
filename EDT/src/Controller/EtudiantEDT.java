@@ -71,6 +71,8 @@ public class EtudiantEDT extends ETUDIANTDAO {
         
         GROUPE_EDT groupeedt = new GROUPE_EDT();
         groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
+        //groupeedt.getlistSEANCE();
+        groupeedt.afficherLISTEENSEIGNANT();
         }
     }catch (SQLException e){
         e.printStackTrace();

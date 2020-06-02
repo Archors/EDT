@@ -5,23 +5,58 @@
  */
 package View;
 
+import Model.SEANCE;
+import java.awt.Color;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+import javax.swing.JTabbedPane;
 
 /**
  *
  * @author Antoine
  */
-public class Fenetre extends JFrame{
-    public Fenetre(){
-        super("EDT" );
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //Ferme l'application quand la dernière fenetre de cette derniere est fermée
-        this.setSize(600,400); //Definit la taille de la fenetre
-        this.setLocationRelativeTo(null); //Centre la fenetre au centre de l'ecran
-        JPanel pan = (JPanel) this.getContentPane();
-        this.setContentPane(pan);
-        this.setVisible(true);
+public class Fenetre extends JFrame {
+/*
+    //Contient une liste d'objet Seance à afficher par le view
+    private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+    //Contient une liste d'objet Utilisateur à afficher par le view
+    private Set<UTILISATEUR> listUTILISATEUR =new HashSet<UTILISATEUR>();
+    //Contient une liste d'objet Promotion à afficher par le view
+    private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
+  
+   
+  public Fenetre(){
+    this.setLocationRelativeTo(null);
+    this.setTitle("Gérer vos conteneurs");
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.pack();
+    this.setDefaultLookAndFeelDecorated(true);
+    this.setExtendedState(this.MAXIMIZED_BOTH);
+
+    eleve();
+
+    this.setVisible(true);
+  }
+
+  public void eleve(){
+
+    JTabbedPane onglet;
+        //Création de plusieurs Panneau
+    Panneau[] tPan = {new Panneau(Color.RED), new Panneau(Color.GREEN)};
       
+    //Création de notre conteneur d'onglets
+    onglet = new JTabbedPane();
+
+    //Méthode d'ajout d'onglet
+     onglet.add("Emploi du temps", tPan[0]);
+     onglet.add("Récapitulatif de cours", tPan[1]);
+      
+    //On passe ensuite les onglets au content pane
+    this.getContentPane().add(onglet);
     }
+   
+  public static void main(String[] args){
+    Fenetre fen = new Fenetre();
+  } */  
 }
