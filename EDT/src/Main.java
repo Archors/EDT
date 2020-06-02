@@ -50,6 +50,7 @@ import Controller.GROUPE_EDT;
 import Controller.EtudiantEDT;
 import Controller.PROMOTION_EDT;
 import Controller.ADD_SEANCE;
+import Controller.CONNEXION_UTILISATEUR;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,8 +68,44 @@ public class Main {
       //GROUPE_EDT test = new GROUPE_EDT();
       //test.voirGROUPE_SEANCE(1);
       
-    EtudiantEDT etudiantedt = new EtudiantEDT();
-    etudiantedt.voirETUDIANT_SEANCE("Bernard");
+   // EtudiantEDT etudiantedt = new EtudiantEDT();
+  //  etudiantedt.voirETUDIANT_SEANCE("Bernard");
+    
+    CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
+    connect.VERIFCONNEXION_UTILISATEUR("davodet@gmail.com", "davodet");
+    if (connect.isConnexion()==false)
+    {
+        System.out.println("MAUVAISE INFO");
+    }
+    else {
+        if(connect.getDroit()==4)
+        {
+    ETUDIANT etudiant = new ETUDIANT();
+    etudiant=connect.getEtudiant();
+    etudiant.afficherETUDIANT(); 
+        }
+        else if (connect.getDroit()==1)
+        {
+            ADMIN admin = new ADMIN();
+            admin=connect.getAdmin();
+            admin.afficherADMIN();
+        }
+        
+        else if (connect.getDroit()==2)
+        {
+            REFERENT referent = new REFERENT();
+            referent=connect.getReferent();
+            referent.afficherREFERENT();
+        }
+        else if (connect.getDroit()==3)
+        {
+            UTILISATEUR utilisateur =new UTILISATEUR();
+            utilisateur = connect.getUtilisateur();
+            utilisateur.afficherUTILISATEUR();
+        }
+        
+        }
+    
 
       
      // PROMOTION_EDT promotionedt =new PROMOTION_EDT();

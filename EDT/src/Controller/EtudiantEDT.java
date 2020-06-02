@@ -67,6 +67,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
         System.out.println("Étudiant : ");
         etudiant.afficherETUDIANT();
         listETUDIANT.add(etudiant);
+        
 
         
         GROUPE_EDT groupeedt = new GROUPE_EDT();
