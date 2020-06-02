@@ -57,6 +57,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
 
@@ -64,14 +66,27 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     
-      //GROUPE_EDT test = new GROUPE_EDT();
-      //test.voirGROUPE_SEANCE(1);
+     /*
+      GROUPE_EDT test = new GROUPE_EDT();
+      test.voirGROUPE_SEANCE(1);
+      Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+      listSEANCE = test.getlistSEANCE(); */
       
-   // EtudiantEDT etudiantedt = new EtudiantEDT();
-  //  etudiantedt.voirETUDIANT_SEANCE("Bernard");
+    EtudiantEDT etudiantedt = new EtudiantEDT();
+    etudiantedt.voirETUDIANT_SEANCE("Bernard");
+    Set<SEANCE> listSEANCE = new HashSet<SEANCE>();
+    listSEANCE= etudiantedt.getlistSEANCE();
+
+    for (SEANCE seance : listSEANCE)
+    {
+        System.out.println("COUCOU");
+        System.out.println(seance.getHEURE_DEBUT());
+    }
+
+
     
-    CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
+    
+  /*  CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
     connect.VERIFCONNEXION_UTILISATEUR("davodet@gmail.com", "davodet");
     if (connect.isConnexion()==false)
     {
