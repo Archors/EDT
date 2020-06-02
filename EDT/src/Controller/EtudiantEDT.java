@@ -68,7 +68,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
 
        while(resultat.next())
        {
-      ETUDIANT etudiant = new ETUDIANT();
+        ETUDIANT etudiant = new ETUDIANT();
         DAO <ETUDIANT> etudiantdao = new  ETUDIANTDAO();
         etudiant=etudiantdao.find(resultat.getInt("ID"));
         System.out.println("Étudiant : ");
@@ -77,7 +77,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
         
         
        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
-       listSEANCE=groupeedt.getlistSEANCE();
+       listSEANCE=groupeedt.getlistSEANCE();  
        }
  
     }catch (SQLException e){

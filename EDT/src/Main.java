@@ -51,6 +51,7 @@ import Controller.EtudiantEDT;
 import Controller.PROMOTION_EDT;
 import Controller.ADD_SEANCE;
 import Controller.CONNEXION_UTILISATEUR;
+import Controller.ENSEIGNANT_EDT;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -66,12 +67,73 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     /*
+      
+       ENSEIGNANT_EDT testenseignant = new ENSEIGNANT_EDT();
+       testenseignant.voirENSEIGNANT_EDT("Hina");
+       Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+       Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
+       Set <SALLE> listSALLE = new HashSet <SALLE>();
+       listSEANCE = testenseignant.getlistSEANCE();
+       listTYPE_COURS = testenseignant.getListTYPE_COURS();
+       listSALLE = testenseignant.getListSALLE();
+       
+           for (SEANCE seance : listSEANCE)
+    {
+        System.out.println(seance.getHEURE_DEBUT());
+    }
+          
+    for (TYPE_COURS type_cours : listTYPE_COURS)
+    {
+        
+        System.out.println(type_cours.getNOM());
+    } 
+    
+        for (SALLE salle : listSALLE)
+    {
+        
+        System.out.println(salle.getNOM());
+    } 
+    
+        
+        /*
+       PROMOTION_EDT test = new PROMOTION_EDT();
+       test.voirPROMOTION_SEANCE("2022");
+       Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+       Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
+       listSEANCE = test.getListSEANCE(); 
+       listTYPE_COURS = test.getListTYPE_COURS();
+       
+    for (SEANCE seance : listSEANCE)
+    {
+        System.out.println(seance.getHEURE_DEBUT());
+    }
+          
+    for (TYPE_COURS type_cours : listTYPE_COURS)
+    {
+        
+        System.out.println(type_cours.getNOM());
+    }
+       
+       /* 
       GROUPE_EDT test = new GROUPE_EDT();
       test.voirGROUPE_SEANCE(1);
       Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-      listSEANCE = test.getlistSEANCE(); */
+      Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
+      listSEANCE = test.getlistSEANCE(); 
+      listTYPE_COURS = test.getListTYPE_COURS();
       
+          for (SEANCE seance : listSEANCE)
+    {
+        System.out.println(seance.getHEURE_DEBUT());
+    }
+          
+              for (TYPE_COURS type_cours : listTYPE_COURS)
+    {
+        
+        System.out.println(type_cours.getNOM());
+    }
+      
+      /*
     EtudiantEDT etudiantedt = new EtudiantEDT();
     etudiantedt.voirETUDIANT_SEANCE("Bernard");
     Set<SEANCE> listSEANCE = new HashSet<SEANCE>();
@@ -82,7 +144,7 @@ public class Main {
         System.out.println("COUCOU");
         System.out.println(seance.getHEURE_DEBUT());
     }
-
+*/
 
     
     
@@ -120,22 +182,9 @@ public class Main {
         }
         
         }
-    
-
+   
       
-     // PROMOTION_EDT promotionedt =new PROMOTION_EDT();
-     // promotionedt.voirPROMOTION_SEANCE("2022");
-    /*  String SEMAINE = "Semaine";
-      String DATE = "DATE";
-      String HEURE_DEBUT ="heure_debut";
-      String HEURE_FIN ="heure_fin";
-      int ETAT = 0;
-      int id_cours = 1;
-      int id_type = 1; 
-      ADD_SEANCE add_seance = new ADD_SEANCE();
-      add_seance.AJOUTER_SEANCE(SEMAINE, DATE, HEURE_DEBUT, HEURE_FIN, ETAT,id_cours, id_type); */
-      
-      
+     */ 
     }
     
 }
