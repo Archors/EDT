@@ -21,7 +21,7 @@ public class Connexion {
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
     
-    private static String url ="jdbc:mysql://localhost:8090/edt";
+    private static String url ="jdbc:mysql://localhost:3306/edt";
     private static String nameuser="root";
     private static String psswd = "";
 

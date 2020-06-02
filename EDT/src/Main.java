@@ -8,55 +8,7 @@
  *
  * @author Milou
  */
-import Model.ETUDIANTDAO;
-import Model.ETUDIANT;
-import Model.UTILISATEUR;
-import Model.UTILISATEURDAO;
-import Model.PROMOTION;
-import Model.PROMOTIONDAO;
-import Model.GROUPE;
-import Model.GROUPEDAO;
-
-import Model.DAO;
-
-import Model.COURS;
-import Model.COURSDAO;
-
-import Model.TYPE_COURS;
-import Model.TYPE_COURSDAO;
-
-import Model.SITE;
-import Model.SITEDAO;
-
-import Model.SALLE; 
-import Model.SALLEDAO; 
-
-import Model.ETUDIANT;
-import Model.ETUDIANTDAO;
-
-import Model.UTILISATEUR;
-import Model.UTILISATEURDAO;
-
-import Model.REFERENT;
-import Model.REFERENTDAO;
-
-import Model.ADMIN;
-import Model.ADMINDAO;
-
-import Model.SEANCE;
-import Model.SEANCEDAO;
-
 import Controller.GROUPE_EDT;
-import Controller.EtudiantEDT;
-import Controller.PROMOTION_EDT;
-import Controller.ADD_SEANCE;
-import Controller.CONNEXION_UTILISATEUR;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.sql.DataSource;
-import java.sql.SQLException;
 
 public class Main {
 
@@ -65,13 +17,13 @@ public class Main {
      */
     public static void main(String[] args) {
      
-      //GROUPE_EDT test = new GROUPE_EDT();
-      //test.voirGROUPE_SEANCE(1);
+      GROUPE_EDT test = new GROUPE_EDT();
+      test.voirGROUPE_SEANCE(1);
       
    // EtudiantEDT etudiantedt = new EtudiantEDT();
   //  etudiantedt.voirETUDIANT_SEANCE("Bernard");
     
-    CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
+    /*CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
     connect.VERIFCONNEXION_UTILISATEUR("davodet@gmail.com", "davodet");
     if (connect.isConnexion()==false)
     {
@@ -104,8 +56,8 @@ public class Main {
             utilisateur.afficherUTILISATEUR();
         }
         
-        }
-    
+        }*/
+        //Fenetre fenetre = new Fenetre();
 
       
      // PROMOTION_EDT promotionedt =new PROMOTION_EDT();
