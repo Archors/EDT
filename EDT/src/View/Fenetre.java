@@ -5,10 +5,11 @@
  */
 package View;
 
-import Model.SEANCE;
-import java.awt.Color;
-import java.util.HashSet;
-import java.util.Set;
+import Controller.CONNEXION_UTILISATEUR;
+import Model.ADMIN;
+import Model.ETUDIANT;
+import Model.REFERENT;
+import Model.UTILISATEUR;
 
 
 /*
@@ -25,7 +26,6 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -35,6 +35,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
 public class Fenetre extends JFrame {
+
   
    private int id;
 
@@ -46,7 +47,7 @@ public class Fenetre extends JFrame {
     this.setDefaultLookAndFeelDecorated(true);
     this.setExtendedState(this.MAXIMIZED_BOTH);
 
-    eleve();
+    connexion();
 
     if(id == 1){
         eleve();
@@ -56,6 +57,7 @@ public class Fenetre extends JFrame {
   }
 
     public void connexion(){
+
         JPanel pan = new JPanel();
 
         JLabel labuser = new JLabel("Username");
@@ -78,24 +80,46 @@ public class Fenetre extends JFrame {
 
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-
+              
                 String uname = username.getText();
-                String pwd = password.getText();
-               
-                if(uname.equals("au")){
-                    System.out.println("Hello World");
-                    //pan.removeAll();  
-                    //id=1;
-                    //eleve();
-                }
-                else{
-                    System.out.println("Hello World 2");
-                    JOptionPane jop1;
- 
-                    //Boîte du message d'information
-                    jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Identifiants incorrects", "Connexion", JOptionPane.INFORMATION_MESSAGE);
-                }
+                char[] pwd = password.getPassword();
+                CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
+    connect.VERIFCONNEXION_UTILISATEUR(uname, pwd);
+    if (connect.isConnexion()==false)
+    {
+         //Boîte du message d'information
+         JOptionPane jop1 = new JOptionPane();
+         jop1.showMessageDialog(null, "Identifiants incorrects", "Connexion", JOptionPane.INFORMATION_MESSAGE);
+    }
+    else {
+        if(connect.getDroit()==4)
+        {
+    ETUDIANT etudiant = new ETUDIANT();
+    etudiant=connect.getEtudiant();
+    etudiant.afficherETUDIANT();
+    eleve(); 
+        }
+        else if (connect.getDroit()==1)
+        {
+            ADMIN admin = new ADMIN();
+            admin=connect.getAdmin();
+            admin.afficherADMIN();
+        }
+        
+        else if (connect.getDroit()==2)
+        {
+            REFERENT referent = new REFERENT();
+            referent=connect.getReferent();
+            referent.afficherREFERENT();
+        }
+        else if (connect.getDroit()==3)
+        {
+            UTILISATEUR utilisateur =new UTILISATEUR();
+            utilisateur = connect.getUtilisateur();
+            utilisateur.afficherUTILISATEUR();
+        }
+        
+        }
             }
         
         });

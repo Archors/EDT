@@ -45,6 +45,13 @@ import java.util.Set;
  */
 public class EtudiantEDT extends ETUDIANTDAO {
     private Set<ETUDIANT> listETUDIANT =new HashSet<ETUDIANT>();
+    GROUPE_EDT groupeedt = new GROUPE_EDT();
+    private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+    private Set<UTILISATEUR> listENSEIGNANT =new HashSet<UTILISATEUR>();
+    private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
+    private Set<TYPE_COURS> listTYPE_COURS = new HashSet<TYPE_COURS>();
+    private Set<COURS> listCOURS = new HashSet<COURS>();
+    private Set <SALLE> listSALLE = new HashSet<SALLE>();
 
     
     public EtudiantEDT(){}
@@ -59,8 +66,8 @@ public class EtudiantEDT extends ETUDIANTDAO {
        ps.setString(1,Nom);
        ResultSet resultat = ps.executeQuery();
 
-      while(resultat.next())
-        {
+       while(resultat.next())
+       {
       ETUDIANT etudiant = new ETUDIANT();
         DAO <ETUDIANT> etudiantdao = new  ETUDIANTDAO();
         etudiant=etudiantdao.find(resultat.getInt("ID"));
@@ -68,20 +75,16 @@ public class EtudiantEDT extends ETUDIANTDAO {
         etudiant.afficherETUDIANT();
         listETUDIANT.add(etudiant);
         
-
         
-        GROUPE_EDT groupeedt = new GROUPE_EDT();
-        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
-        //groupeedt.getlistSEANCE();
-        groupeedt.afficherLISTEENSEIGNANT();
-        }
+       groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
+       listSEANCE=groupeedt.getlistSEANCE();
+       }
+ 
     }catch (SQLException e){
         e.printStackTrace();
     }
-        afficherLISTEETUDIANT();
         
-
-
+        
     }
     public Set<ETUDIANT> getlistETUDIANT(){
         return listETUDIANT;
@@ -90,12 +93,71 @@ public class EtudiantEDT extends ETUDIANTDAO {
       if(this.listETUDIANT.contains(etudiant)!=true)
           this.listETUDIANT.add(etudiant);
         }
-public void afficherLISTEETUDIANT(){
-           
-    for (ETUDIANT etudiant : listETUDIANT)
-    {
-        System.out.println("............"+etudiant.getNOM());
+    
+
+
+    public GROUPE_EDT getGroupeedt() {
+        return groupeedt;
     }
-}
+
+    public void setGroupeedt(GROUPE_EDT groupeedt) {
+        this.groupeedt = groupeedt;
+    }
+
+    public void addSEANCE (SEANCE seance){
+        if(this.listSEANCE.contains(seance)!=true)
+            this.listSEANCE.add(seance);
+    }
+    
+    public void addCOURS (COURS cours){
+        if(this.listCOURS.contains(cours)!=true)
+            this.listCOURS.add(cours);
+    }
+    
+    public void addTYPE_COURS (TYPE_COURS type_cours){
+        if(this.listTYPE_COURS.contains(type_cours)!=true)
+            this.listTYPE_COURS.add(type_cours);
+    }
+    
+
+    public void addUTILISATEUR (UTILISATEUR utilisateur){
+        if(this.listENSEIGNANT.contains(utilisateur)!=true)
+            this.listENSEIGNANT.add(utilisateur);
+    }
+
+    public void addPROMOTION (PROMOTION promotion){
+        if(this.listPROMOTION.contains(promotion)!=true)
+            this.listPROMOTION.add(promotion);
+    }
+    
+    public void addSALLE (SALLE salle){
+        if(this.listSALLE.contains(salle)!=true)
+            this.listSALLE.add(salle);
+    }
+
+    public Set<UTILISATEUR> getlistENSEIGNANT(){
+        return listENSEIGNANT;
+    }
+    public Set<SEANCE> getlistSEANCE(){
+        return listSEANCE;
+    }
+    public Set<PROMOTION> getlistPROMOTION(){
+        return listPROMOTION;
+    }
+
+    public Set<TYPE_COURS> getListTYPE_COURS() {
+        return listTYPE_COURS;
+    }
+
+
+    public Set<COURS> getListCOURS() {
+        return listCOURS;
+    }
+
+
+    public Set<SALLE> getListSALLE() {
+        return listSALLE;
+    }
+
 
 }

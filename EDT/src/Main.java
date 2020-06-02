@@ -8,7 +8,17 @@
  *
  * @author Milou
  */
+import Controller.CONNEXION_UTILISATEUR;
 import Controller.GROUPE_EDT;
+import Model.ADMIN;
+import Model.ETUDIANT;
+import Model.REFERENT;
+import Model.SEANCE;
+import Model.TYPE_COURS;
+import Model.UTILISATEUR;
+import View.Fenetre;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
 
@@ -16,14 +26,47 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     
+     /*
       GROUPE_EDT test = new GROUPE_EDT();
       test.voirGROUPE_SEANCE(1);
+      Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+      listSEANCE = test.getlistSEANCE(); */
       
-   // EtudiantEDT etudiantedt = new EtudiantEDT();
-  //  etudiantedt.voirETUDIANT_SEANCE("Bernard");
+    /*EtudiantEDT etudiantedt = new EtudiantEDT();
+    etudiantedt.voirETUDIANT_SEANCE("Bernard");
+    Set<SEANCE> listSEANCE = new HashSet<SEANCE>();
+    listSEANCE= etudiantedt.getlistSEANCE();
+
+    for (SEANCE seance : listSEANCE)
+    {
+        System.out.println("COUCOU");
+        System.out.println(seance.getHEURE_DEBUT());
+    }*/
+
+      GROUPE_EDT test = new GROUPE_EDT();
+      test.voirGROUPE_SEANCE(1);
+      Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+      Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
+      listSEANCE = test.getlistSEANCE(); 
+      listTYPE_COURS = test.getListTYPE_COURS();
+
+          for (SEANCE seance : listSEANCE)
+    {
+
+        System.out.println(seance.getHEURE_DEBUT());
+    }
+
+              for (TYPE_COURS type_cours : listTYPE_COURS)
+    {
+
+        System.out.println(type_cours.getNOM());
+    }
+
+     Fenetre fenetre = new Fenetre();
+
     
-    /*CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
+    
+    CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
     connect.VERIFCONNEXION_UTILISATEUR("davodet@gmail.com", "davodet");
     if (connect.isConnexion()==false)
     {
@@ -56,7 +99,7 @@ public class Main {
             utilisateur.afficherUTILISATEUR();
         }
         
-        }*/
+        }
         //Fenetre fenetre = new Fenetre();
 
       
