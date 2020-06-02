@@ -51,9 +51,9 @@ import java.util.Set;
 public class CONNEXION_UTILISATEUR extends UTILISATEURDAO{
    private boolean connexion;
    private int droit;
-   ETUDIANT etudiant = new ETUDIANT();
-   ADMIN admin = new ADMIN();
-   REFERENT referent= new REFERENT();
+   private ETUDIANT etudiant = new ETUDIANT();
+   private ADMIN admin = new ADMIN();
+   private REFERENT referent= new REFERENT();
    UTILISATEUR utilisateur = new UTILISATEUR();
    
    public CONNEXION_UTILISATEUR (){this.connexion = false;

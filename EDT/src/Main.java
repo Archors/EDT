@@ -8,42 +8,13 @@
  *
  * @author Milou
  */
-import Model.ETUDIANTDAO;
-import Model.ETUDIANT;
-import Model.UTILISATEUR;
-import Model.UTILISATEURDAO;
-import Model.PROMOTION;
-import Model.PROMOTIONDAO;
-import Model.GROUPE;
-import Model.GROUPEDAO;
-
-import Model.DAO;
-
-import Model.COURS;
-import Model.COURSDAO;
-
-import Model.TYPE_COURS;
-import Model.TYPE_COURSDAO;
-
-import Model.SITE;
-import Model.SITEDAO;
-
-import Model.SALLE; 
-import Model.SALLEDAO; 
-
-import Model.ETUDIANT;
-import Model.ETUDIANTDAO;
-
-import Model.UTILISATEUR;
-import Model.UTILISATEURDAO;
-
-import Model.REFERENT;
-import Model.REFERENTDAO;
-
+import Controller.CONNEXION_UTILISATEUR;
+import Controller.GROUPE_EDT;
 import Model.ADMIN;
-import Model.ADMINDAO;
-
+import Model.ETUDIANT;
+import Model.REFERENT;
 import Model.SEANCE;
+import Model.SALLE;
 import Model.SEANCEDAO;
 
 import Controller.GROUPE_EDT;
@@ -58,6 +29,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.sql.DataSource;
 import java.sql.SQLException;
+
+import Model.TYPE_COURS;
+import Model.UTILISATEUR;
+import View.Fenetre;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -70,19 +46,19 @@ public class Main {
       
        ENSEIGNANT_EDT testenseignant = new ENSEIGNANT_EDT();
        testenseignant.voirENSEIGNANT_EDT("Hina");
-       Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-       Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
+       Set<SEANCE> listSEANCEtest =new HashSet<SEANCE>();
+       Set <TYPE_COURS> listTYPE_COURStest =new HashSet <TYPE_COURS>();
        Set <SALLE> listSALLE = new HashSet <SALLE>();
-       listSEANCE = testenseignant.getlistSEANCE();
-       listTYPE_COURS = testenseignant.getListTYPE_COURS();
+       listSEANCEtest = testenseignant.getlistSEANCE();
+       listTYPE_COURStest = testenseignant.getListTYPE_COURS();
        listSALLE = testenseignant.getListSALLE();
        
-           for (SEANCE seance : listSEANCE)
+           for (SEANCE seance : listSEANCEtest)
     {
         System.out.println(seance.getHEURE_DEBUT());
     }
           
-    for (TYPE_COURS type_cours : listTYPE_COURS)
+    for (TYPE_COURS type_cours : listTYPE_COURStest)
     {
         
         System.out.println(type_cours.getNOM());
@@ -122,6 +98,7 @@ public class Main {
       listSEANCE = test.getlistSEANCE(); 
       listTYPE_COURS = test.getListTYPE_COURS();
       
+<<<<<<< HEAD
           for (SEANCE seance : listSEANCE)
     {
         System.out.println(seance.getHEURE_DEBUT());
@@ -135,6 +112,9 @@ public class Main {
       
       /*
     EtudiantEDT etudiantedt = new EtudiantEDT();
+=======
+    /*EtudiantEDT etudiantedt = new EtudiantEDT();
+>>>>>>> 7c81efb11c31f326ed61168fe2317d7410d6db7c
     etudiantedt.voirETUDIANT_SEANCE("Bernard");
     Set<SEANCE> listSEANCE = new HashSet<SEANCE>();
     listSEANCE= etudiantedt.getlistSEANCE();
@@ -143,12 +123,32 @@ public class Main {
     {
         System.out.println("COUCOU");
         System.out.println(seance.getHEURE_DEBUT());
+    }*/
+
+  /*    GROUPE_EDT test = new GROUPE_EDT();
+      test.voirGROUPE_SEANCE(1);
+      Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+      Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
+      listSEANCE = test.getlistSEANCE(); 
+    listTYPE_COURS = test.getListTYPE_COURS();
+
+          for (SEANCE seance : listSEANCE)
+    {
+
+        System.out.println(seance.getHEURE_DEBUT());
     }
-*/
+
+              for (TYPE_COURS type_cours : listTYPE_COURS)
+    {
+
+        System.out.println(type_cours.getNOM());
+    } */
+
+     Fenetre fenetre = new Fenetre();
 
     
     
-  /*  CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
+    CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
     connect.VERIFCONNEXION_UTILISATEUR("davodet@gmail.com", "davodet");
     if (connect.isConnexion()==false)
     {
@@ -182,9 +182,24 @@ public class Main {
         }
         
         }
-   
+
+        //Fenetre fenetre = new Fenetre();
+
       
-     */ 
+     // PROMOTION_EDT promotionedt =new PROMOTION_EDT();
+     // promotionedt.voirPROMOTION_SEANCE("2022");
+    /*  String SEMAINE = "Semaine";
+      String DATE = "DATE";
+      String HEURE_DEBUT ="heure_debut";
+      String HEURE_FIN ="heure_fin";
+      int ETAT = 0;
+      int id_cours = 1;
+      int id_type = 1; 
+      ADD_SEANCE add_seance = new ADD_SEANCE();
+      add_seance.AJOUTER_SEANCE(SEMAINE, DATE, HEURE_DEBUT, HEURE_FIN, ETAT,id_cours, id_type); */
+
+      
+     
     }
     
 }
