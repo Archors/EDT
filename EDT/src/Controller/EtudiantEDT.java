@@ -68,6 +68,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
 
        while(resultat.next())
        {
+           
         ETUDIANT etudiant = new ETUDIANT();
         DAO <ETUDIANT> etudiantdao = new  ETUDIANTDAO();
         etudiant=etudiantdao.find(resultat.getInt("ID"));
