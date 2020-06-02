@@ -60,7 +60,7 @@ public class ADD_SEANCE extends SEANCEDAO {
        ps.setInt(5,ETAT);
        ps.setInt(6, id_cours);
        ps.setInt(7, id_type);
-            int resultat = ps.executeUpdate();
+       int resultat = ps.executeUpdate();
 
 
     }catch (SQLException e){

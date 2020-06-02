@@ -34,16 +34,19 @@ import Model.TYPE_COURSDAO;
 
 import Model.UTILISATEUR;
 import Model.UTILISATEURDAO;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 /**
  *
  * @author Milou
  */
 public class EtudiantEDT extends ETUDIANTDAO {
+    private Set<ETUDIANT> listETUDIANT =new HashSet<ETUDIANT>();
+
+    
     public EtudiantEDT(){}
 
     public void voirETUDIANT_SEANCE(String Nom)
@@ -63,6 +66,8 @@ public class EtudiantEDT extends ETUDIANTDAO {
         etudiant=etudiantdao.find(resultat.getInt("ID"));
         System.out.println("Étudiant : ");
         etudiant.afficherETUDIANT();
+        listETUDIANT.add(etudiant);
+
         
         GROUPE_EDT groupeedt = new GROUPE_EDT();
         groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
@@ -70,10 +75,24 @@ public class EtudiantEDT extends ETUDIANTDAO {
     }catch (SQLException e){
         e.printStackTrace();
     }
+        afficherLISTEETUDIANT();
         
 
 
     }
-
+    public Set<ETUDIANT> getlistETUDIANT(){
+        return listETUDIANT;
+    }
+    public void addETUDIANT (ETUDIANT etudiant){
+      if(this.listETUDIANT.contains(etudiant)!=true)
+          this.listETUDIANT.add(etudiant);
+        }
+public void afficherLISTEETUDIANT(){
+           
+    for (ETUDIANT etudiant : listETUDIANT)
+    {
+        System.out.println("............"+etudiant.getNOM());
+    }
+}
 
 }

@@ -39,51 +39,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+
 /**
  *
  * @author Milou
  */
-public class PROMOTION_EDT extends ETUDIANTDAO {
-    private Set<GROUPE> listGROUPE =new HashSet<GROUPE>();
-
+public class CONNEXION_UTILISATEUR extends UTILISATEURDAO{
+   /*
+    public CONNEXION_UTILISATEUR(){}
     
-    public PROMOTION_EDT(){}
-
-    public void voirPROMOTION_SEANCE(String Nom)
+    public void VERIFCONNEXION_UTILISATEUR (String EMAIL, String PSSWD)
     {
-        //retrouver le groupe en question
-
         try{ 
-      PreparedStatement ps= this.connection.prepareStatement("SELECT u.ID FROM PROMOTION JOIN GROUPE u ON PROMOTION.ID = u.ID_PROMOTION WHERE PROMOTION.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      PreparedStatement ps= this.connection.prepareStatement("SELECT * FROM UTILISATEUR WHERE UTILISATEUR.EMAIL = ?, UTILISATEUR.PSSWD= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
        // ps.setString(Nom);
-       ps.setString(1,Nom);
+    //   ps.setString(1,Nom);
        ResultSet resultat = ps.executeQuery();
 
       while(resultat.next())
-        { 
+        {
+      ETUDIANT etudiant = new ETUDIANT();
+        DAO <ETUDIANT> etudiantdao = new  ETUDIANTDAO();
+        etudiant=etudiantdao.find(resultat.getInt("ID"));
+        System.out.println("Étudiant : ");
+        etudiant.afficherETUDIANT();
+        listETUDIANT.add(etudiant);
+
+        
         GROUPE_EDT groupeedt = new GROUPE_EDT();
-        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID"));        
+        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
         }
     }catch (SQLException e){
         e.printStackTrace();
     }
-        
-
-
-    }
-    public Set<GROUPE> getlistGROUPE(){
-        return listGROUPE;
-    }
-    public void addGROUPE (GROUPE groupe){
-      if(this.listGROUPE.contains(groupe)!=true)
-          this.listGROUPE.add(groupe);
-        }
-public void afficherLISTEGROUPE(){
-           
-    for (GROUPE groupe : listGROUPE)
-    {
-        System.out.println("............"+groupe.getNOM());
-    }
-}
-
+    } */
 }
