@@ -27,7 +27,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SALLE_EDT salleedt = new SALLE_EDT();
+     /*   SALLE_EDT salleedt = new SALLE_EDT();
         salleedt.voirSALLE_EDT("104");
        Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
        Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
@@ -42,7 +42,7 @@ public class Main {
        
        for(SEANCE seance : listSEANCE)
        {
-           System.out.println("Heure debutdebutdebut: ");
+           System.out.println("Heure : ");
            System.out.println(seance.getHEURE_DEBUT());
        }
        for(PROMOTION promotion : listPROMOTION)
@@ -56,7 +56,7 @@ public class Main {
       
                
 
-
+*/
      Fconnexion fenetre = new Fconnexion();
 
     

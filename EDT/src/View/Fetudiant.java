@@ -23,6 +23,7 @@ import Model.ADMIN;
 import Model.ETUDIANT;
 import Model.REFERENT;
 import Model.UTILISATEUR;
+import java.awt.BorderLayout;
 
 
 /**
@@ -36,7 +37,7 @@ public class Fetudiant extends JFrame {
     public Fetudiant(ETUDIANT student){
         
         this.setLocationRelativeTo(null);
-        this.setTitle("Gérer vos conteneurs");
+        this.setTitle("Votre Emploi Du Temps");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setDefaultLookAndFeelDecorated(true);
@@ -48,7 +49,6 @@ public class Fetudiant extends JFrame {
         //System.out.println("test methode :");
         //Création de notre conteneur d'onglets
         onglet = new JTabbedPane();
-
         //Méthode d'ajout d'onglet
         onglet.add("Emploi du temps", tPan.getPan());
         onglet.add("Récapitulatif de cours", recap);

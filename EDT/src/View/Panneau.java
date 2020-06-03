@@ -5,7 +5,6 @@
  */
 package View;
 
-
 /**
  *
  * @author Aurélien
@@ -24,45 +23,52 @@ import javax.swing.JTextField;
 
 import Model.ETUDIANT;
 import Model.SEANCE;
+import java.awt.BorderLayout;
 
 import java.awt.GridBagConstraints;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JFrame;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableColumn;
 
-public class Panneau extends JPanel{
+public class Panneau extends JFrame{
   private Color color = Color.white;
   private int COUNT = 0;
   private String message = "";
-  private GridBagConstraints gbc = new GridBagConstraints();
-  private JPanel pan = new JPanel();
+ // private GridBagConstraints gbc = new GridBagConstraints();
+  private JPanel principal = new JPanel();
+  private JPanel intermediaire = new JPanel();
   private JPanel pan1 = new JPanel();
   private JPanel pan2 = new JPanel();
-  private JPanel pan3 = new JPanel();
+  private JPanel calendrier = new JPanel();
   private JComboBox combo = new JComboBox();
   private ETUDIANT etudiant;
   private EtudiantEDT studentEDT = new EtudiantEDT();
   private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-
+  private JTable tableau;
    
   public Panneau(ETUDIANT recupEtudiant){
+    principal.setLayout(new BorderLayout());
+    intermediaire.setLayout(new BorderLayout());
+    intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
+    intermediaire.add(edt(),BorderLayout.CENTER);
+    principal.add(intermediaire, BorderLayout.CENTER);
+    principal.add(menu(), BorderLayout.NORTH);
     etudiant = recupEtudiant;
-    pan.add(menu());
-    pan.add(semaine());
-    pan.add(edt());
+
+  //  principal.add(menu());
+
+
+   
     etudiant.afficherETUDIANT();
-    //pan1.setBackground(Color.blue);
-    //pan2.setBackground(Color.blue);
-    //pan3.setBackground(Color.blue);
   }
 
   public JPanel menu(){
-    //JPanel top = new JPanel();
-    pan1.setPreferredSize(new Dimension(1350, 40 ));
-    
+    //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
     pan1.add(combo);
+    
     //this.add(top, BorderLayout.NORTH);
-    combo.setPreferredSize(new Dimension(100, 20));
     combo.addItem("En grille");
     combo.addItem("En liste");
   
@@ -90,8 +96,6 @@ public class Panneau extends JPanel{
 public JPanel semaine(){
 
     //JPanel top = new JPanel();
-    pan2.setPreferredSize(new Dimension(1350, 100 ));
-
     for(int i = 1; i <= 52; i++){
         JButton bouton = new JButton(""+i);
         bouton.setPreferredSize(new Dimension(48,20));
@@ -104,7 +108,10 @@ public JPanel semaine(){
 
 public JPanel edt(){
     int semaine=0;
-    JTable tableau;
+    
+    calendrier.setLayout(new BorderLayout()); 
+
+    /*
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());
     //Recuperation de la liste de cours de l'etudiant
@@ -114,7 +121,7 @@ public JPanel edt(){
     Set<SEANCE> listSEANCEDATE =new HashSet<SEANCE>();
     Set<SEANCE> listSEANCEHEURE =new HashSet<SEANCE>();
     
-    pan3.setPreferredSize(new Dimension(1350, 510 ));
+    pan3.setPreferredSize(new Dimension(3000, 510 ));
     pan3.setBackground(Color.ORANGE);
     
     //pan3.setLocation(2730, 20);
@@ -188,7 +195,7 @@ public JPanel edt(){
         }
     }
     
-
+*/
     Object[][] data = {
       {"8h30", "", "", "", "", ""},
       {"10h", "", "", "", "", ""},
@@ -205,27 +212,21 @@ public JPanel edt(){
     //Les titres des colonnes
 
     String  title[] = {"heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+    
     ZModel model = new ZModel(data, title);
+    
     tableau = new JTable(model);
-    //tableau.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
-    //JTable tableau = new JTable(data, title);
-    //tableau.setVisibleColumnCount(6);
-    //tableau.setHorizontalScrollEnabled(true);
-    //DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-    //r.setHorizontalAlignment(JLabel.CENTER);
-    //tableau.setRowHeight(500);
-    //tableau.getColumn(0).setPreferredWidth(300);
-   // setJTableColumnsWidth(tableau, 1350,135, 270, 270, 270, 270,270);
-  //  tableau.setPreferredSize(new Dimension(1350, 510));
+    tableau.setRowHeight(65);
+    calendrier.add(new JScrollPane(tableau));
+    
+    //this.getContentPane().add(calendrier);
+    
 
-    //Nous ajoutons notre tableau à notre contentPane dans un scroll
-    //Sinon les titres des colonnes ne s'afficheront pas !
-    //top.add(new JScrollPane(tableau));
-
-Object[][] data1 = {
-      {etudiant.NUMERO()},
+/*
+ Object[][] data1 = {
+      {""},
       {""}
-    };
+    }; 
 
     //Les titres des colonnes
     String  title1[] = {"Lundi"};
@@ -241,10 +242,10 @@ Object[][] data1 = {
     }
     else if(COUNT == 1){
         pan3.removeAll();  
-        pan3.add(new JScrollPane(tableau1));
+        pan3.add(new JScrollPane(tableau1)); 
     }
-
-    return pan3;
+*/
+    return calendrier; 
 }
 
 /*
@@ -286,20 +287,20 @@ class ItemAction implements ActionListener{
       {
         COUNT=0;
         
-        pan.add(edt());
+        principal.add(edt());
       }
       
       else if(combo.getSelectedItem() == "En liste")
       {
         COUNT=1;
         
-        pan.add(edt());
+        principal.add(edt());
       }
     }               
   }
 
     public JPanel getPan(){
-        return pan;
+        return principal;
     }
     
 }

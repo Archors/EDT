@@ -10,6 +10,7 @@ import Model.ADMIN;
 import Model.ETUDIANT;
 import Model.REFERENT;
 import Model.UTILISATEUR;
+import java.awt.BorderLayout;
 
 
 /*
@@ -35,18 +36,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-
+//Fenetre de COnnexion de l'utilisateur
 public class Fconnexion extends JFrame {
 
   
    private int id;
     private int con = 0;
     ETUDIANT student = new ETUDIANT();
-    private JPanel pr = new JPanel();
+    private JPanel principal = new JPanel();
 
     public Fconnexion(){
     this.setLocationRelativeTo(null);
-    this.setTitle("Gérer vos conteneurs");
+    this.setTitle("Votre emploi du temps");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.pack();
     this.setDefaultLookAndFeelDecorated(true);
@@ -55,11 +56,10 @@ public class Fconnexion extends JFrame {
     //private ETUDIANT etudiant;
     //private ETUDIANT etudiant;
     //private ETUDIANT etudiant;
-    pr.setPreferredSize(new Dimension(1350, 510));
-    pr.setBackground(Color.ORANGE); 
-    
-  
-       JPanel pan = new JPanel();
+    principal.setLayout(new BorderLayout());
+    principal.setBackground(Color.ORANGE); 
+
+        JPanel pan = new JPanel();
 
         JLabel labuser = new JLabel("Username");
         pan.add(labuser);
@@ -79,9 +79,9 @@ public class Fconnexion extends JFrame {
         
         pan.add(login);  
 
-        pr.add(pan);      
-        this.setContentPane(pr);
-
+        principal.add(pan);      
+        this.setContentPane(principal);
+    
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
               
