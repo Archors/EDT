@@ -104,6 +104,7 @@ public JPanel semaine(){
 
 public JPanel edt(){
     int semaine=0;
+    JTable tableau;
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());
     //Recuperation de la liste de cours de l'etudiant
@@ -114,7 +115,8 @@ public JPanel edt(){
     Set<SEANCE> listSEANCEHEURE =new HashSet<SEANCE>();
     
     pan3.setPreferredSize(new Dimension(1350, 510 ));
-    pan3.setBackground(Color.ORANGE); 
+    pan3.setBackground(Color.ORANGE);
+    
     //pan3.setLocation(2730, 20);
     //pan3.setMinimumSize(new Dimension(900, 400));
     //pan3.setMaximumSize(new Dimension(900, 400));
@@ -202,7 +204,10 @@ public JPanel edt(){
 
     //Les titres des colonnes
     String  title[] = {"heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
-    JTable tableau = new JTable(data, title);
+    ZModel model = new ZModel(data, title);
+    tableau = new JTable(model);
+    //tableau.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+    //JTable tableau = new JTable(data, title);
     //tableau.setVisibleColumnCount(6);
     //tableau.setHorizontalScrollEnabled(true);
     //DefaultTableCellRenderer r = new DefaultTableCellRenderer();
