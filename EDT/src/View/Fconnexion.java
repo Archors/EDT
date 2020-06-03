@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*package View;
+package View;
 
 import Controller.CONNEXION_UTILISATEUR;
 import Model.ADMIN;
-import Model.COURS;
 import Model.ETUDIANT;
-import Model.PROMOTION;
 import Model.REFERENT;
-import Model.SALLE;
-import Model.SEANCE;
-import Model.TYPE_COURS;
 import Model.UTILISATEUR;
 
 
@@ -28,11 +23,11 @@ import Model.UTILISATEUR;
  *
  * @author Aurélien
  */
-/*import javax.swing.JOptionPane;
+import java.awt.Dimension;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -41,35 +36,30 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-public class Fenetre extends JFrame {
+public class Fconnexion extends JFrame {
 
-  //Données pour l'affichage
-  private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-  private Set<UTILISATEUR> listENSEIGNANT =new HashSet<UTILISATEUR>();
-  private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
-  private Set<TYPE_COURS> listTYPE_COURS = new HashSet<TYPE_COURS>();
-  private Set<COURS> listCOURS = new HashSet<COURS>();
-  private Set <SALLE> listSALLE = new HashSet<SALLE>();
-
+  
    private int id;
+    private int con = 0;
+    ETUDIANT student = new ETUDIANT();
+    private JPanel pr = new JPanel();
 
-  public Fenetre(){
+    public Fconnexion(){
     this.setLocationRelativeTo(null);
     this.setTitle("Gérer vos conteneurs");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.pack();
     this.setDefaultLookAndFeelDecorated(true);
     this.setExtendedState(this.MAXIMIZED_BOTH);
-
-    //connexion();
-    eleve();
-
-    this.setVisible(true);
-  }
-
-    public void connexion(){
-
-        JPanel pan = new JPanel();
+    
+    //private ETUDIANT etudiant;
+    //private ETUDIANT etudiant;
+    //private ETUDIANT etudiant;
+    pr.setPreferredSize(new Dimension(1350, 510));
+    pr.setBackground(Color.ORANGE); 
+    
+  
+       JPanel pan = new JPanel();
 
         JLabel labuser = new JLabel("Username");
         pan.add(labuser);
@@ -89,13 +79,16 @@ public class Fenetre extends JFrame {
         
         pan.add(login);  
 
+        pr.add(pan);      
+        this.setContentPane(pr);
+
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
               
                 String uname = username.getText();
-                String pwd = String.valueOf(password.getPassword());
+                String pwd = password.getText();
                 CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
-    connect.VERIFCONNEXION_UTILISATEUR(uname, pwd);
+                connect.VERIFCONNEXION_UTILISATEUR(uname, pwd);
     if (connect.isConnexion()==false)
     {
          //Boîte du message d'information
@@ -105,11 +98,23 @@ public class Fenetre extends JFrame {
     else {
         if(connect.getDroit()==4)
         {
-    ETUDIANT etudiant = new ETUDIANT();
-    etudiant=connect.getEtudiant();
-    etudiant.afficherETUDIANT();
-
-    eleve(etudiant); 
+            System.out.println("test 3:");
+            ETUDIANT etudiant = new ETUDIANT();
+            etudiant=connect.getEtudiant();
+            //etudiant.afficherETUDIANT(); 
+            con = 1;
+            student = etudiant; 
+            
+            //pr.removeAll();
+            //Panneau tPan = new Panneau(etudiant);
+            //pr.paint();
+            Fetudiant fetudiant = new Fetudiant();
+            //fenetre.dispose();
+            //this.dispose();
+            //eleve(student); 
+            
+            //pr.add(tPan.getPan());
+            //pr.repaint();
         }
         else if (connect.getDroit()==1)
         {
@@ -132,25 +137,29 @@ public class Fenetre extends JFrame {
         }
         
         }
-            }
-        
-        });
+      }
+    });
+       //this.setContentPane(pr);
+       this.setVisible(true);
+  }
+
+    
+    public void connexion(){
 
         
 
         //On prévient notre JFrame que notre JPanel sera son content pane
-        this.setContentPane(pan);               
-        this.setVisible(true);
+        
+       // this.setVisible(true);
     }
 
   public void eleve(ETUDIANT etudiant){
-
-    System.out.println("Everything is fine !");
+    
     JTabbedPane onglet;
-        //Création de plusieurs Panneau
+    //Création de plusieurs Panneau
     Panneau tPan = new Panneau(etudiant);
     Recapitulatif recap = new Recapitulatif();
-      
+    //System.out.println("test methode :");
     //Création de notre conteneur d'onglets
     onglet = new JTabbedPane();
 
@@ -158,41 +167,10 @@ public class Fenetre extends JFrame {
      onglet.add("Emploi du temps", tPan.getPan());
      onglet.add("Récapitulatif de cours", recap);
       
-    //On passe ensuite les onglets au content pane
+    
     this.getContentPane().add(onglet);
-    etudiant.afficherETUDIANT();
+    //etudiant.afficherETUDIANT();
     }
 
   
-
-    public void setListSeance(Set<SEANCE> listS)
-    {
-      listSEANCE=listS;
-    }
-    public void setListEnseignant(Set<UTILISATEUR> listU)
-    {
-      listENSEIGNANT=listU;
-    }
-    public void setListPromotion(Set<PROMOTION> listP)
-    {
-      listPROMOTION=listP;
-    }
-    public void setListType_cours(Set<TYPE_COURS> listT)
-    {
-      listTYPE_COURS=listT;
-    }
-    public void setListCours(Set<COURS> listC)
-    {
-      listCOURS=listC;
-    }
-    public void setListSalle(Set<SALLE> listS)
-    {
-      listSALLE=listS;
-    }
-
-
-   
-  public static void main(String[] args){
-    Fenetre fen = new Fenetre();
-  }   
-}*/
+}
