@@ -86,7 +86,7 @@ public class Fconnexion extends JFrame {
             public void actionPerformed(ActionEvent e){
               
                 String uname = username.getText();
-                String pwd = password.getText();
+                String pwd = String.valueOf(password.getPassword());
                 CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
                 connect.VERIFCONNEXION_UTILISATEUR(uname, pwd);
     if (connect.isConnexion()==false)

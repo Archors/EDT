@@ -10,28 +10,25 @@ package View;
  *
  * @author Aurélien
  */
+import Controller.EtudiantEDT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JComboBox;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JTextField;
 
 import Model.ETUDIANT;
+import Model.SEANCE;
 
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.table.TableColumn;
 
 public class Panneau extends JPanel{
   private Color color = Color.white;
@@ -44,6 +41,8 @@ public class Panneau extends JPanel{
   private JPanel pan3 = new JPanel();
   private JComboBox combo = new JComboBox();
   private ETUDIANT etudiant;
+  private EtudiantEDT studentEDT = new EtudiantEDT();
+  private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
 
    
   public Panneau(ETUDIANT recupEtudiant){
@@ -104,28 +103,120 @@ public JPanel semaine(){
 }
 
 public JPanel edt(){
+    int semaine=0;
+    JTable tableau;
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());
+    //Recuperation de la liste de cours de l'etudiant
+    studentEDT.voirETUDIANT_SEANCE(etudiant.NUMERO());
+    listSEANCE = studentEDT.getlistSEANCE();
+    Set<SEANCE> listSEANCESEMAINE =new HashSet<SEANCE>();
+    Set<SEANCE> listSEANCEDATE =new HashSet<SEANCE>();
+    Set<SEANCE> listSEANCEHEURE =new HashSet<SEANCE>();
+    
     pan3.setPreferredSize(new Dimension(1350, 510 ));
-    pan3.setBackground(Color.ORANGE); 
+    pan3.setBackground(Color.ORANGE);
+    
     //pan3.setLocation(2730, 20);
     //pan3.setMinimumSize(new Dimension(900, 400));
     //pan3.setMaximumSize(new Dimension(900, 400));
+    for(SEANCE i : listSEANCE)
+    {
+        if(i.getSEMAINE() == semaine)
+        {
+            listSEANCESEMAINE.add(i);
+        }
+    }
+    for(SEANCE i : listSEANCESEMAINE)
+    {
+        int x = 0,y=0;
+        switch(i.getDATE())
+        {
+            case ("LUNDI") :
+            {
+                y=1;
+                break;
+            }
+            case ("MARDI") :
+            {
+                y=2;
+                break;
+            }
+            case ("MERCREDI") :
+            {
+                y=3;
+                break;
+            }
+            case ("JEUDI") :
+            {
+                y=4;
+                break;
+            }
+            case ("VENDREDI") :
+            {
+                y=5;
+                break;
+            }
+        }
+        switch(i.getHEURE_DEBUT())
+        {
+            case ("8h30-10h15") :
+            {
+                x=0;
+                break;
+            }
+            case ("10h15-11h45") :
+            {
+                x=1;
+                break;
+            }
+            case ("12h-13h30") :
+            {
+                x=2;
+                break;
+            }
+            case ("13h45-15h15") :
+            {
+                x=3;
+                break;
+            }
+            case ("15h30-17h") :
+            {
+                x=4;
+                break;
+            }
+        }
+    }
     
 
     Object[][] data = {
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""}
+      {"8h30", "", "", "", "", ""},
+      {"10h", "", "", "", "", ""},
+      {"10h15", "", "", "", "", ""},
+      {"11h45", "", "", "", "", ""},
+      {"12h", "", "", "", "", ""},
+      {"13h30", "", "", "", "", ""},
+      {"13h45", "", "", "", "", ""},
+      {"15h15", "", "", "", "", ""},
+      {"15h30", "", "", "", "", ""},
+      {"17h", "", "", "", "", ""}
     };
 
     //Les titres des colonnes
-    String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
-    JTable tableau = new JTable(data, title);
-    tableau.setPreferredSize(new Dimension(1300, 1200));
-    
 
+    String  title[] = {"heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+    ZModel model = new ZModel(data, title);
+    tableau = new JTable(model);
+    //tableau.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+    //JTable tableau = new JTable(data, title);
+    //tableau.setVisibleColumnCount(6);
+    //tableau.setHorizontalScrollEnabled(true);
+    //DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+    //r.setHorizontalAlignment(JLabel.CENTER);
+    //tableau.setRowHeight(500);
+    //tableau.getColumn(0).setPreferredWidth(300);
+   // setJTableColumnsWidth(tableau, 1350,135, 270, 270, 270, 270,270);
+  //  tableau.setPreferredSize(new Dimension(1350, 510));
 
     //Nous ajoutons notre tableau à notre contentPane dans un scroll
     //Sinon les titres des colonnes ne s'afficheront pas !
@@ -174,6 +265,19 @@ Object[][] data1 = {
    
     }               
     }*/
+public static void setJTableColumnsWidth(JTable table, int tablePreferredWidth,
+        double... percentages) {
+    double total = 0;
+    for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+        total += percentages[i];
+    }
+ 
+    for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+        TableColumn column = table.getColumnModel().getColumn(i);
+        column.setPreferredWidth((int)
+                (tablePreferredWidth * (percentages[i] / total)));
+    }
+}
 
 class ItemAction implements ActionListener{
     public void actionPerformed(ActionEvent e) {
