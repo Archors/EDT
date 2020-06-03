@@ -8,35 +8,15 @@
  *
  * @author Milou
  */
-import Controller.CONNEXION_UTILISATEUR;
-import Controller.GROUPE_EDT;
-import Model.ADMIN;
-import Model.ETUDIANT;
-import Model.REFERENT;
 import Model.SEANCE;
-import Model.SALLE;
-import Model.SEANCEDAO;
-
-import Controller.GROUPE_EDT;
-import Controller.EtudiantEDT;
-import Controller.PROMOTION_EDT;
-import Controller.ADD_SEANCE;
-import Controller.CONNEXION_UTILISATEUR;
-import Controller.ENSEIGNANT_EDT;
 import Controller.SALLE_EDT;
 import Model.COURS;
 import Model.GROUPE;
 import Model.PROMOTION;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.sql.DataSource;
-import java.sql.SQLException;
 
 import Model.TYPE_COURS;
-import Model.UTILISATEUR;
-import View.Fenetre;
+import View.Fconnexion;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -77,7 +57,7 @@ public class Main {
                
 
 
-   //  Fenetre fenetre = new Fenetre();
+     Fconnexion fenetre = new Fconnexion();
 
     
     /*
