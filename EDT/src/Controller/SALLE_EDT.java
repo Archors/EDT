@@ -60,7 +60,6 @@ public class SALLE_EDT extends SALLEDAO {
         ResultSet result = ps.executeQuery();
         while(result.next())         
         {    
-            System.out.println("FOISFOISFOIS");
         SALLE sallete = new SALLE();
         DAO<SALLE> testsalle =new SALLEDAO();
         sallete=testsalle.find(result.getInt("ID_SALLE"));

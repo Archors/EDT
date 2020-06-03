@@ -68,14 +68,13 @@ public class EtudiantEDT extends ETUDIANTDAO {
 
        while(resultat.next())
        {
-           
+        
         ETUDIANT etudiant = new ETUDIANT();
         DAO <ETUDIANT> etudiantdao = new  ETUDIANTDAO();
         etudiant=etudiantdao.find(resultat.getInt("ID"));
         System.out.println("Étudiant : ");
         etudiant.afficherETUDIANT();
         listETUDIANT.add(etudiant);
-        
         
        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
        listSEANCE=groupeedt.getlistSEANCE();  

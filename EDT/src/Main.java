@@ -47,40 +47,16 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SALLE_EDT salleedt = new SALLE_EDT();
-        salleedt.voirSALLE_EDT("104");
-       Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-       Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
-       Set <COURS> listCOURS = new HashSet <COURS>();
-       Set <PROMOTION> listPROMOTION = new HashSet <PROMOTION>();
-       Set <GROUPE> listGROUPE = new HashSet <GROUPE>();
-       listSEANCE = salleedt.getlistSEANCE();
-       listPROMOTION= salleedt.getlistPROMOTION();
-       listCOURS = salleedt.getListCOURS();
-       listTYPE_COURS = salleedt.getListTYPE_COURS();
-       listGROUPE=salleedt.getListGROUPE();
-       
-       for(SEANCE seance : listSEANCE)
-       {
-           System.out.println("Heure debutdebutdebut: ");
-           System.out.println(seance.getHEURE_DEBUT());
-       }
-       for(PROMOTION promotion : listPROMOTION)
-       {
-           System.out.println(promotion.getNOM());
-       }
-              for(GROUPE groupe : listGROUPE)
-       {
-           System.out.println(groupe.getNOM());
-       }
-      
-               
-
-
-   //  Fenetre fenetre = new Fenetre();
+        
+        
+        
+        
+        
+        
+     Fenetre fenetre = new Fenetre();
 
     
-    /*
+    
     CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
     connect.VERIFCONNEXION_UTILISATEUR("tiago@gmail.com", "tiago");
     if (connect.isConnexion()==false)
@@ -116,7 +92,7 @@ public class Main {
         
         }
 
-*/
+
       
      
     }
