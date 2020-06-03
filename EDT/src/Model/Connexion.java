@@ -24,7 +24,6 @@ public class Connexion {
     private static String url ="jdbc:mysql://localhost:8889/edt";
     private static String nameuser="root";
     private static String psswd = "root";
-
     
     public Connection getConnexion() {
         if (conn == null){

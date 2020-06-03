@@ -121,10 +121,11 @@ public JPanel edt(){
     };
 
     //Les titres des colonnes
-    String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+    String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
     JTable tableau = new JTable(data, title);
-    tableau.setRowHeight(200);
-    tableau.setPreferredSize(new Dimension(7000, 510));
+    tableau.setPreferredSize(new Dimension(1300, 1200));
+    
+
 
     //Nous ajoutons notre tableau à notre contentPane dans un scroll
     //Sinon les titres des colonnes ne s'afficheront pas !
