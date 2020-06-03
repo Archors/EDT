@@ -103,26 +103,105 @@ public JPanel semaine(){
 }
 
 public JPanel edt(){
+    int semaine=0;
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());
+    //Recuperation de la liste de cours de l'etudiant
     studentEDT.voirETUDIANT_SEANCE(etudiant.NUMERO());
     listSEANCE = studentEDT.getlistSEANCE();
+    Set<SEANCE> listSEANCESEMAINE =new HashSet<SEANCE>();
+    Set<SEANCE> listSEANCEDATE =new HashSet<SEANCE>();
+    Set<SEANCE> listSEANCEHEURE =new HashSet<SEANCE>();
+    
     pan3.setPreferredSize(new Dimension(1350, 510 ));
     pan3.setBackground(Color.ORANGE); 
     //pan3.setLocation(2730, 20);
     //pan3.setMinimumSize(new Dimension(900, 400));
     //pan3.setMaximumSize(new Dimension(900, 400));
+    for(SEANCE i : listSEANCE)
+    {
+        if(i.getSEMAINE() == semaine)
+        {
+            listSEANCESEMAINE.add(i);
+        }
+    }
+    for(SEANCE i : listSEANCESEMAINE)
+    {
+        int x = 0,y=0;
+        switch(i.getDATE())
+        {
+            case ("LUNDI") :
+            {
+                y=1;
+                break;
+            }
+            case ("MARDI") :
+            {
+                y=2;
+                break;
+            }
+            case ("MERCREDI") :
+            {
+                y=3;
+                break;
+            }
+            case ("JEUDI") :
+            {
+                y=4;
+                break;
+            }
+            case ("VENDREDI") :
+            {
+                y=5;
+                break;
+            }
+        }
+        switch(i.getHEURE_DEBUT())
+        {
+            case ("8h30-10h15") :
+            {
+                x=0;
+                break;
+            }
+            case ("10h15-11h45") :
+            {
+                x=1;
+                break;
+            }
+            case ("12h-13h30") :
+            {
+                x=2;
+                break;
+            }
+            case ("13h45-15h15") :
+            {
+                x=3;
+                break;
+            }
+            case ("15h30-17h") :
+            {
+                x=4;
+                break;
+            }
+        }
+    }
     
 
     Object[][] data = {
-      {etudiant.NUMERO(), "", "", "", "", ""},
-      {etudiant.toString(), "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""}
+      {"8h30", "", "", "", "", ""},
+      {"10h", "", "", "", "", ""},
+      {"10h15", "", "", "", "", ""},
+      {"11h45", "", "", "", "", ""},
+      {"12h", "", "", "", "", ""},
+      {"13h30", "", "", "", "", ""},
+      {"13h45", "", "", "", "", ""},
+      {"15h15", "", "", "", "", ""},
+      {"15h30", "", "", "", "", ""},
+      {"17h", "", "", "", "", ""}
     };
 
     //Les titres des colonnes
-    String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+    String  title[] = {"heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
     JTable tableau = new JTable(data, title);
     //tableau.setVisibleColumnCount(6);
     //tableau.setHorizontalScrollEnabled(true);
@@ -130,7 +209,7 @@ public JPanel edt(){
     //r.setHorizontalAlignment(JLabel.CENTER);
     //tableau.setRowHeight(500);
     //tableau.getColumn(0).setPreferredWidth(300);
-    //setJTableColumnsWidth(tableau, 1350, 270, 270, 270, 270,270);
+    setJTableColumnsWidth(tableau, 1350,135, 270, 270, 270, 270,270);
     tableau.setPreferredSize(new Dimension(1350, 510));
 
     //Nous ajoutons notre tableau à notre contentPane dans un scroll
