@@ -46,12 +46,12 @@ import java.sql.SQLException;
 public class ADD_SEANCE extends SEANCEDAO {
     public ADD_SEANCE(){}
 
-    public void AJOUTER_SEANCE(String SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, String NomCours, String Type_CoursNom)
+    public void AJOUTER_SEANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, String NomCours, String Type_CoursNom)
     {
         try{ 
       PreparedStatement ps= this.connection.prepareStatement("INSERT INTO SEANCE (SEMAINE, DATE, HEURE_DEBUT, HEURE_FIN, ETAT,ID_COURS, ID_TYPE) VALUES (?, ?, ?, ?, ?, ?, ?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-       ps.setString(1,SEMAINE);
+       ps.setInt(1,SEMAINE);
        ps.setString(2,DATE);
        ps.setString(3,HEURE_DEBUT);
        ps.setString(4,HEURE_FIN);

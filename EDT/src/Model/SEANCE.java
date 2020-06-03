@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class SEANCE {
     private int ID=0;
-    private String SEMAINE="";
+    private int SEMAINE=0;
     private String DATE="";
     private String HEURE_DEBUT="";
     private String HEURE_FIN="";
@@ -24,7 +24,7 @@ public class SEANCE {
 
     
     public SEANCE(){}
-    public SEANCE(int ID, String SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT){
+    public SEANCE(int ID, int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT){
         this.ID=ID;
         this.SEMAINE=SEMAINE;
         this.DATE=DATE;
@@ -41,11 +41,11 @@ public class SEANCE {
         this.ID=ID;
     }
     
-        public String getSEMAINE(){
+        public int getSEMAINE(){
         return SEMAINE;
     }
     
-    public void setSEMAINE(String SEMAINE){
+    public void setSEMAINE(int SEMAINE){
         this.SEMAINE=SEMAINE;
     }
     
@@ -66,7 +66,7 @@ public class SEANCE {
     }
     
     public String getHEURE_FIN(){
-        return SEMAINE;
+        return HEURE_FIN;
     }
     
     public void setHEURE_FIN(String HEURE_FIN){
