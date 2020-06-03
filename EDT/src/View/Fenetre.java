@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*package View;
+package View;
 
 import Controller.CONNEXION_UTILISATEUR;
 import Model.ADMIN;
-import Model.COURS;
 import Model.ETUDIANT;
-import Model.PROMOTION;
 import Model.REFERENT;
-import Model.SALLE;
-import Model.SEANCE;
-import Model.TYPE_COURS;
 import Model.UTILISATEUR;
 
 
@@ -28,11 +23,9 @@ import Model.UTILISATEUR;
  *
  * @author Aurélien
  */
-/*import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -43,14 +36,7 @@ import javax.swing.JPasswordField;
 
 public class Fenetre extends JFrame {
 
-  //Données pour l'affichage
-  private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-  private Set<UTILISATEUR> listENSEIGNANT =new HashSet<UTILISATEUR>();
-  private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
-  private Set<TYPE_COURS> listTYPE_COURS = new HashSet<TYPE_COURS>();
-  private Set<COURS> listCOURS = new HashSet<COURS>();
-  private Set <SALLE> listSALLE = new HashSet<SALLE>();
-
+  
    private int id;
 
   public Fenetre(){
@@ -61,8 +47,8 @@ public class Fenetre extends JFrame {
     this.setDefaultLookAndFeelDecorated(true);
     this.setExtendedState(this.MAXIMIZED_BOTH);
 
-    //connexion();
-    eleve();
+    connexion();
+
 
     this.setVisible(true);
   }
@@ -93,7 +79,7 @@ public class Fenetre extends JFrame {
             public void actionPerformed(ActionEvent e){
               
                 String uname = username.getText();
-                String pwd = String.valueOf(password.getPassword());
+                String pwd = password.getText();
                 CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
     connect.VERIFCONNEXION_UTILISATEUR(uname, pwd);
     if (connect.isConnexion()==false)
@@ -105,9 +91,11 @@ public class Fenetre extends JFrame {
     else {
         if(connect.getDroit()==4)
         {
+          System.out.println("test 3:");
     ETUDIANT etudiant = new ETUDIANT();
     etudiant=connect.getEtudiant();
     etudiant.afficherETUDIANT();
+    System.out.println("test 1 :");
 
     eleve(etudiant); 
         }
@@ -145,7 +133,6 @@ public class Fenetre extends JFrame {
 
   public void eleve(ETUDIANT etudiant){
 
-    System.out.println("Everything is fine !");
     JTabbedPane onglet;
         //Création de plusieurs Panneau
     Panneau tPan = new Panneau(etudiant);
@@ -160,39 +147,11 @@ public class Fenetre extends JFrame {
       
     //On passe ensuite les onglets au content pane
     this.getContentPane().add(onglet);
+    System.out.println("test :");
     etudiant.afficherETUDIANT();
     }
-
-  
-
-    public void setListSeance(Set<SEANCE> listS)
-    {
-      listSEANCE=listS;
-    }
-    public void setListEnseignant(Set<UTILISATEUR> listU)
-    {
-      listENSEIGNANT=listU;
-    }
-    public void setListPromotion(Set<PROMOTION> listP)
-    {
-      listPROMOTION=listP;
-    }
-    public void setListType_cours(Set<TYPE_COURS> listT)
-    {
-      listTYPE_COURS=listT;
-    }
-    public void setListCours(Set<COURS> listC)
-    {
-      listCOURS=listC;
-    }
-    public void setListSalle(Set<SALLE> listS)
-    {
-      listSALLE=listS;
-    }
-
-
    
   public static void main(String[] args){
     Fenetre fen = new Fenetre();
   }   
-}*/
+}

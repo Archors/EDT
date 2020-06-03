@@ -9,19 +9,34 @@
  * @author Milou
  */
 import Controller.CONNEXION_UTILISATEUR;
-import Model.SEANCE;
-import Controller.SALLE_EDT;
+import Controller.GROUPE_EDT;
 import Model.ADMIN;
-import Model.COURS;
 import Model.ETUDIANT;
+import Model.REFERENT;
+import Model.SEANCE;
+import Model.SALLE;
+import Model.SEANCEDAO;
+
+import Controller.GROUPE_EDT;
+import Controller.EtudiantEDT;
+import Controller.PROMOTION_EDT;
+import Controller.ADD_SEANCE;
+import Controller.CONNEXION_UTILISATEUR;
+import Controller.ENSEIGNANT_EDT;
+import Controller.SALLE_EDT;
+import Model.COURS;
 import Model.GROUPE;
 import Model.PROMOTION;
-import Model.REFERENT;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.sql.DataSource;
+import java.sql.SQLException;
 
 import Model.TYPE_COURS;
 import Model.UTILISATEUR;
-import View.Fconnexion;
+import View.Fenetre;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,44 +47,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         
         
         
         
         
-        SALLE_EDT salleedt = new SALLE_EDT();
-        salleedt.voirSALLE_EDT("104");
-       Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-       Set <TYPE_COURS> listTYPE_COURS =new HashSet <TYPE_COURS>();
-       Set <COURS> listCOURS = new HashSet <COURS>();
-       Set <PROMOTION> listPROMOTION = new HashSet <PROMOTION>();
-       Set <GROUPE> listGROUPE = new HashSet <GROUPE>();
-       listSEANCE = salleedt.getlistSEANCE();
-       listPROMOTION= salleedt.getlistPROMOTION();
-       listCOURS = salleedt.getListCOURS();
-       listTYPE_COURS = salleedt.getListTYPE_COURS();
-       listGROUPE=salleedt.getListGROUPE();
-       
-       for(SEANCE seance : listSEANCE)
-       {
-           System.out.println("Heure debutdebutdebut: ");
-           System.out.println(seance.getHEURE_DEBUT());
-       }
-       for(PROMOTION promotion : listPROMOTION)
-       {
-           System.out.println(promotion.getNOM());
-       }
-              for(GROUPE groupe : listGROUPE)
-       {
-           System.out.println(groupe.getNOM());
-       }
-      
-               
-
-
-     Fconnexion fenetre = new Fconnexion();
-
+        
+     Fenetre fenetre = new Fenetre();
 
     
     
