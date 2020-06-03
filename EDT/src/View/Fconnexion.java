@@ -98,10 +98,8 @@ public class Fconnexion extends JFrame {
     else {
         if(connect.getDroit()==4)
         {
-            System.out.println("test 3:");
             ETUDIANT etudiant = new ETUDIANT();
             etudiant=connect.getEtudiant();
-            //etudiant.afficherETUDIANT(); 
             con = 1;
             //student = etudiant; 
             

@@ -56,6 +56,8 @@ public class Panneau extends JFrame{
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
     etudiant = recupEtudiant;
+    System.out.print("L'etudiant dans panneau est :");
+            etudiant.afficherUTILISATEUR();
 
   //  principal.add(menu());
 
@@ -107,10 +109,14 @@ public JPanel semaine(){
 }
 
 public JPanel edt(){
-    int semaine=0;
+    int semaine=1;
     
     calendrier.setLayout(new BorderLayout()); 
-
+    //System.out.print("L'etudiant dans fetudiant est :");
+    //etudiant.afficherETUDIANT();
+    //System.out.print(etudiant.getNOM());
+    //studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
+    //listSEANCE = studentEDT.getlistSEANCE();
     /*
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());
@@ -127,17 +133,22 @@ public JPanel edt(){
     //pan3.setLocation(2730, 20);
     //pan3.setMinimumSize(new Dimension(900, 400));
     //pan3.setMaximumSize(new Dimension(900, 400));
+    */
+    Object[][] data = {
+      {"8h30 - 10h", "", "", "", "", ""},
+      {"10h15 - 11h45", "", "", "", "", ""},
+      {"12h - 13h30", "", "", "", "", ""},
+      {"13h45 - 15h15", "", "", "", "", ""},
+      {"15h30 - 17h", "", "", "", "", ""}
+    };
     for(SEANCE i : listSEANCE)
     {
+        System.out.println("l'eleve a 1 cours");
         if(i.getSEMAINE() == semaine)
         {
-            listSEANCESEMAINE.add(i);
-        }
-    }
-    for(SEANCE i : listSEANCESEMAINE)
-    {
-        int x = 0,y=0;
-        switch(i.getDATE())
+            System.out.println("Un cours dans la semaine :");
+            int x = 0,y=0;
+            switch(i.getDATE())
         {
             case ("LUNDI") :
             {
@@ -167,47 +178,41 @@ public JPanel edt(){
         }
         switch(i.getHEURE_DEBUT())
         {
-            case ("8h30-10h15") :
+            case ("8h30") :
             {
                 x=0;
                 break;
             }
-            case ("10h15-11h45") :
+            case ("10h15") :
             {
                 x=1;
                 break;
             }
-            case ("12h-13h30") :
+            case ("12h") :
             {
                 x=2;
                 break;
             }
-            case ("13h45-15h15") :
+            case ("13h45") :
             {
                 x=3;
                 break;
             }
-            case ("15h30-17h") :
+            case ("15h30") :
             {
                 x=4;
                 break;
             }
         }
+        System.out.print("ici : ");
+        System.out.println(i.getID());
+        data[x][y]=i.getID();
+        }
     }
     
-*/
-    Object[][] data = {
-      {"8h30", "", "", "", "", ""},
-      {"10h", "", "", "", "", ""},
-      {"10h15", "", "", "", "", ""},
-      {"11h45", "", "", "", "", ""},
-      {"12h", "", "", "", "", ""},
-      {"13h30", "", "", "", "", ""},
-      {"13h45", "", "", "", "", ""},
-      {"15h15", "", "", "", "", ""},
-      {"15h30", "", "", "", "", ""},
-      {"17h", "", "", "", "", ""}
-    };
+    
+
+    
 
     //Les titres des colonnes
 
@@ -266,19 +271,6 @@ public JPanel edt(){
    
     }               
     }*/
-public static void setJTableColumnsWidth(JTable table, int tablePreferredWidth,
-        double... percentages) {
-    double total = 0;
-    for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
-        total += percentages[i];
-    }
- 
-    for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
-        TableColumn column = table.getColumnModel().getColumn(i);
-        column.setPreferredWidth((int)
-                (tablePreferredWidth * (percentages[i] / total)));
-    }
-}
 
 class ItemAction implements ActionListener{
     public void actionPerformed(ActionEvent e) {
