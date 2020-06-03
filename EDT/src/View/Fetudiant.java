@@ -30,29 +30,32 @@ import Model.UTILISATEUR;
  * @author Aurélien
  */
 public class Fetudiant extends JFrame {
-ETUDIANT student = new ETUDIANT();
-    public Fetudiant(){
-    this.setLocationRelativeTo(null);
-    this.setTitle("Gérer vos conteneurs");
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.pack();
-    this.setDefaultLookAndFeelDecorated(true);
-    this.setExtendedState(this.MAXIMIZED_BOTH);
-    JTabbedPane onglet;
-    //Création de plusieurs Panneau
-    Panneau tPan = new Panneau(student);
-    Recapitulatif recap = new Recapitulatif();
-    //System.out.println("test methode :");
-    //Création de notre conteneur d'onglets
-    onglet = new JTabbedPane();
 
-    //Méthode d'ajout d'onglet
-     onglet.add("Emploi du temps", tPan.getPan());
-     onglet.add("Récapitulatif de cours", recap);
+    //ETUDIANT student = new ETUDIANT();
+    public Fetudiant(){}
+    public Fetudiant(ETUDIANT student){
+        
+        this.setLocationRelativeTo(null);
+        this.setTitle("Gérer vos conteneurs");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setDefaultLookAndFeelDecorated(true);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        JTabbedPane onglet;
+        //Création de plusieurs Panneau
+        Panneau tPan = new Panneau(student);
+        Recapitulatif recap = new Recapitulatif();
+        //System.out.println("test methode :");
+        //Création de notre conteneur d'onglets
+        onglet = new JTabbedPane();
+
+        //Méthode d'ajout d'onglet
+        onglet.add("Emploi du temps", tPan.getPan());
+        onglet.add("Récapitulatif de cours", recap);
 
 
-    this.getContentPane().add(onglet);
-    this.setVisible(true);
+        this.getContentPane().add(onglet);
+        this.setVisible(true);
 
     }
 

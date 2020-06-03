@@ -51,7 +51,10 @@ public class Panneau extends JPanel{
     pan.add(menu());
     pan.add(semaine());
     pan.add(edt());
-    
+    System.out.println("Premier etudiant :");
+    recupEtudiant.afficherETUDIANT();
+    System.out.println("Deuxieme etudiant :");
+    etudiant.afficherETUDIANT();
     //pan1.setBackground(Color.blue);
     //pan2.setBackground(Color.blue);
     //pan3.setBackground(Color.blue);

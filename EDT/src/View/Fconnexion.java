@@ -103,12 +103,12 @@ public class Fconnexion extends JFrame {
             etudiant=connect.getEtudiant();
             //etudiant.afficherETUDIANT(); 
             con = 1;
-            student = etudiant; 
+            //student = etudiant; 
             
             //pr.removeAll();
             //Panneau tPan = new Panneau(etudiant);
             //pr.paint();
-            Fetudiant fetudiant = new Fetudiant();
+            Fetudiant fetudiant = new Fetudiant(etudiant);
             //fenetre.dispose();
             //this.dispose();
             //eleve(student); 
