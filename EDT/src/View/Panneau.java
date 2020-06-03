@@ -49,6 +49,12 @@ public class Panneau extends JFrame{
   private JTable tableau;
    
   public Panneau(ETUDIANT recupEtudiant){
+      etudiant = recupEtudiant;
+      System.out.print("L'etudiant 3 dans panneau est :");
+    System.out.print(recupEtudiant.getID());
+    System.out.print(recupEtudiant.getDROIT());
+    System.out.println(recupEtudiant.getNOM());
+    
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
@@ -56,9 +62,10 @@ public class Panneau extends JFrame{
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
     etudiant = recupEtudiant;
-    System.out.print("L'etudiant dans panneau est :");
-            etudiant.afficherUTILISATEUR();
-
+    System.out.print("L'etudiant 4 dans panneau est :");
+    System.out.print(etudiant.getID());
+    System.out.print(etudiant.getDROIT());
+    System.out.println(etudiant.getNOM());
   //  principal.add(menu());
 
 
@@ -112,11 +119,14 @@ public JPanel edt(){
     int semaine=1;
     
     calendrier.setLayout(new BorderLayout()); 
-    //System.out.print("L'etudiant dans fetudiant est :");
+    System.out.print("L'etudiant dans fetudiant est :");
+    System.out.print(etudiant.getID());
+    System.out.print(etudiant.getDROIT());
+    System.out.print(etudiant.getNOM());
     //etudiant.afficherETUDIANT();
     //System.out.print(etudiant.getNOM());
-    //studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
-    //listSEANCE = studentEDT.getlistSEANCE();
+    studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
+    listSEANCE = studentEDT.getlistSEANCE();
     /*
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());

@@ -106,7 +106,12 @@ public class Fconnexion extends JFrame {
             //pr.removeAll();
             //Panneau tPan = new Panneau(etudiant);
             //pr.paint();
+            System.out.print("L'etudiant 1 dans fetudiant est :");
+    System.out.print(etudiant.getID());
+    System.out.print(etudiant.getDROIT());
+    System.out.print(etudiant.getNOM());
             Fetudiant fetudiant = new Fetudiant(etudiant);
+            
             //fenetre.dispose();
             //this.dispose();
             //eleve(student); 
