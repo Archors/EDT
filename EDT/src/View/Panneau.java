@@ -10,28 +10,25 @@ package View;
  *
  * @author Aurélien
  */
+import Controller.EtudiantEDT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JComboBox;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JTextField;
 
 import Model.ETUDIANT;
+import Model.SEANCE;
 
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.table.TableColumn;
 
 public class Panneau extends JPanel{
   private Color color = Color.white;
@@ -44,6 +41,8 @@ public class Panneau extends JPanel{
   private JPanel pan3 = new JPanel();
   private JComboBox combo = new JComboBox();
   private ETUDIANT etudiant;
+  private EtudiantEDT studentEDT = new EtudiantEDT();
+  private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
 
    
   public Panneau(ETUDIANT recupEtudiant){
@@ -106,6 +105,8 @@ public JPanel semaine(){
 public JPanel edt(){
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());
+    studentEDT.voirETUDIANT_SEANCE(etudiant.NUMERO());
+    listSEANCE = studentEDT.getlistSEANCE();
     pan3.setPreferredSize(new Dimension(1350, 510 ));
     pan3.setBackground(Color.ORANGE); 
     //pan3.setLocation(2730, 20);
@@ -114,17 +115,23 @@ public JPanel edt(){
     
 
     Object[][] data = {
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
+      {etudiant.NUMERO(), "", "", "", "", ""},
+      {etudiant.toString(), "", "", "", "", ""},
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""}
     };
 
     //Les titres des colonnes
-    String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+    String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
     JTable tableau = new JTable(data, title);
-    tableau.setRowHeight(200);
-    tableau.setPreferredSize(new Dimension(7000, 510));
+    //tableau.setVisibleColumnCount(6);
+    //tableau.setHorizontalScrollEnabled(true);
+    //DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+    //r.setHorizontalAlignment(JLabel.CENTER);
+    //tableau.setRowHeight(500);
+    //tableau.getColumn(0).setPreferredWidth(300);
+    //setJTableColumnsWidth(tableau, 1350, 270, 270, 270, 270,270);
+    tableau.setPreferredSize(new Dimension(1350, 510));
 
     //Nous ajoutons notre tableau à notre contentPane dans un scroll
     //Sinon les titres des colonnes ne s'afficheront pas !
@@ -173,6 +180,19 @@ Object[][] data1 = {
    
     }               
     }*/
+public static void setJTableColumnsWidth(JTable table, int tablePreferredWidth,
+        double... percentages) {
+    double total = 0;
+    for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+        total += percentages[i];
+    }
+ 
+    for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+        TableColumn column = table.getColumnModel().getColumn(i);
+        column.setPreferredWidth((int)
+                (tablePreferredWidth * (percentages[i] / total)));
+    }
+}
 
 class ItemAction implements ActionListener{
     public void actionPerformed(ActionEvent e) {
