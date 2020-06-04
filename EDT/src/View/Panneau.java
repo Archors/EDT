@@ -47,6 +47,7 @@ public class Panneau extends JFrame{
   private EtudiantEDT studentEDT = new EtudiantEDT();
   private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
   private JTable tableau;
+  private int semaine=1;
    
   public Panneau(ETUDIANT recupEtudiant){
       etudiant = recupEtudiant;
@@ -110,14 +111,11 @@ public JPanel semaine(){
         bouton.setPreferredSize(new Dimension(48,20));
         pan2.add(bouton);
     }
-
     return pan2;
     
 }
 
-public JPanel edt(){
-    int semaine=1;
-    
+public JPanel edt(){    
     calendrier.setLayout(new BorderLayout()); 
     System.out.print("L'etudiant dans fetudiant est :");
     System.out.print(etudiant.getID());
