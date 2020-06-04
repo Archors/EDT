@@ -32,7 +32,9 @@ import Model.UTILISATEURDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 /**
  *
@@ -41,12 +43,12 @@ import java.util.Set;
 public class GROUPE_EDT extends GROUPEDAO {
     public GROUPE_EDT(){}
 
-    private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-    private Set<UTILISATEUR> listENSEIGNANT =new HashSet<UTILISATEUR>();
-    private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
-    private Set<TYPE_COURS> listTYPE_COURS = new HashSet<TYPE_COURS>();
-    private Set<COURS> listCOURS = new HashSet<COURS>();
-    private Set <SALLE> listSALLE = new HashSet<SALLE>();
+    private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
+    private List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
+    private List<PROMOTION> listPROMOTION =new ArrayList<PROMOTION>();
+    private List<TYPE_COURS> listTYPE_COURS = new ArrayList<TYPE_COURS>();
+    private List<COURS> listCOURS = new ArrayList<COURS>();
+    private List <SALLE> listSALLE = new ArrayList<SALLE>();
 
     public void voirGROUPE_SEANCE(int ID)
     {
@@ -63,12 +65,12 @@ public class GROUPE_EDT extends GROUPEDAO {
         PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM GROUPE JOIN SEANCE_GROUPE a ON GROUPE.ID = a.ID_GROUPE JOIN SEANCE b ON a.ID_SEANCE = b.ID JOIN SEANCE_SALLE d ON b.ID = d.ID_SEANCE JOIN SALLE e ON d.ID_SALLE = e.ID JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR WHERE GROUPE.ID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setInt(1,ID);
         ResultSet result = ps.executeQuery();
-        
+        int i=0;
         while(result.next()) 
             
         
         {    
-            
+           
         //on créee un objet séance contenant les informations récupérés (ID_SEANCE) de la BDD
         SEANCE seancetest= new SEANCE();
         DAO<SEANCE> seancedaotest = new SEANCEDAO();
@@ -102,10 +104,10 @@ public class GROUPE_EDT extends GROUPEDAO {
         DAO<SALLE> testsalle =new SALLEDAO();
         sallete=testsalle.find(result.getInt("ID_SALLE"));
         listSALLE.add(sallete);
-
-
+        
+System.out.println("AFFICHAGE LISTE SEANCE : ");
+afficherLISTESEANCE(); 
         }
-
     }catch (SQLException e){
         e.printStackTrace();
     }
@@ -121,6 +123,16 @@ public void afficherLISTESEANCE(){
     }
     
     }
+
+public void afficherLISTESALLE(){
+           
+    for (SALLE salle : listSALLE)
+    {
+        System.out.println(salle.getNOM());
+    }
+    
+    }
+
 public void afficherLISTEENSEIGNANT(){
            
     for (UTILISATEUR enseignant : listENSEIGNANT)
@@ -168,37 +180,37 @@ public void afficherLISTEPROMOTION(){
             this.listSALLE.add(salle);
     }
 
-    public Set<UTILISATEUR> getlistENSEIGNANT(){
+    public List<UTILISATEUR> getlistENSEIGNANT(){
         return listENSEIGNANT;
     }
-    public Set<SEANCE> getlistSEANCE(){
+    public List<SEANCE> getlistSEANCE(){
         return listSEANCE;
     }
-    public Set<PROMOTION> getlistPROMOTION(){
+    public List<PROMOTION> getlistPROMOTION(){
         return listPROMOTION;
     }
 
-    public Set<TYPE_COURS> getListTYPE_COURS() {
+    public List<TYPE_COURS> getListTYPE_COURS() {
         return listTYPE_COURS;
     }
 
-    public void setListTYPE_COURS(Set<TYPE_COURS> listTYPE_COURS) {
+    public void setListTYPE_COURS(List<TYPE_COURS> listTYPE_COURS) {
         this.listTYPE_COURS = listTYPE_COURS;
     }
 
-    public Set<COURS> getListCOURS() {
+    public List<COURS> getListCOURS() {
         return listCOURS;
     }
 
-    public void setListCOURS(Set<COURS> listCOURS) {
+    public void setListCOURS(List<COURS> listCOURS) {
         this.listCOURS = listCOURS;
     }
 
-    public Set<SALLE> getListSALLE() {
+    public List<SALLE> getListSALLE() {
         return listSALLE;
     }
 
-    public void setListSALLE(Set<SALLE> listSALLE) {
+    public void setListSALLE(List<SALLE> listSALLE) {
         this.listSALLE = listSALLE;
     }
 

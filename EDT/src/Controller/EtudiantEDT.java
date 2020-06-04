@@ -37,21 +37,23 @@ import Model.UTILISATEURDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 /**
  *
  * @author Milou
  */
 public class EtudiantEDT extends ETUDIANTDAO {
-    private Set<ETUDIANT> listETUDIANT =new HashSet<ETUDIANT>();
+    private List<ETUDIANT> listETUDIANT =new ArrayList<ETUDIANT>();
     GROUPE_EDT groupeedt = new GROUPE_EDT();
-    private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-    private Set<UTILISATEUR> listENSEIGNANT =new HashSet<UTILISATEUR>();
-    private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
-    private Set<TYPE_COURS> listTYPE_COURS = new HashSet<TYPE_COURS>();
-    private Set<COURS> listCOURS = new HashSet<COURS>();
-    private Set <SALLE> listSALLE = new HashSet<SALLE>();
+    private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
+    private List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
+    private List<PROMOTION> listPROMOTION =new ArrayList<PROMOTION>();
+    private List<TYPE_COURS> listTYPE_COURS = new ArrayList<TYPE_COURS>();
+    private List<COURS> listCOURS = new ArrayList<COURS>();
+    private List <SALLE> listSALLE = new ArrayList<SALLE>();
 
     
     public EtudiantEDT(){}
@@ -78,6 +80,12 @@ public class EtudiantEDT extends ETUDIANTDAO {
         
        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
        listSEANCE=groupeedt.getlistSEANCE();  
+       listTYPE_COURS=groupeedt.getListTYPE_COURS();
+       listCOURS=groupeedt.getListCOURS();
+       listENSEIGNANT=groupeedt.getlistENSEIGNANT();
+       listPROMOTION=groupeedt.getlistPROMOTION();
+       listSALLE=groupeedt.getListSALLE();
+       
        }
  
     }catch (SQLException e){
@@ -86,7 +94,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
         
         
     }
-    public Set<ETUDIANT> getlistETUDIANT(){
+    public List<ETUDIANT> getlistETUDIANT(){
         return listETUDIANT;
     }
     public void addETUDIANT (ETUDIANT etudiant){
@@ -135,27 +143,27 @@ public class EtudiantEDT extends ETUDIANTDAO {
             this.listSALLE.add(salle);
     }
 
-    public Set<UTILISATEUR> getlistENSEIGNANT(){
+    public List<UTILISATEUR> getlistENSEIGNANT(){
         return listENSEIGNANT;
     }
-    public Set<SEANCE> getlistSEANCE(){
+    public List<SEANCE> getlistSEANCE(){
         return listSEANCE;
     }
-    public Set<PROMOTION> getlistPROMOTION(){
+    public List<PROMOTION> getlistPROMOTION(){
         return listPROMOTION;
     }
 
-    public Set<TYPE_COURS> getListTYPE_COURS() {
+    public List<TYPE_COURS> getListTYPE_COURS() {
         return listTYPE_COURS;
     }
 
 
-    public Set<COURS> getListCOURS() {
+    public List<COURS> getListCOURS() {
         return listCOURS;
     }
 
 
-    public Set<SALLE> getListSALLE() {
+    public List<SALLE> getListSALLE() {
         return listSALLE;
     }
 

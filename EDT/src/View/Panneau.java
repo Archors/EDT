@@ -10,6 +10,7 @@ package View;
  * @author Aurélien
  */
 import Controller.EtudiantEDT;
+import Controller.MODIFIER_ETAT_SEANCE;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -22,11 +23,14 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 
 import Model.ETUDIANT;
+import Model.SALLE;
 import Model.SEANCE;
 import java.awt.BorderLayout;
 
 import java.awt.GridBagConstraints;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
@@ -45,7 +49,8 @@ public class Panneau extends JFrame{
   private JComboBox combo = new JComboBox();
   private ETUDIANT etudiant;
   private EtudiantEDT studentEDT = new EtudiantEDT();
-  private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+  private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
+  private List <SALLE> listSALLE =new ArrayList <SALLE>();
   private JTable tableau;
   private int semaine=1;
    
@@ -125,23 +130,21 @@ public JPanel edt(){
     //System.out.print(etudiant.getNOM());
     studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
     listSEANCE = studentEDT.getlistSEANCE();
-    /*
-    //Les données du tableau
-    //JPanel top = new JPanel(new BorderLayout());
-    //Recuperation de la liste de cours de l'etudiant
-    studentEDT.voirETUDIANT_SEANCE(etudiant.NUMERO());
-    listSEANCE = studentEDT.getlistSEANCE();
-    Set<SEANCE> listSEANCESEMAINE =new HashSet<SEANCE>();
-    Set<SEANCE> listSEANCEDATE =new HashSet<SEANCE>();
-    Set<SEANCE> listSEANCEHEURE =new HashSet<SEANCE>();
+    listSALLE = studentEDT.getListSALLE();
     
-    pan3.setPreferredSize(new Dimension(3000, 510 ));
-    pan3.setBackground(Color.ORANGE);
+    for(SEANCE seance : listSEANCE)
+    {System.out.println(seance.getID());
     
-    //pan3.setLocation(2730, 20);
-    //pan3.setMinimumSize(new Dimension(900, 400));
-    //pan3.setMaximumSize(new Dimension(900, 400));
-    */
+    }
+    
+    for (SALLE salle : listSALLE)
+    {
+        System.out.println(salle.getNOM());
+    }
+    
+    
+    
+
     Object[][] data = {
       {"8h30 - 10h", "", "", "", "", ""},
       {"10h15 - 11h45", "", "", "", "", ""},
