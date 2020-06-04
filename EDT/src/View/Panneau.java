@@ -11,7 +11,8 @@ package View;
  */
 import Controller.AffecterEnseignant;
 import Controller.EtudiantEDT;
-import Controller.MODIFIER_ETAT_SEANCE;
+import Controller.GROUPE_EDT;
+import Model.COURS;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -26,20 +27,17 @@ import javax.swing.JTextField;
 import Model.ETUDIANT;
 import Model.SALLE;
 import Model.SEANCE;
+import Model.TYPE_COURS;
 import Model.UTILISATEUR;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-
-import java.awt.GridBagConstraints;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JFrame;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class Panneau extends JFrame{
   private Color color = Color.white;
-  private int COUNT = 0;
   private String message = "";
  // private GridBagConstraints gbc = new GridBagConstraints();
   private JPanel principal = new JPanel();
@@ -53,8 +51,11 @@ public class Panneau extends JFrame{
   private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
   private List<SALLE> listSALLE =new ArrayList<SALLE>();
   private List<UTILISATEUR> listeENSEIGNANT = new ArrayList<UTILISATEUR>();
+  private List<TYPE_COURS> listeTYPE_COURS = new ArrayList<TYPE_COURS>();
+  private List<COURS> listeCOURS = new ArrayList<COURS>();
   private JTable tableau;
   private int semaine=1;
+  private int COUNT=0;
    
   public Panneau(ETUDIANT recupEtudiant){
       etudiant = recupEtudiant;    
@@ -64,16 +65,6 @@ public class Panneau extends JFrame{
     intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
-    etudiant = recupEtudiant;
-    System.out.print("L'etudiant 4 dans panneau est :");
-    System.out.print(etudiant.getID());
-    System.out.print(etudiant.getDROIT());
-    System.out.println(etudiant.getNOM());
-  //  principal.add(menu());
-
-
-   
-    etudiant.afficherETUDIANT();
   }
 
   public JPanel menu(){
@@ -118,35 +109,36 @@ public JPanel semaine(){
 
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
+
     int ID=11;
     AffecterEnseignant affecter = new AffecterEnseignant(ID);
     
     int compteurSALLE=0;
-    String infoSEANCE = "";
+String infoSEANCE = "";
+    int compteur=0;
+
     calendrier.setLayout(new BorderLayout()); 
     
-
+    //Creation de l'objet qui contient les données de l'etudiant
     studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
-    
+    //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
- 
+    listeTYPE_COURS = studentEDT.getListTYPE_COURS();
+    listeCOURS = studentEDT.getListCOURS();
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
 
-    
+    GROUPE_EDT grpedt = new GROUPE_EDT();
+    //grpedt.afficherLISTESEANCE();
+    grpedt.afficherLISTESALLE();
 
     //Données du tableau
     Object[][] data = {
-      {"8h30", "", "", "", "", ""},
-      {"10h", "", "", "", "", ""},
-      {"10h15", "", "", "", "", ""},
-      {"11h45", "", "", "", "", ""},
-      {"12h", "", "", "", "", ""},
-      {"13h30", "", "", "", "", ""},
-      {"13h45", "", "", "", "", ""},
-      {"15h15", "", "", "", "", ""},
-      {"15h30", "", "", "", "", ""},
-      {"17h", "", "", "", "", ""}
+      {"8h30-10h", "", "", "", "", ""},
+      {"10h15-11h45", "", "", "", "", ""},
+      {"12h-13h30", "", "", "", "", ""},
+      {"13h45-15h15", "", "", "", "", ""},
+      {"15h30-17h", "", "", "", "", ""}
     };
     for(SEANCE i : listSEANCE)
     {
@@ -190,75 +182,60 @@ public JPanel edt(){
             }
             case ("10h15") :
             {
-                y=2;
+                y=1;
                 break;
             }
             case ("12h") :
             {
-                y=4;
+                y=2;
                 break;
             }
             case ("13h45") :
             {
-                y=6;
+                y=3;
                 break;
             }
             case ("15h30") :
             {
-                y=8;
+                y=4;
                 break;
             }
         }
         //On verifie que le cours n'est pas annulé
-        if(i.getETAT()==1){
-            infoSEANCE= "Le cours a lieu en salle " + listSALLE.get(compteurSALLE).getNOM()+" avec " + listeENSEIGNANT.get(compteurSALLE).getNOM();
-            data[y][x] = infoSEANCE;
+   //     if(i.getETAT()==1){
+   //         infoSEANCE= "Le cours de " + listeCOURS.get(i.getID()).getNOM()+" en "+ listeTYPE_COURS.get(i.getID()).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+   //         data[y][x] = infoSEANCE;
+   //     }
         }
-        }
-        compteurSALLE++;
+        compteur++;
     }
-    
-    
-
-    
 
     //Les titres des colonnes
-
-    String  title[] = {"heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+    String  title[] = {"Heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
     
     ZModel model = new ZModel(data, title);
     
     tableau = new JTable(model);
-    tableau.setRowHeight(65);
+    //Definition de la taille des lignes
+    tableau.setRowHeight(125);
+    //Changement de la taille des colonnes
+     setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+        
     calendrier.add(new JScrollPane(tableau));
-    
-    //this.getContentPane().add(calendrier);
-    
-
-/*
- Object[][] data1 = {
-      {""},
-      {""}
-    }; 
-
-    //Les titres des colonnes
-    String  title1[] = {"Lundi"};
-    JTable tableau1 = new JTable(data1, title1);
-    tableau1.setPreferredSize(new Dimension(pan3.getWidth(), pan3.getHeight()));
-
-    //Nous ajoutons notre tableau à notre contentPane dans un scroll
-    //Sinon les titres des colonnes ne s'afficheront pas !
-
-    if(COUNT == 0){
-        pan3.removeAll();  
-        pan3.add(new JScrollPane(tableau));
-    }
-    else if(COUNT == 1){
-        pan3.removeAll();  
-        pan3.add(new JScrollPane(tableau1)); 
-    }
-*/
     return calendrier; 
+}
+
+//Fonction pour choisir la taille des colonnes du tableau avec des pourcentages
+//Source : https://kahdev.wordpress.com/2011/10/30/java-specifying-the-column-widths-of-a-jtable-as-percentages/
+private static void setWidthAsPercentages(JTable table,
+        double... percentages) {
+    final double factor = 10000;
+ 
+    TableColumnModel model = table.getColumnModel();
+    for (int columnIndex = 0; columnIndex < percentages.length; columnIndex++) {
+        TableColumn column = model.getColumn(columnIndex);
+        column.setPreferredWidth((int) (percentages[columnIndex] * factor));
+    }
 }
 
 /*

@@ -44,10 +44,6 @@ public class Fetudiant extends JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         JTabbedPane onglet;
         //Création de plusieurs Panneau
-        System.out.print("L'etudiant 2 dans fetudiant est :");
-    System.out.print(student.getID());
-    System.out.print(student.getDROIT());
-    System.out.print(student.getNOM());
         Panneau tPan = new Panneau(student);
         Recapitulatif recap = new Recapitulatif();
         //System.out.println("test methode :");
