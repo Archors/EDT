@@ -59,16 +59,17 @@ public class MODIFIER_ETAT_SEANCE extends SEANCEDAO{
    public MODIFIER_ETAT_SEANCE (){}
     
    public MODIFIER_ETAT_SEANCE(int ID, int etat)
-   {/*
+   {
        try {
-   PreparedStatement ps= this.connection.prepareStatement("UPDATE ETAT FROM SEANCE SET ETAT = ? u WHERE u.ID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+   PreparedStatement ps= this.connection.prepareStatement("UPDATE SEANCE  SET SEANCE.ETAT = ?  WHERE SEANCE.ID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     ps.setInt(1, etat);
+    ps.setInt(2,ID);
      int resultat = ps.executeUpdate();
 
        }catch (SQLException e){
         e.printStackTrace();
     }
-    */    
+      
    }
    
    }

@@ -81,8 +81,7 @@ public class Panneau extends JFrame{
 
   public JPanel menu(){
     //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
-    pan1.add(combo);
-    
+    pan1.add(combo);    
     //this.add(top, BorderLayout.NORTH);
     combo.addItem("En grille");
     combo.addItem("En liste");
@@ -122,25 +121,14 @@ public JPanel semaine(){
 
 public JPanel edt(){    
     calendrier.setLayout(new BorderLayout()); 
-    System.out.print("L'etudiant dans fetudiant est :");
-    System.out.print(etudiant.getID());
-    System.out.print(etudiant.getDROIT());
-    System.out.print(etudiant.getNOM());
     //etudiant.afficherETUDIANT();
     //System.out.print(etudiant.getNOM());
+    
+    
     studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
     
-    for(SEANCE seance : listSEANCE)
-    {System.out.println(seance.getID());
-    
-    }
-    
-    for (SALLE salle : listSALLE)
-    {
-        System.out.println(salle.getNOM());
-    }
     
     
     
