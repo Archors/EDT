@@ -40,4 +40,14 @@ class ZModel extends AbstractTableModel{
     public String getColumnName(int col) {
         return this.title[col];
 }
-  }
+    public void setValueAt(Object aValue, int row, int col) {
+            data[row][col] = aValue;
+            fireTableCellUpdated(row, col);
+        }
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return true;
+        }
+    public Class<?> getColumnClass(int columnIndex) {
+            return String.class;
+        }
+}

@@ -106,10 +106,6 @@ public class Fconnexion extends JFrame {
             //pr.removeAll();
             //Panneau tPan = new Panneau(etudiant);
             //pr.paint();
-            System.out.print("L'etudiant 1 dans fetudiant est :");
-    System.out.print(etudiant.getID());
-    System.out.print(etudiant.getDROIT());
-    System.out.print(etudiant.getNOM());
             Fetudiant fetudiant = new Fetudiant(etudiant);
             
             //fenetre.dispose();
@@ -162,7 +158,6 @@ public class Fconnexion extends JFrame {
     //Création de plusieurs Panneau
     Panneau tPan = new Panneau(etudiant);
     Recapitulatif recap = new Recapitulatif();
-    //System.out.println("test methode :");
     //Création de notre conteneur d'onglets
     onglet = new JTabbedPane();
 
@@ -172,7 +167,6 @@ public class Fconnexion extends JFrame {
       
     
     this.getContentPane().add(onglet);
-    //etudiant.afficherETUDIANT();
     }
 
   
