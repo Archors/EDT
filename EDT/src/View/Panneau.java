@@ -22,15 +22,15 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 
 import Model.ETUDIANT;
+import Model.SALLE;
 import Model.SEANCE;
+import Model.UTILISATEUR;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
-import java.awt.GridBagConstraints;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JFrame;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableColumn;
 
 public class Panneau extends JFrame{
   private Color color = Color.white;
@@ -46,16 +46,15 @@ public class Panneau extends JFrame{
   private ETUDIANT etudiant;
   private EtudiantEDT studentEDT = new EtudiantEDT();
   private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
+  private Set<SALLE> listSALLE =new HashSet<SALLE>();
+  private ArrayList<SALLE> listdeSALLE = new ArrayList<SALLE>();
+  private Set<UTILISATEUR> listeENSEIGNANT = new HashSet<UTILISATEUR>();
+  private ArrayList<UTILISATEUR> listedENSEIGNANT = new ArrayList<UTILISATEUR>();
   private JTable tableau;
   private int semaine=1;
    
   public Panneau(ETUDIANT recupEtudiant){
-      etudiant = recupEtudiant;
-      System.out.print("L'etudiant 3 dans panneau est :");
-    System.out.print(recupEtudiant.getID());
-    System.out.print(recupEtudiant.getDROIT());
-    System.out.println(recupEtudiant.getNOM());
-    
+      etudiant = recupEtudiant;    
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
@@ -115,16 +114,21 @@ public JPanel semaine(){
     
 }
 
-public JPanel edt(){    
+public JPanel edt(){
+    //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
+    int compteurSALLE=0;
+    String infoSEANCE = "";
     calendrier.setLayout(new BorderLayout()); 
-    System.out.print("L'etudiant dans fetudiant est :");
-    System.out.print(etudiant.getID());
-    System.out.print(etudiant.getDROIT());
-    System.out.print(etudiant.getNOM());
-    //etudiant.afficherETUDIANT();
-    //System.out.print(etudiant.getNOM());
     studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
     listSEANCE = studentEDT.getlistSEANCE();
+    listSALLE = studentEDT.getListSALLE();
+    listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
+    
+    //Passage d'un set à un ArrayList pour pouvoir acceder à la case que l'on souhaite
+    for(SALLE i : listSALLE)
+        listdeSALLE.add(i);
+    for(UTILISATEUR i : listeENSEIGNANT)
+        listedENSEIGNANT.add(i);
     /*
     //Les données du tableau
     //JPanel top = new JPanel(new BorderLayout());
@@ -142,6 +146,7 @@ public JPanel edt(){
     //pan3.setMinimumSize(new Dimension(900, 400));
     //pan3.setMaximumSize(new Dimension(900, 400));
     */
+    //Données du tableau
     Object[][] data = {
       {"8h30 - 10h", "", "", "", "", ""},
       {"10h15 - 11h45", "", "", "", "", ""},
@@ -151,36 +156,34 @@ public JPanel edt(){
     };
     for(SEANCE i : listSEANCE)
     {
-        System.out.println("l'eleve a 1 cours");
         if(i.getSEMAINE() == semaine)
         {
-            System.out.println("Un cours dans la semaine :");
             int x = 0,y=0;
             switch(i.getDATE())
         {
             case ("LUNDI") :
             {
-                y=1;
+                x=1;
                 break;
             }
             case ("MARDI") :
             {
-                y=2;
+                x=2;
                 break;
             }
             case ("MERCREDI") :
             {
-                y=3;
+                x=3;
                 break;
             }
             case ("JEUDI") :
             {
-                y=4;
+                x=4;
                 break;
             }
             case ("VENDREDI") :
             {
-                y=5;
+                x=5;
                 break;
             }
         }
@@ -188,34 +191,37 @@ public JPanel edt(){
         {
             case ("8h30") :
             {
-                x=0;
+                y=0;
                 break;
             }
             case ("10h15") :
             {
-                x=1;
+                y=1;
                 break;
             }
             case ("12h") :
             {
-                x=2;
+                y=2;
                 break;
             }
             case ("13h45") :
             {
-                x=3;
+                y=3;
                 break;
             }
             case ("15h30") :
             {
-                x=4;
+                y=4;
                 break;
             }
         }
-        System.out.print("ici : ");
-        System.out.println(i.getID());
-        data[x][y]=i.getID();
+        //On verifie que le cours n'est pas annulé
+        if(i.getETAT()==1){
+            infoSEANCE= "Le cours a lieu en salle " + listdeSALLE.get(compteurSALLE).getNOM()+" avec " + listedENSEIGNANT.get(compteurSALLE).getNOM();
+            data[y][x] = infoSEANCE;
         }
+        }
+        compteurSALLE++;
     }
     
     
