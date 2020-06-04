@@ -37,22 +37,24 @@ import Model.UTILISATEURDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 /**
  *
  * @author Milou
  */
 public class PROMOTION_EDT extends ETUDIANTDAO {
-    private Set<GROUPE> listGROUPE =new HashSet<GROUPE>();
-    private Set<ETUDIANT> listETUDIANT =new HashSet<ETUDIANT>();
+    private List<GROUPE> listGROUPE =new ArrayList<GROUPE>();
+    private List<ETUDIANT> listETUDIANT =new ArrayList<ETUDIANT>();
     private GROUPE_EDT groupeedt = new GROUPE_EDT();
-    private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-    private Set<UTILISATEUR> listENSEIGNANT =new HashSet<UTILISATEUR>();
-    private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
-    private Set<TYPE_COURS> listTYPE_COURS = new HashSet<TYPE_COURS>();
-    private Set<COURS> listCOURS = new HashSet<COURS>();
-    private Set <SALLE> listSALLE = new HashSet<SALLE>();
+    private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
+    private List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
+    private List<PROMOTION> listPROMOTION =new ArrayList<PROMOTION>();
+    private List<TYPE_COURS> listTYPE_COURS = new ArrayList<TYPE_COURS>();
+    private List<COURS> listCOURS = new ArrayList<COURS>();
+    private List <SALLE> listSALLE = new ArrayList<SALLE>();
 
     
     public PROMOTION_EDT(){}
@@ -80,7 +82,7 @@ public class PROMOTION_EDT extends ETUDIANTDAO {
 
 
     }
-    public Set<GROUPE> getlistGROUPE(){
+    public List<GROUPE> getlistGROUPE(){
         return listGROUPE;
     }
     public void addGROUPE (GROUPE groupe){
@@ -95,67 +97,67 @@ public void afficherLISTEGROUPE(){
     }
 }
 
-    public Set<GROUPE> getListGROUPE() {
+    public List<GROUPE> getListGROUPE() {
         return listGROUPE;
     }
 
-    public void setListGROUPE(Set<GROUPE> listGROUPE) {
+    public void setListGROUPE(List<GROUPE> listGROUPE) {
         this.listGROUPE = listGROUPE;
     }
 
-    public Set<ETUDIANT> getListETUDIANT() {
+    public List<ETUDIANT> getListETUDIANT() {
         return listETUDIANT;
     }
 
-    public void setListETUDIANT(Set<ETUDIANT> listETUDIANT) {
+    public void setListETUDIANT(List<ETUDIANT> listETUDIANT) {
         this.listETUDIANT = listETUDIANT;
     }
 
-    public Set<SEANCE> getListSEANCE() {
+    public List<SEANCE> getListSEANCE() {
         return listSEANCE;
     }
 
-    public void setListSEANCE(Set<SEANCE> listSEANCE) {
+    public void setListSEANCE(List<SEANCE> listSEANCE) {
         this.listSEANCE = listSEANCE;
     }
 
-    public Set<UTILISATEUR> getListENSEIGNANT() {
+    public List<UTILISATEUR> getListENSEIGNANT() {
         return listENSEIGNANT;
     }
 
-    public void setListENSEIGNANT(Set<UTILISATEUR> listENSEIGNANT) {
+    public void setListENSEIGNANT(List<UTILISATEUR> listENSEIGNANT) {
         this.listENSEIGNANT = listENSEIGNANT;
     }
 
-    public Set<PROMOTION> getListPROMOTION() {
+    public List<PROMOTION> getListPROMOTION() {
         return listPROMOTION;
     }
 
-    public void setListPROMOTION(Set<PROMOTION> listPROMOTION) {
+    public void setListPROMOTION(List<PROMOTION> listPROMOTION) {
         this.listPROMOTION = listPROMOTION;
     }
 
-    public Set<TYPE_COURS> getListTYPE_COURS() {
+    public List<TYPE_COURS> getListTYPE_COURS() {
         return listTYPE_COURS;
     }
 
-    public void setListTYPE_COURS(Set<TYPE_COURS> listTYPE_COURS) {
+    public void setListTYPE_COURS(List<TYPE_COURS> listTYPE_COURS) {
         this.listTYPE_COURS = listTYPE_COURS;
     }
 
-    public Set<COURS> getListCOURS() {
+    public List<COURS> getListCOURS() {
         return listCOURS;
     }
 
-    public void setListCOURS(Set<COURS> listCOURS) {
+    public void setListCOURS(List<COURS> listCOURS) {
         this.listCOURS = listCOURS;
     }
 
-    public Set<SALLE> getListSALLE() {
+    public List<SALLE> getListSALLE() {
         return listSALLE;
     }
 
-    public void setListSALLE(Set<SALLE> listSALLE) {
+    public void setListSALLE(List<SALLE> listSALLE) {
         this.listSALLE = listSALLE;
     }
 

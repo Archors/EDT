@@ -10,6 +10,7 @@ package View;
  * @author Aurélien
  */
 import Controller.EtudiantEDT;
+import Controller.MODIFIER_ETAT_SEANCE;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -28,7 +29,10 @@ import Model.UTILISATEUR;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
+import java.awt.GridBagConstraints;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JFrame;
 
@@ -45,11 +49,9 @@ public class Panneau extends JFrame{
   private JComboBox combo = new JComboBox();
   private ETUDIANT etudiant;
   private EtudiantEDT studentEDT = new EtudiantEDT();
-  private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-  private Set<SALLE> listSALLE =new HashSet<SALLE>();
-  private ArrayList<SALLE> listdeSALLE = new ArrayList<SALLE>();
-  private Set<UTILISATEUR> listeENSEIGNANT = new HashSet<UTILISATEUR>();
-  private ArrayList<UTILISATEUR> listedENSEIGNANT = new ArrayList<UTILISATEUR>();
+  private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
+  private List<SALLE> listSALLE =new ArrayList<SALLE>();
+  private List<UTILISATEUR> listeENSEIGNANT = new ArrayList<UTILISATEUR>();
   private JTable tableau;
   private int semaine=1;
    
@@ -120,39 +122,24 @@ public JPanel edt(){
     String infoSEANCE = "";
     calendrier.setLayout(new BorderLayout()); 
     studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
+    
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
     
-    //Passage d'un set à un ArrayList pour pouvoir acceder à la case que l'on souhaite
-    for(SALLE i : listSALLE)
-        listdeSALLE.add(i);
-    for(UTILISATEUR i : listeENSEIGNANT)
-        listedENSEIGNANT.add(i);
-    /*
-    //Les données du tableau
-    //JPanel top = new JPanel(new BorderLayout());
-    //Recuperation de la liste de cours de l'etudiant
-    studentEDT.voirETUDIANT_SEANCE(etudiant.NUMERO());
-    listSEANCE = studentEDT.getlistSEANCE();
-    Set<SEANCE> listSEANCESEMAINE =new HashSet<SEANCE>();
-    Set<SEANCE> listSEANCEDATE =new HashSet<SEANCE>();
-    Set<SEANCE> listSEANCEHEURE =new HashSet<SEANCE>();
-    
-    pan3.setPreferredSize(new Dimension(3000, 510 ));
-    pan3.setBackground(Color.ORANGE);
-    
-    //pan3.setLocation(2730, 20);
-    //pan3.setMinimumSize(new Dimension(900, 400));
-    //pan3.setMaximumSize(new Dimension(900, 400));
-    */
+
     //Données du tableau
     Object[][] data = {
-      {"8h30 - 10h", "", "", "", "", ""},
-      {"10h15 - 11h45", "", "", "", "", ""},
-      {"12h - 13h30", "", "", "", "", ""},
-      {"13h45 - 15h15", "", "", "", "", ""},
-      {"15h30 - 17h", "", "", "", "", ""}
+      {"8h30", "", "", "", "", ""},
+      {"10h", "", "", "", "", ""},
+      {"10h15", "", "", "", "", ""},
+      {"11h45", "", "", "", "", ""},
+      {"12h", "", "", "", "", ""},
+      {"13h30", "", "", "", "", ""},
+      {"13h45", "", "", "", "", ""},
+      {"15h15", "", "", "", "", ""},
+      {"15h30", "", "", "", "", ""},
+      {"17h", "", "", "", "", ""}
     };
     for(SEANCE i : listSEANCE)
     {
@@ -196,28 +183,28 @@ public JPanel edt(){
             }
             case ("10h15") :
             {
-                y=1;
+                y=2;
                 break;
             }
             case ("12h") :
             {
-                y=2;
+                y=4;
                 break;
             }
             case ("13h45") :
             {
-                y=3;
+                y=6;
                 break;
             }
             case ("15h30") :
             {
-                y=4;
+                y=8;
                 break;
             }
         }
         //On verifie que le cours n'est pas annulé
         if(i.getETAT()==1){
-            infoSEANCE= "Le cours a lieu en salle " + listdeSALLE.get(compteurSALLE).getNOM()+" avec " + listedENSEIGNANT.get(compteurSALLE).getNOM();
+            infoSEANCE= "Le cours a lieu en salle " + listSALLE.get(compteurSALLE).getNOM()+" avec " + listeENSEIGNANT.get(compteurSALLE).getNOM();
             data[y][x] = infoSEANCE;
         }
         }

@@ -32,7 +32,9 @@ import Model.UTILISATEURDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 /**
  *
@@ -41,12 +43,12 @@ import java.util.Set;
 public class ENSEIGNANT_EDT extends UTILISATEURDAO {
     public ENSEIGNANT_EDT(){}
 
-    private Set<SEANCE> listSEANCE =new HashSet<SEANCE>();
-    private Set<UTILISATEUR> listENSEIGNANT =new HashSet<UTILISATEUR>();
-    private Set<PROMOTION> listPROMOTION =new HashSet<PROMOTION>();
-    private Set<TYPE_COURS> listTYPE_COURS = new HashSet<TYPE_COURS>();
-    private Set<COURS> listCOURS = new HashSet<COURS>();
-    private Set <SALLE> listSALLE = new HashSet<SALLE>();
+    private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
+    private List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
+    private List<PROMOTION> listPROMOTION =new ArrayList<PROMOTION>();
+    private List<TYPE_COURS> listTYPE_COURS = new ArrayList<TYPE_COURS>();
+    private List<COURS> listCOURS = new ArrayList<COURS>();
+    private List<SALLE> listSALLE = new ArrayList<SALLE>();
 
     public void voirENSEIGNANT_EDT(String Nom)
     {
@@ -158,37 +160,37 @@ public void afficherLISTEPROMOTION(){
             this.listSALLE.add(salle);
     }
 
-    public Set<UTILISATEUR> getlistENSEIGNANT(){
+    public List<UTILISATEUR> getlistENSEIGNANT(){
         return listENSEIGNANT;
     }
-    public Set<SEANCE> getlistSEANCE(){
+    public List<SEANCE> getlistSEANCE(){
         return listSEANCE;
     }
-    public Set<PROMOTION> getlistPROMOTION(){
+    public List<PROMOTION> getlistPROMOTION(){
         return listPROMOTION;
     }
 
-    public Set<TYPE_COURS> getListTYPE_COURS() {
+    public List<TYPE_COURS> getListTYPE_COURS() {
         return listTYPE_COURS;
     }
 
-    public void setListTYPE_COURS(Set<TYPE_COURS> listTYPE_COURS) {
+    public void setListTYPE_COURS(List<TYPE_COURS> listTYPE_COURS) {
         this.listTYPE_COURS = listTYPE_COURS;
     }
 
-    public Set<COURS> getListCOURS() {
+    public List<COURS> getListCOURS() {
         return listCOURS;
     }
 
-    public void setListCOURS(Set<COURS> listCOURS) {
+    public void setListCOURS(List<COURS> listCOURS) {
         this.listCOURS = listCOURS;
     }
 
-    public Set<SALLE> getListSALLE() {
+    public List<SALLE> getListSALLE() {
         return listSALLE;
     }
 
-    public void setListSALLE(Set<SALLE> listSALLE) {
+    public void setListSALLE(List<SALLE> listSALLE) {
         this.listSALLE = listSALLE;
     }
 

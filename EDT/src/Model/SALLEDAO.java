@@ -40,6 +40,8 @@ public boolean update(SALLE obj){
         ResultSet result = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM SALLE WHERE ID = " +ID);
         if(result.first())
              salle=new SALLE(ID, result.getString("Nom"), result.getInt("CAPACITE"));
+        
+        
     }catch (SQLException e){
         e.printStackTrace();
     }
