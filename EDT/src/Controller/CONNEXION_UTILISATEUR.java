@@ -70,9 +70,9 @@ public class CONNEXION_UTILISATEUR extends UTILISATEURDAO{
        ResultSet resultat=ps.executeQuery();
        if (resultat.first() == false)
        {
-           System.out.println("RIEN");
+           
        }
-       else { System.out.println("QCH");
+       else { 
        this.connexion=true;
           if (resultat.getInt("DROIT")==1)
          {

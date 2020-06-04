@@ -9,6 +9,7 @@ package View;
  *
  * @author Aurélien
  */
+import Controller.AffecterEnseignant;
 import Controller.EtudiantEDT;
 import Controller.MODIFIER_ETAT_SEANCE;
 import java.awt.event.ActionEvent;
@@ -117,6 +118,9 @@ public JPanel semaine(){
 
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
+    int ID=11;
+    AffecterEnseignant affecter = new AffecterEnseignant(ID);
+    
     int compteurSALLE=0;
     String infoSEANCE = "";
     calendrier.setLayout(new BorderLayout()); 

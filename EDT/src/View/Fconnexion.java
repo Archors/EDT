@@ -67,11 +67,11 @@ public class Fconnexion extends JFrame {
         JLabel labpassword = new JLabel("Password");
         pan.add(labpassword);
 
-        JTextField username = new JTextField("Username");
+        JTextField username = new JTextField("anbari@gmail.com");
         pan.add(username);
         
 
-        JPasswordField password = new JPasswordField("Password");
+        JPasswordField password = new JPasswordField("anbari");
         pan.add(password);
 
         JButton login = new JButton("Login");
