@@ -21,79 +21,73 @@ import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-public class Recapitulatif extends JPanel{
+public class Rprof extends JPanel{
   private Color color = Color.white;
   private static int COUNT = 0;
   private String message = "";
-   
-  public Recapitulatif(){
-    
- this.setLayout(new GridBagLayout());
- GridBagConstraints gbc = new GridBagConstraints();
- gbc.weightx = 1;
- gbc.weighty = 1;
- 
- gbc.gridx = 0;
- gbc.gridwidth = 2;
- gbc.gridheight = 2;
- gbc.gridy = 0;
- gbc.fill = GridBagConstraints.BOTH;
+  private JPanel principal = new JPanel();
+  private JPanel calendrier = new JPanel();
+  private JTable tableau;
 
-this.add( menu(), gbc);
- 
-////////////////////
- gbc.gridx = 0;
- gbc.gridwidth = 2;
- gbc.gridheight = 2;
- gbc.gridy = 2;
- this.add( edt(), gbc);
-
+  public Rprof(){
+    principal.setLayout(new BorderLayout());
+    principal.add(edt(), BorderLayout.CENTER);
+    //principal.add(menu(), BorderLayout.NORTH);
  
   }
 
   public JPanel menu(){
-    JPanel top = new JPanel();
-
+    JPanel menu = new JPanel();
 
   JComboBox combo2 = new JComboBox();
   
-    top.add(combo2);
+    menu.add(combo2);
     //this.add(top, BorderLayout.NORTH);
+    
     
     combo2.setPreferredSize(new Dimension(100, 20));
     combo2.addItem("Saisie du nom");
     combo2.addItem("Option 2");
 
-    return top;
+    return menu;
 }
 
-
 public JPanel edt(){
-    //Les données du tableau
-    JPanel top = new JPanel(new BorderLayout());
-    top.setMinimumSize(new Dimension(900, 400));
-    top.setMaximumSize(new Dimension(900, 400));
-    top.setPreferredSize(new Dimension(900, 400));
- 
-
+    //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
+    calendrier.setLayout(new BorderLayout()); 
     Object[][] data = {
-      {"", "", "", "", "", "",""},
-      {"", "", "", "", "", "",""},
-      {"", "", "", "", "", "",""},
-      {"", "", "", "", "", "",""}
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""}
     };
 
     //Les titres des colonnes
+
     String  title[] = {"Matières", "Première séance", "Dernière séance", "Durée", "Nb"};
-    JTable tableau = new JTable(data, title);
-    tableau.setPreferredSize(new Dimension(7000, 65));
+    
+    ZModel model = new ZModel(data, title);
+    
+    tableau = new JTable(model);
+    tableau.setRowHeight(65);
+    calendrier.add(new JScrollPane(tableau));
+    
+    //this.getContentPane().add(calendrier);
 
-    //Nous ajoutons notre tableau à notre contentPane dans un scroll
-    //Sinon les titres des colonnes ne s'afficheront pas !
-    top.add(new JScrollPane(tableau));
+    return calendrier; 
 
-    return top;
 }
+
+
+ public JPanel getPan(){
+        return principal;
+    }
 
   public void paintComponent(Graphics g){
     

@@ -23,40 +23,37 @@ import Model.ADMIN;
 import Model.ETUDIANT;
 import Model.REFERENT;
 import Model.UTILISATEUR;
-import java.awt.BorderLayout;
 
 
 /**
  *
  * @author Aurélien
  */
-public class Fetudiant extends JFrame {
+public class Fprof extends JFrame {
 
     //ETUDIANT student = new ETUDIANT();
-    public Fetudiant(){}
-    public Fetudiant(ETUDIANT student){
+    public Fprof(){}
+    public Fprof(UTILISATEUR utilisateur){
         
         this.setLocationRelativeTo(null);
-        this.setTitle("Votre Emploi Du Temps");
+        this.setTitle("Professeur");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setDefaultLookAndFeelDecorated(true);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         JTabbedPane onglet;
         //Création de plusieurs Panneau
-        System.out.print("L'etudiant 2 dans fetudiant est :");
-    System.out.print(student.getID());
-    System.out.print(student.getDROIT());
-    System.out.print(student.getNOM());
-        Panneau tPan = new Panneau(student);
-        Retudiant recap = new Retudiant();
+        Pprof tPan = new Pprof(utilisateur);
+        Rprof recap = new Rprof();
+        
         //System.out.println("test methode :");
         //Création de notre conteneur d'onglets
         onglet = new JTabbedPane();
+
         //Méthode d'ajout d'onglet
         onglet.add("Emploi du temps", tPan.getPan());
         onglet.add("Récapitulatif de cours", recap.getPan());
-
+        
 
         this.getContentPane().add(onglet);
         this.setVisible(true);
@@ -64,3 +61,4 @@ public class Fetudiant extends JFrame {
     }
 
 }
+

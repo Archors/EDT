@@ -21,8 +21,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.Dimension;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
+
+
 
 import Model.ETUDIANT;
+import Model.ADMIN;
 import Model.SALLE;
 import Model.SEANCE;
 import Model.UTILISATEUR;
@@ -36,7 +40,7 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.JFrame;
 
-public class Panneau extends JFrame{
+public class Padmin extends JFrame{
   private Color color = Color.white;
   private int COUNT = 0;
   private String message = "";
@@ -55,49 +59,85 @@ public class Panneau extends JFrame{
   private JTable tableau;
   private int semaine=1;
    
-  public Panneau(ETUDIANT recupEtudiant){
-    etudiant = recupEtudiant;    
+  public Padmin(ADMIN admin){
+    //etudiant = recupEtudiant;    
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
     intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
-    etudiant = recupEtudiant;
-    System.out.print("L'etudiant 4 dans panneau est :");
-    System.out.print(etudiant.getID());
-    System.out.print(etudiant.getDROIT());
-    System.out.println(etudiant.getNOM());
+    //etudiant = recupEtudiant;
+   // System.out.print("L'etudiant 4 dans panneau est :");
+    //System.out.print(etudiant.getID());
+    //System.out.print(etudiant.getDROIT());
+    //System.out.println(etudiant.getNOM());
   //  principal.add(menu());
    
-    etudiant.afficherETUDIANT();
+    //etudiant.afficherETUDIANT();
   }
 
   public JPanel menu(){
-    //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
-    pan1.add(combo);    
-    //this.add(top, BorderLayout.NORTH);
-    combo.addItem("En grille");
-    combo.addItem("En liste");
-  /*
-    //combo.addItemListener(new ItemState());
-     combo.addActionListener(new ItemAction());
+   //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
+    JLabel groupe = new JLabel("Groupe : ");
+    pan1.add(groupe);
 
-  JComboBox combo2 = new JComboBox();
-  
-    pan1.add(combo2);
-    //this.add(top, BorderLayout.NORTH);
-    
-    combo2.setPreferredSize(new Dimension(100, 20));
-    combo2.addItem("Saisie du nom");
-    combo2.addItem("Option 2");
+    JTextField groupefield = new JTextField();
+    groupefield.setPreferredSize(new Dimension(100, 20));
+    pan1.add(groupefield);
 
-    JTextField textfield = new JTextField(" Edit me !!! ");
-    pan1.add(textfield);
-    //this.add(new JTextField());
-    */
+    JButton btngroupe = new JButton("Recherche groupe");
+    pan1.add(btngroupe);
+
+    btngroupe.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent event){       
+        //sgroupe = groupefield.getText();
+        //System.out.print("La string sprof : " + sprof);
+        //principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
+        
+      }
+    });
     
-    //this.color = color;
+    //Liste salle
+    JLabel salle = new JLabel("Salle : ");
+    pan1.add(salle);
+
+    JTextField sallefield = new JTextField();
+    sallefield.setPreferredSize(new Dimension(100, 20));
+    pan1.add(sallefield);
+
+    JButton btnsalle = new JButton("Recherche salle");
+    pan1.add(btnsalle);
+
+    btnsalle.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent event){       
+        //ssalle = groupefield.getText();
+        //System.out.print("La string sprof : " + sprof);
+        //principal.add(edtsalle(ssalle), BorderLayout.CENTER);
+        
+      }
+    });
+
+    //Liste prof
+    JLabel prof = new JLabel("Professeur : ");
+    pan1.add(prof);
+
+    JTextField proffield = new JTextField();
+    proffield.setPreferredSize(new Dimension(100, 20));
+    pan1.add(proffield);
+
+    JButton btnprof = new JButton("Recherche professeur");
+    pan1.add(btnprof);
+
+    btnprof.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent event){       
+        //sprof = groupefield.getText();
+        //System.out.print("La string sprof : " + sprof);
+        //principal.add(edtprof(sprof), BorderLayout.CENTER);
+        
+      }
+    });
+
     return pan1;
 }
 
@@ -110,7 +150,7 @@ public JPanel semaine(){
         bouton.setPreferredSize(new Dimension(48,20));
         pan2.add(bouton);
         bouton.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent event){       
+            public void actionPerformed(ActionEvent event){       
         
         //sgroupe = groupefield.getText();
         System.out.print("Le bouton est : " + numerobtn);
@@ -128,14 +168,14 @@ public JPanel edt(){
     String infoSEANCE = "";
     calendrier.setLayout(new BorderLayout()); 
     
-
+    /*
     studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
     
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
  
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
-
+    */
     
 
     //Données du tableau
@@ -151,6 +191,7 @@ public JPanel edt(){
       {"15h30", "", "", "", "", ""},
       {"17h", "", "", "", "", ""}
     };
+/*
     for(SEANCE i : listSEANCE)
     {
         if(i.getSEMAINE() == semaine)
@@ -219,7 +260,7 @@ public JPanel edt(){
         }
         }
         compteurSALLE++;
-    }
+    }*/
     
     
 
@@ -289,15 +330,15 @@ class ItemAction implements ActionListener{
       if(combo.getSelectedItem() == "En grille")
       {
         COUNT=0;
-        intermediaire.add(edt(),BorderLayout.CENTER);
-        principal.add(intermediaire, BorderLayout.CENTER);
+        
+        principal.add(edt());
       }
       
       else if(combo.getSelectedItem() == "En liste")
       {
         COUNT=1;
-        intermediaire.add(edt(),BorderLayout.CENTER);
-        principal.add(intermediaire, BorderLayout.CENTER);
+        
+        principal.add(edt());
       }
     }               
   }
