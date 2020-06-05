@@ -66,7 +66,7 @@ public class Panneau extends JFrame{
     intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
-<<<<<<< HEAD
+
     etudiant = recupEtudiant;
     System.out.print("L'etudiant 4 dans panneau est :");
     System.out.print(etudiant.getID());
@@ -75,8 +75,6 @@ public class Panneau extends JFrame{
   //  principal.add(menu());
    
     etudiant.afficherETUDIANT();
-=======
->>>>>>> 29ce808d5fe2dc1d60c55dc98657484fbe55cdf9
   }
 
   public JPanel menu(){
