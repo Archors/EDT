@@ -111,14 +111,10 @@ public JPanel semaine(){
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
-<<<<<<< HEAD
     int ID=2;
     AffecterEnseignant affecter = new AffecterEnseignant(ID);
-=======
    // ADD_SEANCE add = new ADD_SEANCE();
    // add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "CI");
-    
->>>>>>> 3f9787299af5c3e1e962d63b066d8e4298cb4039
     
     int compteurSALLE=0;
     String infoSEANCE = "";
@@ -212,7 +208,7 @@ public JPanel edt(){
         }
         //On verifie que le cours n'est pas annulé
         if(i.getETAT()==1){
-            infoSEANCE= "Le cours de " + listeCOURS.get(i.getID()).getNOM()+" en "+ listeTYPE_COURS.get(i.getID()).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            infoSEANCE= "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
             data[y][x] = infoSEANCE;
         }
         }
