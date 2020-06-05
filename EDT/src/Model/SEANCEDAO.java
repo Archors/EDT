@@ -54,7 +54,6 @@ public boolean update(SEANCE obj){
       groupetest=groupedaotest.find(result.getInt("ID_GROUPE"));
       
       
-      
                 
     }catch (SQLException e){
         e.printStackTrace();

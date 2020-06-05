@@ -66,15 +66,6 @@ public class Panneau extends JFrame{
     intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
-
-    etudiant = recupEtudiant;
-    System.out.print("L'etudiant 4 dans panneau est :");
-    System.out.print(etudiant.getID());
-    System.out.print(etudiant.getDROIT());
-    System.out.println(etudiant.getNOM());
-  //  principal.add(menu());
-   
-    etudiant.afficherETUDIANT();
   }
 
   public JPanel menu(){
@@ -129,11 +120,12 @@ public JPanel semaine(){
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
-  //  int ID=2;
-  //  AffecterEnseignant affecter = new AffecterEnseignant(ID);
+    int ID=2;
+    AffecterEnseignant affecter = new AffecterEnseignant(ID);
   //  ADD_SEANCE add = new ADD_SEANCE();
-  //  System.out.println(add.AJOUTER_SEANCE(1, "MARDI", "15h30", "17h", 1, "Web", "CI","Hina",1,"104"));
+  //  add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "CI", "Hina", "TD01","104");
     
+    int compteurSALLE=0;
     String infoSEANCE = "";
     int compteur=0;
 
