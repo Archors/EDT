@@ -23,36 +23,39 @@ import Model.ADMIN;
 import Model.ETUDIANT;
 import Model.REFERENT;
 import Model.UTILISATEUR;
-import java.awt.BorderLayout;
 
 
 /**
  *
  * @author Aurélien
  */
-public class Fetudiant extends JFrame {
+public class Fadmin extends JFrame {
 
     //ETUDIANT student = new ETUDIANT();
-    public Fetudiant(){}
-    public Fetudiant(ETUDIANT student){
+    public Fadmin(){}
+    public Fadmin(ADMIN admin){
         
         this.setLocationRelativeTo(null);
-        this.setTitle("Votre Emploi Du Temps");
+        this.setTitle("Admin");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setDefaultLookAndFeelDecorated(true);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         JTabbedPane onglet;
         //Création de plusieurs Panneau
-        Panneau tPan = new Panneau(student);
-        Retudiant recap = new Retudiant();
+        Padmin tPan = new Padmin(admin);
+        Radmin recap = new Radmin();
+        Modification modif = new Modification();
+        Reporting report = new Reporting();
         //System.out.println("test methode :");
         //Création de notre conteneur d'onglets
         onglet = new JTabbedPane();
+
         //Méthode d'ajout d'onglet
         onglet.add("Emploi du temps", tPan.getPan());
         onglet.add("Récapitulatif de cours", recap.getPan());
-
+        onglet.add("Modification", modif.getPan());
+        onglet.add("Reporting", report.getPan());
 
         this.getContentPane().add(onglet);
         this.setVisible(true);

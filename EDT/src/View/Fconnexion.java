@@ -10,7 +10,6 @@ import Model.ADMIN;
 import Model.ETUDIANT;
 import Model.REFERENT;
 import Model.UTILISATEUR;
-import java.awt.BorderLayout;
 
 
 /*
@@ -26,6 +25,7 @@ import java.awt.BorderLayout;
  */
 import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,18 +36,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-//Fenetre de COnnexion de l'utilisateur
+import java.awt.BorderLayout;
+
 public class Fconnexion extends JFrame {
 
   
    private int id;
     private int con = 0;
     ETUDIANT student = new ETUDIANT();
-    private JPanel principal = new JPanel();
+    private JPanel pr = new JPanel();
 
     public Fconnexion(){
+    
     this.setLocationRelativeTo(null);
-    this.setTitle("Votre emploi du temps");
+    this.setTitle("Connexion");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.pack();
     this.setDefaultLookAndFeelDecorated(true);
@@ -56,37 +58,59 @@ public class Fconnexion extends JFrame {
     //private ETUDIANT etudiant;
     //private ETUDIANT etudiant;
     //private ETUDIANT etudiant;
-    principal.setLayout(new BorderLayout());
-    principal.setBackground(Color.ORANGE); 
+    pr.setPreferredSize(new Dimension(1350, 510));
+    pr.setBackground(Color.ORANGE); 
+    pr.setLayout(new BorderLayout());   
+  
+       JPanel log = new JPanel();
+       JPanel south = new JPanel();
+       JPanel north = new JPanel();
+       
+       log.setLayout(new BorderLayout());
+       log.setPreferredSize(new Dimension(1350, 50));
+       south.setPreferredSize(new Dimension(1350, 50));
+       north.setPreferredSize(new Dimension(1350, 250));
 
-        JPanel pan = new JPanel();
-
+       JLabel titre = new JLabel("Hyperplaning");
+       Font font = new Font("Arial",Font.BOLD,72);
+        titre.setFont(font);
+        north.add(titre);
+        
+       JPanel use = new JPanel();
+       JPanel pw = new JPanel();
+       JPanel btnlog = new JPanel();
+       
         JLabel labuser = new JLabel("Username");
-        pan.add(labuser);
+        use.add(labuser);
 
         JLabel labpassword = new JLabel("Password");
-        pan.add(labpassword);
+        pw.add(labpassword);
 
-        JTextField username = new JTextField("anbari@gmail.com");
-        pan.add(username);
-        
-
-        JPasswordField password = new JPasswordField("anbari");
-        pan.add(password);
+        JTextField username = new JTextField();
+        username.setPreferredSize(new Dimension(110, 20));
+        use.add(username);
+         
+        JPasswordField password = new JPasswordField();
+        password.setPreferredSize(new Dimension(110, 20));
+        pw.add(password);
 
         JButton login = new JButton("Login");
-        
-        
-        pan.add(login);  
+        btnlog.add(login); 
 
-        principal.add(pan);      
-        this.setContentPane(principal);
-    
+        log.add(use, BorderLayout.NORTH);
+        log.add(pw, BorderLayout.CENTER);
+        log.add(btnlog, BorderLayout.SOUTH);
+
+        pr.add(log, BorderLayout.CENTER);  
+        pr.add(south, BorderLayout.SOUTH); 
+        pr.add(north, BorderLayout.NORTH); 
+        this.setContentPane(pr);
+
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
               
                 String uname = username.getText();
-                String pwd = String.valueOf(password.getPassword());
+                String pwd = password.getText();
                 CONNEXION_UTILISATEUR connect = new CONNEXION_UTILISATEUR();
                 connect.VERIFCONNEXION_UTILISATEUR(uname, pwd);
     if (connect.isConnexion()==false)
@@ -98,28 +122,26 @@ public class Fconnexion extends JFrame {
     else {
         if(connect.getDroit()==4)
         {
+            //System.out.println("test 3:");
             ETUDIANT etudiant = new ETUDIANT();
             etudiant=connect.getEtudiant();
-            con = 1;
-            //student = etudiant; 
+            //etudiant.afficherETUDIANT(); 
+            //con = 1;
+
+            System.out.print("L'etudiant 1 dans fetudiant est :");
+            System.out.print(etudiant.getID());
+            System.out.print(etudiant.getDROIT());
+            System.out.print(etudiant.getNOM());
             
-            //pr.removeAll();
-            //Panneau tPan = new Panneau(etudiant);
-            //pr.paint();
             Fetudiant fetudiant = new Fetudiant(etudiant);
-            
-            //fenetre.dispose();
-            //this.dispose();
-            //eleve(student); 
-            
-            //pr.add(tPan.getPan());
-            //pr.repaint();
+       
         }
         else if (connect.getDroit()==1)
         {
             ADMIN admin = new ADMIN();
             admin=connect.getAdmin();
-            admin.afficherADMIN();
+            //admin.afficherADMIN();
+            Fadmin fadmin = new Fadmin(admin);
         }
         
         else if (connect.getDroit()==2)
@@ -127,12 +149,14 @@ public class Fconnexion extends JFrame {
             REFERENT referent = new REFERENT();
             referent=connect.getReferent();
             referent.afficherREFERENT();
+            
         }
         else if (connect.getDroit()==3)
         {
             UTILISATEUR utilisateur =new UTILISATEUR();
             utilisateur = connect.getUtilisateur();
             utilisateur.afficherUTILISATEUR();
+            Fprof fprof = new Fprof(utilisateur);
         }
         
         }
@@ -142,32 +166,4 @@ public class Fconnexion extends JFrame {
        this.setVisible(true);
   }
 
-    
-    public void connexion(){
-
-        
-
-        //On prévient notre JFrame que notre JPanel sera son content pane
-        
-       // this.setVisible(true);
-    }
-
-  public void eleve(ETUDIANT etudiant){
-    
-    JTabbedPane onglet;
-    //Création de plusieurs Panneau
-    Panneau tPan = new Panneau(etudiant);
-    Recapitulatif recap = new Recapitulatif();
-    //Création de notre conteneur d'onglets
-    onglet = new JTabbedPane();
-
-    //Méthode d'ajout d'onglet
-     onglet.add("Emploi du temps", tPan.getPan());
-     onglet.add("Récapitulatif de cours", recap);
-      
-    
-    this.getContentPane().add(onglet);
-    }
-
-  
 }
