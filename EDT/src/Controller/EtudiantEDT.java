@@ -87,6 +87,9 @@ public class EtudiantEDT extends ETUDIANTDAO {
        listSALLE=groupeedt.getListSALLE();
        
        }
+       /*for(TYPE_COURS i : listTYPE_COURS){
+        
+       }*/
  
     }catch (SQLException e){
         e.printStackTrace();

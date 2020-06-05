@@ -110,11 +110,11 @@ public JPanel semaine(){
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
-    int ID=11;
+    int ID=2;
     AffecterEnseignant affecter = new AffecterEnseignant(ID);
     
     int compteurSALLE=0;
-String infoSEANCE = "";
+    String infoSEANCE = "";
     int compteur=0;
 
     calendrier.setLayout(new BorderLayout()); 
@@ -128,9 +128,11 @@ String infoSEANCE = "";
     listeCOURS = studentEDT.getListCOURS();
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
 
-    GROUPE_EDT grpedt = new GROUPE_EDT();
+    //GROUPE_EDT grpedt = new GROUPE_EDT();
+    //grpedt.voirGROUPE_SEANCE();
+    //System.out.println("Affichage  ici !! :");
     //grpedt.afficherLISTESEANCE();
-    grpedt.afficherLISTESALLE();
+    //grpedt.afficherLISTESALLE();
 
     //Données du tableau
     Object[][] data = {
@@ -202,10 +204,10 @@ String infoSEANCE = "";
             }
         }
         //On verifie que le cours n'est pas annulé
-   //     if(i.getETAT()==1){
-   //         infoSEANCE= "Le cours de " + listeCOURS.get(i.getID()).getNOM()+" en "+ listeTYPE_COURS.get(i.getID()).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
-   //         data[y][x] = infoSEANCE;
-   //     }
+        if(i.getETAT()==1){
+            infoSEANCE= "Le cours de " + listeCOURS.get(i.getID()).getNOM()+" en "+ listeTYPE_COURS.get(i.getID()).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            data[y][x] = infoSEANCE;
+        }
         }
         compteur++;
     }
