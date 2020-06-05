@@ -11,8 +11,10 @@
 import Model.SEANCE;
 import Controller.SALLE_EDT;
 import Model.COURS;
+import Model.DAO;
 import Model.GROUPE;
 import Model.PROMOTION;
+import Model.SEANCEDAO;
 
 
 import Model.TYPE_COURS;
@@ -58,6 +60,7 @@ public class Main {
 
 */
      Fconnexion fenetre = new Fconnexion();
+     
 
     
     /*
