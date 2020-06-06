@@ -10,11 +10,14 @@ package View;
  * @author Aurélien
  */
 import Controller.ADD_SEANCE;
+import Controller.AJOUTER_GROUPE;
 import Controller.AffecterEnseignant;
 import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
 import Controller.SALLE_EDT;
+import Controller.SEANCE_GROUPE;
+import Controller.SUPPRIMER_SEANCE;
 import Model.COURS;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +31,7 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 
 import Model.ETUDIANT;
+import Model.GROUPE;
 import Model.SALLE;
 import Model.SEANCE;
 import Model.TYPE_COURS;
@@ -113,7 +117,7 @@ public JPanel edt(){
         tableau.setRowHeight(125);
         //Changement de la taille des colonnes
         setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-        
+        //calendrier.removeAll();
         calendrier.add(new JScrollPane(tableau));
     }
     else if(COUNT == 1){
@@ -280,10 +284,11 @@ public JPanel edt(){
     tableauV.setRowHeight(125);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-    
+    //calendrier.removeAll();
     calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
     calendrier.add(calendrier2,BorderLayout.CENTER);
     }
+   // edt().removeAll();
     return calendrier; 
 }
 

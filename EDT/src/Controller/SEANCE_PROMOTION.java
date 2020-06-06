@@ -10,6 +10,8 @@ import Model.COURSDAO;
 import Model.DAO;
 import Model.GROUPE;
 import Model.GROUPEDAO;
+import Model.PROMOTION;
+import Model.PROMOTIONDAO;
 import Model.SALLE;
 import Model.SALLEDAO;
 import Model.SEANCE;
@@ -28,26 +30,26 @@ import java.util.List;
  *
  * @author Milou
  */
-public class SEANCE_GROUPE extends SEANCEDAO{
-    private List <GROUPE> listGROUPE = new ArrayList<>();
-    public SEANCE_GROUPE() {}
+public class SEANCE_PROMOTION extends PROMOTIONDAO{
+    private List <PROMOTION> listPROMOTION = new ArrayList<>();
+    public SEANCE_PROMOTION() {}
     
-    public SEANCE_GROUPE(int SEANCEID)
+    public SEANCE_PROMOTION(int SEANCEID)
     {
     
 try{
           
        
-        PreparedStatement ps = this.connection.prepareStatement("SELECT g.ID FROM GROUPE g JOIN SEANCE_GROUPE sg ON g.ID = sg.ID_GROUPE JOIN SEANCE s ON s.ID=sg.ID_SEANCE WHERE s.ID = ?  ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement ps = this.connection.prepareStatement("SELECT p.ID FROM PROMOTION p JOIN GROUPE g ON g.ID_PROMOTION = p.ID JOIN SEANCE_GROUPE sg ON g.ID = sg.ID_GROUPE JOIN SEANCE s ON s.ID=sg.ID_SEANCE WHERE s.ID = ?  ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setInt(1,SEANCEID);
         ResultSet result = ps.executeQuery();
         
         while(result.next())         
         {    
-           GROUPE groupetest = new GROUPE();
-           DAO <GROUPE> groupetestdao = new GROUPEDAO();
-           groupetest = groupetestdao.find(result.getInt("ID"));
-           listGROUPE.add(groupetest);
+           PROMOTION promotest = new PROMOTION();
+           DAO <PROMOTION> promotestdao = new PROMOTIONDAO();
+           promotest = promotestdao.find(result.getInt("ID"));
+           listPROMOTION.add(promotest);
         }
        
 
@@ -60,13 +62,13 @@ try{
 }
     
     
-        public void addGROUPE (GROUPE groupe){
-        if(this.listGROUPE.contains(groupe)!=true)
-            this.listGROUPE.add(groupe);
+        public void addGROUPE (PROMOTION promotion){
+        if(this.listPROMOTION.contains(promotion)!=true)
+            this.listPROMOTION.add(promotion);
     }
 
-    public List<GROUPE> getlistGROUPE(){
-        return listGROUPE;
+    public List<PROMOTION> getlistGROUPE(){
+        return listPROMOTION;
     }
     
 }
