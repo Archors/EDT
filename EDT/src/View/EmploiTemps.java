@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author Antoine
  */
-public class EmploiDuTemps {
+public class EmploiTemps {
     private EtudiantEDT studentEDT = new EtudiantEDT();
   private List<SEANCE> listSEANCE =new ArrayList<>();
   private List<SALLE> listSALLE =new ArrayList<>();
@@ -33,7 +33,7 @@ public class EmploiDuTemps {
   private List <GROUPE> listGROUPE = new ArrayList<>();
   int compteur = 0;
   
-    public EmploiDuTemps(){
+    public EmploiTemps(){
         
     }
     public Object[][] emploidutempsetudiant(ETUDIANT student, int semaine){
@@ -126,7 +126,8 @@ public class EmploiDuTemps {
       {"10h15-11h45", "", "", "", "", ""},
       {"12h-13h30", "", "", "", "", ""},
       {"13h45-15h15", "", "", "", "", ""},
-      {"15h30-17h", "", "", "", "", ""}
+      {"15h30-17h", "", "", "", "", ""},
+      {"17h15-18h45","", "", "", "", ""}
     };
     return donnee;
 }

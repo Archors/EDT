@@ -53,14 +53,21 @@ public class Panneau extends JFrame{
   private JTable tableau;
   private int semaine=1;
   private int COUNT=0;
+  private JTable tableauL;
+  private JTable tableauM;
+  private JTable tableauMe;
+  private JTable tableauJ;
+  private JTable tableauV;
    
   public Panneau(ETUDIANT recupEtudiant){
-    etudiant = recupEtudiant;    
+    etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
     intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
+    //principal.add(edt(), BorderLayout.SOUTH);
+    //principal.add(semaine(), BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
   }
 
@@ -70,9 +77,10 @@ public class Panneau extends JFrame{
     //this.add(top, BorderLayout.NORTH);
     combo.addItem("En grille");
     combo.addItem("En liste");
+    combo.addActionListener(new ItemAction());
   /*
     //combo.addItemListener(new ItemState());
-     combo.addActionListener(new ItemAction());
+     
 
   JComboBox combo2 = new JComboBox();
   
@@ -96,15 +104,18 @@ public JPanel semaine(){
 
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
-        int numerobtn = i;
+        int btnsemaine = i;
         JButton bouton = new JButton(""+i);
         bouton.setPreferredSize(new Dimension(48,20));
         pan2.add(bouton);
         bouton.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent event){       
-        
+        public void actionPerformed(ActionEvent event){
+            semaine = btnsemaine;
+            edt().removeAll();
+            intermediaire.add(edt(),BorderLayout.CENTER);
+            principal.add(intermediaire, BorderLayout.CENTER);
         //sgroupe = groupefield.getText();
-        System.out.print("Le bouton est : " + numerobtn);
+            //System.out.print("Le bouton est : " + semaine);
         //principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
            }
         });
@@ -124,19 +135,136 @@ public JPanel edt(){
     String infoSEANCE = "";
 
     calendrier.setLayout(new BorderLayout()); 
-    
-    
-    //Creation de la classe pour mettre les donnees en tableau
-    EmploiDuTemps edtutilisateur = new EmploiDuTemps();
+
+    if(COUNT == 0){
+    //Creation de la classe pour mettre les donne
+    EmploiTemps edtutilisateur = new EmploiTemps();
     ZModel model = new ZModel(edtutilisateur.emploidutempsetudiant(etudiant,semaine), edtutilisateur.setTitle());
     
-    tableau = new JTable(model);
-    //Definition de la taille des lignes
-    tableau.setRowHeight(125);
-    //Changement de la taille des colonnes
-     setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+        tableau = new JTable(model);
+        //Definition de la taille des lignes
+        tableau.setRowHeight(125);
+        //Changement de la taille des colonnes
+        setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
         
-    calendrier.add(new JScrollPane(tableau));
+        calendrier.add(new JScrollPane(tableau));
+    }
+    else if(COUNT == 1){
+
+    JPanel calendrier1 = new JPanel();
+    JPanel calendrier2 = new JPanel();
+    JPanel calendrier3 = new JPanel();
+    calendrier.setLayout(new BorderLayout());
+    calendrier1.setLayout(new BorderLayout());
+    calendrier2.setLayout(new BorderLayout());
+    calendrier3.setLayout(new BorderLayout());
+
+      Object[][] dataL = {
+      {""},
+      {""}
+      
+    };
+
+    //Les titres des colonnes
+    String  titleL[] = {"Lundi"};
+    
+    ZModel modelL = new ZModel(dataL, titleL);
+    
+    tableauL = new JTable(modelL);
+    //Definition de la taille des lignes
+    tableauL.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    //calendrier.removeAll();
+    calendrier1.add(new JScrollPane(tableauL),BorderLayout.NORTH);
+
+    /////////////////Mardi//////////////
+
+    Object[][] dataM = {
+      {""},
+      {""}
+     
+    };
+
+    //Les titres des colonnes
+    String  titleM[] = {"Mardi"};
+    
+    ZModel modelM = new ZModel(dataM, titleM);
+    
+    tableauM = new JTable(modelM);
+    //Definition de la taille des lignes
+    tableauM.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    //calendrier.removeAll();
+    calendrier1.add(new JScrollPane(tableauM),BorderLayout.CENTER);
+
+    /////////////////Mercredi//////////////
+
+    Object[][] dataMe = {
+      {""},
+      {""}
+     
+    };
+
+    //Les titres des colonnes
+    String  titleMe[] = {"Mercredi"};
+    
+    ZModel modelMe = new ZModel(dataMe, titleMe);
+    
+    tableauMe = new JTable(modelMe);
+    //Definition de la taille des lignes
+    tableauMe.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    
+    calendrier1.add(new JScrollPane(tableauMe),BorderLayout.SOUTH);
+    calendrier.add(calendrier1, BorderLayout.NORTH);
+
+    //////////Jeudi////////////
+
+    Object[][] dataJ = {
+      {""},
+      {""}
+     
+    };
+
+    //Les titres des colonnes
+    String  titleJ[] = {"Jeudi"};
+    
+    ZModel modelJ = new ZModel(dataJ, titleJ);
+    
+    tableauJ = new JTable(modelJ);
+    //Definition de la taille des lignes
+    tableauJ.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    
+    calendrier2.add(new JScrollPane(tableauJ),BorderLayout.NORTH);
+    
+
+    /////////////////Vendredi/////////////////
+
+    Object[][] dataV = {
+      {""},
+      {""}
+     
+    };
+
+    //Les titres des colonnes
+    String  titleV[] = {"Vendredi"};
+    
+    ZModel modelV = new ZModel(dataV, titleV);
+    
+    tableauV = new JTable(modelMe);
+    //Definition de la taille des lignes
+    tableauV.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    
+    calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
+    calendrier.add(calendrier2,BorderLayout.CENTER);
+    }
     return calendrier; 
 }
 
@@ -157,21 +285,20 @@ private static void setWidthAsPercentages(JTable table,
 
 class ItemAction implements ActionListener{
     public void actionPerformed(ActionEvent e) {
-      
+
       if(combo.getSelectedItem() == "En grille")
       {
         COUNT=0;
-        intermediaire.add(edt(),BorderLayout.CENTER);
-        principal.add(intermediaire, BorderLayout.CENTER);
       }
-      
+
       else if(combo.getSelectedItem() == "En liste")
       {
         COUNT=1;
-        intermediaire.add(edt(),BorderLayout.CENTER);
-        principal.add(intermediaire, BorderLayout.CENTER);
       }
-    }               
+      edt().removeAll();
+      intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+      principal.add(intermediaire, BorderLayout.CENTER);
+    }
   }
 
     public JPanel getPan(){
