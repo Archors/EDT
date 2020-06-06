@@ -50,11 +50,13 @@ import java.util.List;
 public class ADD_SEANCE extends SEANCEDAO {
   private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
   private List<SEANCE> listSEANCESALLE =new ArrayList<SEANCE>();
+  private List<SEANCE> listSEANCEGROUPE =new ArrayList<SEANCE>();
+
 
 
     public ADD_SEANCE(){}
-
-    public String AJOUTER_SEANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, String NomCours, String Type_CoursNom, String ENSEIGNANTNOM, int GROUPEID, String SALLENOM)
+/*
+    public String AJOUTER_SEANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, String NomCours, String Type_CoursNom, String ENSEIGNANTNOM, String GROUPENOM, String SALLENOM)
     { 
         
         int resultat;
@@ -158,6 +160,7 @@ public class ADD_SEANCE extends SEANCEDAO {
                    // 2. La salle est-elle libre ? 
                    SALLE_EDT salledt = new SALLE_EDT();
                    //on utilise la fonction dans le controller qui permet de trouver toutes les séances associées à la salle
+                   
                    salledt.voirSALLE_EDT(SALLENOM);
                    listSEANCESALLE = salledt.getlistSEANCE();
                    
@@ -215,20 +218,80 @@ public class ADD_SEANCE extends SEANCEDAO {
                    }
                    
                    
-                   
+                   //GROUPE
+                   //GROUPE
+                   //GROUPE
+                   //GROUPE
+                   //GROUPE
 
+            GROUPE_EDT groupedt = new GROUPE_EDT();
+                   //on utilise la fonction dans le controller qui permet de trouver toutes les séances associées à la salle
                    
-                 //  PreparedStatement ajoutergroupe= this.connection.prepareStatement("INSERT INTO SEANCE_GROUPE (ID_GROUPE, ID_SEANCE) VALUES (?,(SELECT MAX(ID) FROM SEANCE))", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                 //  ajoutergroupe.setInt(1,GROUPEID);
-                 //  resultatgroupe = ajoutergroupe.executeUpdate();
-                   } 
-                } 
+            PreparedStatement recupGROUPE= this.connection.prepareStatement("SELECT ID FROM GROUPE g WHERE g.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            recupGROUPE.setString(1,GROUPENOM);
+            ResultSet recupGROUPEset = recupGROUPE.executeQuery();
+            if(recupGROUPEset.first()==false)
+            { 
+                return "NOM DU GROUPE NON VALIDE";
             }
+
+            else{
+            groupedt.voirGROUPE_SEANCE(recupGROUPEset.getInt("ID"));
+            listSEANCEGROUPE = groupedt.getlistSEANCE();
+                       for(SEANCE seancelibreGROUPE : listSEANCEGROUPE)
+                   {
+                       if(HEURE_DEBUT.equals(seancelibreGROUPE.getHEURE_DEBUT()) && DATE.equals(seancelibreGROUPE.getDATE()) && SEMAINE == seancelibreGROUPE.getSEMAINE() )
+                       {
+                           i=0;
+                       }
+                   }
+                   if(i==0)
+                   {
+                  PreparedStatement supprimerSEANCE= this.connection.prepareStatement("DELETE FROM SEANCE ORDER by ID desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                  resultatsupp = supprimerSEANCE.executeUpdate();
+                  
+                  PreparedStatement supprimerSEANCE_ENSEIGNANT = this.connection.prepareStatement("DELETE FROM SEANCE_ENSEIGNANT ORDER by ID_SEANCE desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                  Supprimer_seance_salle = supprimerSEANCE_ENSEIGNANT.executeUpdate();
+                       
+                  PreparedStatement supprimerSEANCE_SALLE = this.connection.prepareStatement("DELETE FROM SEANCE ORDER by ID desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                  resultsallesupp = supprimerSEANCE_SALLE.executeUpdate();
+                  return "LE GROUPE N'EST PAS DISPO";
+                       
+                   }
+                   else{
+                       
+                   PreparedStatement retrouvegroupe= this.connection.prepareStatement("SELECT ID FROM UTILISATEUR WHERE NOM= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                   retrouverenseignant.setString(1,ENSEIGNANTNOM);
+                   ResultSet enseignantrecuperer = retrouverenseignant.executeQuery(); 
+                   if(enseignantrecuperer.first()==false)
+                   {
+                       return "Le nom de l'utilisateur est invalide";
+                   }
+                   else 
+                   {
+                   
+                   
+                   PreparedStatement ajouterenseignant= this.connection.prepareStatement("INSERT INTO SEANCE_ENSEIGNANT (ID_SEANCE, ID_ENSEIGNANT) VALUES ((SELECT MAX(ID) FROM SEANCE),?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    
+                   
+                   ajouterenseignant.setInt(1,enseignantrecuperer.getInt("ID"));
+                   resultatenseignant = ajouterenseignant.executeUpdate();
+                   }
+                     
+                   }
+                
+            }
+                   }
+                }
+            }
+                   
+            
+                        
     }catch (SQLException e){
         e.printStackTrace();
     }
         
 return "COURS CORRECTEMENT AJOUTER";
 
-    }
+    } */
 }
