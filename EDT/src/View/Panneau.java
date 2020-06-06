@@ -132,9 +132,9 @@ public JPanel edt(){
 
     int compteurSALLE=0;
 
-    AffecterEnseignant affecter = new AffecterEnseignant(ID);
-  //  ADD_SEANCE add = new ADD_SEANCE();
-  //  add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "CI", "Hina", "TD01","104");
+ //   AffecterEnseignant affecter = new AffecterEnseignant(ID);
+    ADD_SEANCE add = new ADD_SEANCE();
+    System.out.println(add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "TP", "Hina", "TD01", "104", "2023"));
     
     String infoSEANCE = "";
 
