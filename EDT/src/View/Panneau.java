@@ -10,6 +10,7 @@ package View;
  * @author Aurélien
  */
 import Controller.ADD_SEANCE;
+import Controller.AJOUTER_GROUPE;
 import Controller.AffecterEnseignant;
 import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
@@ -128,6 +129,9 @@ public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
     int ID=2;
+
+    int compteurSALLE=0;
+
     AffecterEnseignant affecter = new AffecterEnseignant(ID);
   //  ADD_SEANCE add = new ADD_SEANCE();
   //  add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "CI", "Hina", "TD01","104");
@@ -146,7 +150,7 @@ public JPanel edt(){
         tableau.setRowHeight(125);
         //Changement de la taille des colonnes
         setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-        
+        //calendrier.removeAll();
         calendrier.add(new JScrollPane(tableau));
     }
     else if(COUNT == 1){
@@ -261,10 +265,11 @@ public JPanel edt(){
     tableauV.setRowHeight(125);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-    
+    //calendrier.removeAll();
     calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
     calendrier.add(calendrier2,BorderLayout.CENTER);
     }
+   // edt().removeAll();
     return calendrier; 
 }
 
