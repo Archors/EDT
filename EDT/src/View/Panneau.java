@@ -12,6 +12,7 @@ package View;
 import Controller.ADD_SEANCE;
 import Controller.AJOUTER_GROUPE;
 import Controller.AffecterEnseignant;
+import Controller.DEPLACER_SEANCE;
 import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
@@ -132,7 +133,11 @@ public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
     int ID=2;
-
+    
+    DEPLACER_SEANCE dep =new DEPLACER_SEANCE();
+    dep.DEPLACER_SEANCE_INSTANCE(2, "MARDI", "10h15", "104", 1, "LUNDI", "10h15", "11h30");
+    
+    
     int compteurSALLE=0;
     List <GROUPE> listGROUPE = new ArrayList<>();
 
