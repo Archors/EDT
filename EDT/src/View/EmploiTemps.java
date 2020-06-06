@@ -220,4 +220,3 @@ public class EmploiTemps {
     return str.substring(0, str.length() - 1);
 }
 }
-

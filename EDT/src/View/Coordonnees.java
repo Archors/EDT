@@ -18,7 +18,7 @@ public class Coordonnees {
     public void setx(int valeurx){
         x=valeurx;
     }
-
+    
     public void sety(int valeury){
         y=valeury;
     }

@@ -106,7 +106,7 @@ public JPanel graphprof(){
     pieDataset.setValue("Valeur3", new Integer(50)); 
     pieDataset.setValue("Valeur4", new Integer(5)); 
 
-    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par pprofesseurs", 
+    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par professeurs", 
      pieDataset, true, true, true); 
     ChartPanel cPanel = new ChartPanel(pieChart); 
     graph.add(cPanel); 

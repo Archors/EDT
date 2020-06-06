@@ -28,6 +28,8 @@ import javax.swing.JLabel;
 import Model.ETUDIANT;
 import Model.SEANCE;
 
+import Controller.ADD_SEANCE;
+
 import java.awt.GridBagConstraints;
 import java.util.HashSet;
 import java.util.Set;
@@ -75,12 +77,12 @@ public class Modification extends JPanel{
 
     //panel bouton et création des boutons
     JPanel boutonPane = new JPanel();
-    JButton creer = new JButton("créer séance");
+    JButton creer = new JButton("Ajouter groupe");
     JButton annuler = new JButton("Annuler séance");
-    JButton ajouter = new JButton("ajouter séance");
+    JButton ajouter = new JButton("Ajouter séance");
     JButton retirer = new JButton("Retirer séance");
     JButton deplacer = new JButton("Déplacer séance");
-    JButton modifier = new JButton("Modifier séance");
+    JButton modifier = new JButton("Modifier état séance");
 
     //action bouton creer
     creer.addActionListener(new ActionListener(){
@@ -162,48 +164,84 @@ public JPanel ajouter(){
         JLabel semaine = new JLabel("Semaine : ");
         ajouter.add(semaine);
 
-        JTextField textsemaine = new JTextField("Semaine");
+        JTextField textsemaine = new JTextField();
+        textsemaine.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textsemaine);
 
         JLabel date = new JLabel("Date : ");
         ajouter.add(date);
          
-        JTextField textdate = new JTextField("date");
+        JTextField textdate = new JTextField();
+        textdate.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textdate);
 
         JLabel heuredeb = new JLabel("Heure de début : ");
         ajouter.add(heuredeb);
          
-        JTextField textheuredeb = new JTextField("heure début");
+        JTextField textheuredeb = new JTextField();
+        textheuredeb.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textheuredeb);
 
         JLabel heurefin = new JLabel("Heure de fin : ");
         ajouter.add(heurefin);
 
-        JTextField textheurefin = new JTextField("heure fin");
+        JTextField textheurefin = new JTextField();
+        textheurefin.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textheurefin);
 
         JLabel etat = new JLabel("Etat : ");
         ajouter.add(etat);
 
-        JTextField textetat = new JTextField("etat");
+        JTextField textetat = new JTextField();
+        textetat.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textetat);
 
         JLabel nom = new JLabel("Nom du cours : ");
         ajouter.add(nom);
          
-        JTextField textnom = new JTextField("nom");
+        JTextField textnom = new JTextField();
+        textnom.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textnom);
 
         JLabel type = new JLabel("Type du cours : ");
         ajouter.add(type);
          
-        JTextField texttype = new JTextField("type");
+        JTextField texttype = new JTextField();
+        texttype.setPreferredSize(new Dimension(80, 20));
         ajouter.add(texttype);
 
+        JLabel enseignant = new JLabel("Enseignant : ");
+        ajouter.add(enseignant);
+         
+        JTextField textenseignant = new JTextField();
+        textenseignant.setPreferredSize(new Dimension(80, 20));
+        ajouter.add(textenseignant);
 
-        JButton login = new JButton("Ajouter");
-        ajouter.add(login); 
+        JLabel groupe = new JLabel("Goupe : ");
+        ajouter.add(groupe);
+         
+        JTextField textegroupe = new JTextField();
+        textegroupe.setPreferredSize(new Dimension(80, 20));
+        ajouter.add(textegroupe);
+
+        JLabel salle = new JLabel("Salle : ");
+        ajouter.add(salle);
+         
+        JTextField textesalle = new JTextField();
+        textesalle.setPreferredSize(new Dimension(80, 20));
+        ajouter.add(textesalle);
+
+
+        JButton ajou = new JButton("Ajouter");
+        ajouter.add(ajou); 
+
+       ajou.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            String testr = textsemaine.getText();
+            int resultat = Integer.parseInt(testr);
+            System.out.println("le résultat est : " + testr);
+           }
+        });
 
         return ajouter;
 }
