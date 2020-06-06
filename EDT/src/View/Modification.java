@@ -24,9 +24,14 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import Model.ETUDIANT;
 import Model.SEANCE;
+
+import Controller.ADD_SEANCE;
+import Controller.AJOUTER_GROUPE;
+import Controller.SUPPRIMER_SEANCE;
 
 import java.awt.GridBagConstraints;
 import java.util.HashSet;
@@ -55,32 +60,32 @@ public class Modification extends JPanel{
 		
     //création des cartes pour chaque action
     JPanel card1 = new JPanel();
-    //card1=creer();
-    card1.setBackground(Color.yellow);
+    card1=creer();
+    //card1.setBackground(Color.yellow);
     JPanel card2 = new JPanel();
-    //card1=annuler();
-    card2.setBackground(Color.red);		
+    card2=annuler();
+    //card2.setBackground(Color.red);		
     JPanel card3 = new JPanel();
     card3=ajouter();
     //card3.setBackground(Color.green);
     JPanel card4 = new JPanel();
-    //card1=retirer();
+    //card4=retirer();
     card4.setBackground(Color.black);		
     JPanel card5 = new JPanel();
-    //card1=deplacer();
+    //card5=deplacer();
     card5.setBackground(Color.white);		
     JPanel card6 = new JPanel();
-    //card1=modifier();
+    //card6=modifier();
     card6.setBackground(Color.orange);
 
     //panel bouton et création des boutons
     JPanel boutonPane = new JPanel();
-    JButton creer = new JButton("créer séance");
-    JButton annuler = new JButton("Annuler séance");
-    JButton ajouter = new JButton("ajouter séance");
+    JButton creer = new JButton("Ajouter groupe");
+    JButton supprimer = new JButton("Supprimer séance");
+    JButton ajouter = new JButton("Ajouter séance");
     JButton retirer = new JButton("Retirer séance");
     JButton deplacer = new JButton("Déplacer séance");
-    JButton modifier = new JButton("Modifier séance");
+    JButton modifier = new JButton("Modifier état séance");
 
     //action bouton creer
     creer.addActionListener(new ActionListener(){
@@ -90,7 +95,7 @@ public class Modification extends JPanel{
     });
 	
     //action bouton annuler
-    annuler.addActionListener(new ActionListener(){
+    supprimer.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){       
         cl.show(content, listContent[1]);
       }
@@ -127,7 +132,7 @@ public class Modification extends JPanel{
 	
     //ajout des boutons
     boutonPane.add(creer);
-    boutonPane.add(annuler);
+    boutonPane.add(supprimer);
     boutonPane.add(ajouter);
     boutonPane.add(retirer);
     boutonPane.add(deplacer);
@@ -151,9 +156,177 @@ public class Modification extends JPanel{
 
 
 
-//public JPanel creer(){}
+public JPanel creer(){
+    JPanel creer = new JPanel();
 
-//public JPanel annuler(){}
+        JLabel semaine = new JLabel("Semaine : ");
+        creer.add(semaine);
+
+        JTextField textsemaine = new JTextField();
+        textsemaine.setPreferredSize(new Dimension(80, 20));
+        creer.add(textsemaine);
+
+        JLabel date = new JLabel("Date : ");
+        creer.add(date);
+         
+        JTextField textdate = new JTextField();
+        textdate.setPreferredSize(new Dimension(80, 20));
+        creer.add(textdate);
+
+        JLabel heuredeb = new JLabel("Heure de début : ");
+        creer.add(heuredeb);
+         
+        JTextField textheuredeb = new JTextField();
+        textheuredeb.setPreferredSize(new Dimension(80, 20));
+        creer.add(textheuredeb);
+
+        JLabel salle = new JLabel("Salle : ");
+        creer.add(salle);
+         
+        JTextField textesalle = new JTextField();
+        textesalle.setPreferredSize(new Dimension(80, 20));
+        creer.add(textesalle);
+
+        JLabel groupe = new JLabel("Goupe : ");
+        creer.add(groupe);
+         
+        JTextField textegroupe = new JTextField();
+        textegroupe.setPreferredSize(new Dimension(80, 20));
+        creer.add(textegroupe);
+
+        JLabel promo = new JLabel("Promo : ");
+        creer.add(promo);
+         
+        JTextField textpromo = new JTextField();
+        textpromo.setPreferredSize(new Dimension(80, 20));
+        creer.add(textpromo);
+
+
+        JButton create = new JButton("Creer");
+        creer.add(create); 
+
+       create.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            String ssemaine = textsemaine.getText();
+            int isemaine = Integer.parseInt(ssemaine);
+            String sdate = textdate.getText();
+            String sheuredeb = textheuredeb.getText();
+            String ssalle = textesalle.getText();
+            String sgroupe = textegroupe.getText();
+            String spromo = textpromo.getText();
+            //System.out.println("le résultat est : " + testr);
+            AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
+            String aj = ajout.AJOUTER_GROUPE_INSTANCE (isemaine, sdate, sheuredeb, ssalle, sgroupe, spromo);
+            JOptionPane jop2 = new JOptionPane();
+            jop2.showMessageDialog(null, aj, "Ajout", JOptionPane.INFORMATION_MESSAGE);
+           }
+        });
+
+        return creer;
+
+}
+
+public JPanel annuler(){
+    JPanel supprimer = new JPanel();
+
+        JLabel semaine = new JLabel("Semaine : ");
+        supprimer.add(semaine);
+
+        JTextField textsemaine = new JTextField();
+        textsemaine.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textsemaine);
+
+        JLabel date = new JLabel("Date : ");
+        supprimer.add(date);
+         
+        JTextField textdate = new JTextField();
+        textdate.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textdate);
+
+        JLabel heuredeb = new JLabel("Heure de début : ");
+        supprimer.add(heuredeb);
+         
+        JTextField textheuredeb = new JTextField();
+        textheuredeb.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textheuredeb);
+
+        /*JLabel heurefin = new JLabel("Heure de fin : ");
+        supprimer.add(heurefin);
+
+        JTextField textheurefin = new JTextField();
+        textheurefin.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textheurefin);
+
+        JLabel etat = new JLabel("Etat : ");
+        supprimer.add(etat);
+
+        JTextField textetat = new JTextField();
+        textetat.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textetat);
+
+        JLabel nom = new JLabel("Nom du cours : ");
+        supprimer.add(nom);
+         
+        JTextField textnom = new JTextField();
+        textnom.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textnom);
+
+        JLabel type = new JLabel("Type du cours : ");
+        supprimer.add(type);
+         
+        JTextField texttype = new JTextField();
+        texttype.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(texttype);
+
+        JLabel enseignant = new JLabel("Enseignant : ");
+        supprimer.add(enseignant);
+         
+        JTextField textenseignant = new JTextField();
+        textenseignant.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textenseignant);
+
+        JLabel groupe = new JLabel("Goupe : ");
+        supprimer.add(groupe);
+         
+        JTextField textegroupe = new JTextField();
+        textegroupe.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textegroupe);*/
+
+        JLabel salle = new JLabel("Salle : ");
+        supprimer.add(salle);
+         
+        JTextField textesalle = new JTextField();
+        textesalle.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textesalle);
+
+        /*JLabel promo = new JLabel("Promo : ");
+        supprimer.add(promo);
+         
+        JTextField textpromo = new JTextField();
+        textpromo.setPreferredSize(new Dimension(80, 20));
+        supprimer.add(textpromo);*/
+
+
+        JButton delete = new JButton("Supprimer");
+        supprimer.add(delete); 
+
+       delete.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            String ssemaine = textsemaine.getText();
+            int isemaine = Integer.parseInt(ssemaine);
+            String sdate = textdate.getText();
+            String sheuredeb = textheuredeb.getText();
+            String ssalle = textesalle.getText();
+            //System.out.println("le résultat est : " + testr);
+            SUPPRIMER_SEANCE supp_seance = new SUPPRIMER_SEANCE();
+            String sp = supp_seance.SUPPRIMER_SEANCE_INSTANCE(isemaine,sdate,sheuredeb,ssalle);
+            JOptionPane jop2 = new JOptionPane();
+            jop2.showMessageDialog(null, sp, "Suppression", JOptionPane.INFORMATION_MESSAGE);
+           }
+        });
+
+        return supprimer;
+}
 
 public JPanel ajouter(){
 
@@ -162,48 +335,106 @@ public JPanel ajouter(){
         JLabel semaine = new JLabel("Semaine : ");
         ajouter.add(semaine);
 
-        JTextField textsemaine = new JTextField("Semaine");
+        JTextField textsemaine = new JTextField();
+        textsemaine.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textsemaine);
 
         JLabel date = new JLabel("Date : ");
         ajouter.add(date);
          
-        JTextField textdate = new JTextField("date");
+        JTextField textdate = new JTextField();
+        textdate.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textdate);
 
         JLabel heuredeb = new JLabel("Heure de début : ");
         ajouter.add(heuredeb);
          
-        JTextField textheuredeb = new JTextField("heure début");
+        JTextField textheuredeb = new JTextField();
+        textheuredeb.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textheuredeb);
 
         JLabel heurefin = new JLabel("Heure de fin : ");
         ajouter.add(heurefin);
 
-        JTextField textheurefin = new JTextField("heure fin");
+        JTextField textheurefin = new JTextField();
+        textheurefin.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textheurefin);
 
         JLabel etat = new JLabel("Etat : ");
         ajouter.add(etat);
 
-        JTextField textetat = new JTextField("etat");
+        JTextField textetat = new JTextField();
+        textetat.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textetat);
 
         JLabel nom = new JLabel("Nom du cours : ");
         ajouter.add(nom);
          
-        JTextField textnom = new JTextField("nom");
+        JTextField textnom = new JTextField();
+        textnom.setPreferredSize(new Dimension(80, 20));
         ajouter.add(textnom);
 
         JLabel type = new JLabel("Type du cours : ");
         ajouter.add(type);
          
-        JTextField texttype = new JTextField("type");
+        JTextField texttype = new JTextField();
+        texttype.setPreferredSize(new Dimension(80, 20));
         ajouter.add(texttype);
 
+        JLabel enseignant = new JLabel("Enseignant : ");
+        ajouter.add(enseignant);
+         
+        JTextField textenseignant = new JTextField();
+        textenseignant.setPreferredSize(new Dimension(80, 20));
+        ajouter.add(textenseignant);
 
-        JButton login = new JButton("Ajouter");
-        ajouter.add(login); 
+        JLabel groupe = new JLabel("Goupe : ");
+        ajouter.add(groupe);
+         
+        JTextField textegroupe = new JTextField();
+        textegroupe.setPreferredSize(new Dimension(80, 20));
+        ajouter.add(textegroupe);
+
+        JLabel salle = new JLabel("Salle : ");
+        ajouter.add(salle);
+         
+        JTextField textesalle = new JTextField();
+        textesalle.setPreferredSize(new Dimension(80, 20));
+        ajouter.add(textesalle);
+
+        JLabel promo = new JLabel("Promo : ");
+        ajouter.add(promo);
+         
+        JTextField textpromo = new JTextField();
+        textpromo.setPreferredSize(new Dimension(80, 20));
+        ajouter.add(textpromo);
+
+
+        JButton ajou = new JButton("Ajouter");
+        ajouter.add(ajou); 
+
+       ajou.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            String ssemaine = textsemaine.getText();
+            int isemaine = Integer.parseInt(ssemaine);
+            String sdate = textdate.getText();
+            String sheuredeb = textheuredeb.getText();
+            String sheurefin = textheurefin.getText();
+            String setat = textetat.getText();
+            int ietat = Integer.parseInt(setat);
+            String snom = textnom.getText();
+            String stype = texttype.getText();
+            String senseignant = textenseignant.getText();
+            String sgroupe = textegroupe.getText();
+            String ssalle = textesalle.getText();
+            String spromo = textpromo.getText();
+            //System.out.println("le résultat est : " + testr);
+            ADD_SEANCE nvlseance = new ADD_SEANCE();
+            String ns = nvlseance.AJOUTER_SEANCE(isemaine, sdate, sheuredeb, sheurefin, ietat, snom, stype, senseignant, sgroupe, ssalle, spromo);
+            JOptionPane jop2 = new JOptionPane();
+            jop2.showMessageDialog(null, ns, "Ajout", JOptionPane.INFORMATION_MESSAGE);
+           }
+        });
 
         return ajouter;
 }

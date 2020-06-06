@@ -57,7 +57,9 @@ public class ADD_SEANCE extends SEANCEDAO {
     public ADD_SEANCE(){}
     
 
+
     public String AJOUTER_SEANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, String NomCours, String Type_CoursNom, String ENSEIGNANTNOM, String GROUPENOM, String SALLENOM, String NomPROMOTION)
+
     { 
         
         int resultat;
@@ -226,8 +228,9 @@ public class ADD_SEANCE extends SEANCEDAO {
                    //GROUPE
 
             GROUPE_EDT groupedt = new GROUPE_EDT();
-                   
+                
             PreparedStatement recupGROUPE= this.connection.prepareStatement("SELECT g.ID FROM GROUPE g JOIN PROMOTION p ON p.ID=g.ID_PROMOTION WHERE g.NOM = ? AND p.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
             recupGROUPE.setString(1,GROUPENOM);
             recupGROUPE.setString(2,NomPROMOTION);
             ResultSet recupGROUPEset = recupGROUPE.executeQuery();
@@ -282,7 +285,10 @@ public class ADD_SEANCE extends SEANCEDAO {
         e.printStackTrace();
     }
         
-return "COURS CORRECTEMENT AJOUTER";
+return "COURS CORRECTEMENT AJOUTEE";
 
     } 
+
 }
+
+

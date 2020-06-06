@@ -14,7 +14,7 @@ public class Coordonnees {
     private int x=0;
     private int y=0;
     public Coordonnees(){}
-    
+
     public void setx(int valeurx){
         x=valeurx;
     }

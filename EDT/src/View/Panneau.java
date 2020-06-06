@@ -164,7 +164,7 @@ public JPanel edt(){
         tableau.setRowHeight(125);
         //Changement de la taille des colonnes
         setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-        
+        //calendrier.removeAll();
         calendrier.add(new JScrollPane(tableau));
     }
     else if(COUNT == 1){
@@ -279,10 +279,11 @@ public JPanel edt(){
     tableauV.setRowHeight(125);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-    
+    //calendrier.removeAll();
     calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
     calendrier.add(calendrier2,BorderLayout.CENTER);
     }
+   // edt().removeAll();
     return calendrier; 
 }
 
