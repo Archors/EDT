@@ -11,8 +11,10 @@ package View;
  */
 import Controller.ADD_SEANCE;
 import Controller.AffecterEnseignant;
+import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
+import Controller.SALLE_EDT;
 import Model.COURS;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -131,8 +133,66 @@ public JPanel edt(){
 
     calendrier.setLayout(new BorderLayout()); 
     
-    //Creation de l'objet qui contient les données de l'etudiant
-    studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
+    
+
+    //Les titres des colonnes
+    String  title[] = {"Heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+    
+    ZModel model = new ZModel(emploidutempsetudiant(etudiant), title);
+    
+    tableau = new JTable(model);
+    //Definition de la taille des lignes
+    tableau.setRowHeight(125);
+    //Changement de la taille des colonnes
+     setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+        
+    calendrier.add(new JScrollPane(tableau));
+    return calendrier; 
+}
+
+//Fonction pour choisir la taille des colonnes du tableau avec des pourcentages
+//Source : https://kahdev.wordpress.com/2011/10/30/java-specifying-the-column-widths-of-a-jtable-as-percentages/
+private static void setWidthAsPercentages(JTable table,
+        double... percentages) {
+    final double factor = 10000;
+ 
+    TableColumnModel model = table.getColumnModel();
+    for (int columnIndex = 0; columnIndex < percentages.length; columnIndex++) {
+        TableColumn column = model.getColumn(columnIndex);
+        column.setPreferredWidth((int) (percentages[columnIndex] * factor));
+    }
+}
+
+
+
+class ItemAction implements ActionListener{
+    public void actionPerformed(ActionEvent e) {
+      
+      if(combo.getSelectedItem() == "En grille")
+      {
+        COUNT=0;
+        intermediaire.add(edt(),BorderLayout.CENTER);
+        principal.add(intermediaire, BorderLayout.CENTER);
+      }
+      
+      else if(combo.getSelectedItem() == "En liste")
+      {
+        COUNT=1;
+        intermediaire.add(edt(),BorderLayout.CENTER);
+        principal.add(intermediaire, BorderLayout.CENTER);
+      }
+    }               
+  }
+
+    public JPanel getPan(){
+        return principal;
+    }
+
+    public Object[][] emploidutempsetudiant(ETUDIANT student){
+        int compteur = 0;
+        String infoSEANCE;
+        //Creation de l'objet qui contient les données de l'etudiant
+    studentEDT.voirETUDIANT_SEANCE(student.getNOM());
     //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
@@ -140,20 +200,9 @@ public JPanel edt(){
     listeCOURS = studentEDT.getListCOURS();
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
 
-    //GROUPE_EDT grpedt = new GROUPE_EDT();
-    //grpedt.voirGROUPE_SEANCE();
-    //System.out.println("Affichage  ici !! :");
-    //grpedt.afficherLISTESEANCE();
-    //grpedt.afficherLISTESALLE();
-
     //Données du tableau
-    Object[][] data = {
-      {"8h30-10h", "", "", "", "", ""},
-      {"10h15-11h45", "", "", "", "", ""},
-      {"12h-13h30", "", "", "", "", ""},
-      {"13h45-15h15", "", "", "", "", ""},
-      {"15h30-17h", "", "", "", "", ""}
-    };
+    Object[][] data = remplissage();
+    
     for(SEANCE i : listSEANCE)
     {
         if(i.getSEMAINE() == semaine)
@@ -223,75 +272,187 @@ public JPanel edt(){
         }
         compteur++;
     }
-
-    //Les titres des colonnes
-    String  title[] = {"Heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
-    
-    ZModel model = new ZModel(data, title);
-    
-    tableau = new JTable(model);
-    //Definition de la taille des lignes
-    tableau.setRowHeight(125);
-    //Changement de la taille des colonnes
-     setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-        
-    calendrier.add(new JScrollPane(tableau));
-    return calendrier; 
-}
-
-//Fonction pour choisir la taille des colonnes du tableau avec des pourcentages
-//Source : https://kahdev.wordpress.com/2011/10/30/java-specifying-the-column-widths-of-a-jtable-as-percentages/
-private static void setWidthAsPercentages(JTable table,
-        double... percentages) {
-    final double factor = 10000;
- 
-    TableColumnModel model = table.getColumnModel();
-    for (int columnIndex = 0; columnIndex < percentages.length; columnIndex++) {
-        TableColumn column = model.getColumn(columnIndex);
-        column.setPreferredWidth((int) (percentages[columnIndex] * factor));
+    return data;
     }
-}
-
-/*
-  public void paintComponent(Graphics g){
     
-    g.setColor(this.color);
-    g.fillRect(0, 0, this.getWidth(), this.getHeight());
-    g.setColor(Color.white);
-    g.setFont(new Font("Arial", Font.BOLD, 15));
-    g.drawString(this.message, 10, 20);
-  }*/
-  
+    public Object[][] emploidutempssalle(SALLE salle, int week){
+        int compteur = 0;
+        String infoSEANCE;
+        SALLE_EDT edtsalle = new SALLE_EDT();
+        edtsalle.voirSALLE_EDT(salle.getNOM());
+        listSEANCE = edtsalle.getlistSEANCE();
+        listeTYPE_COURS = edtsalle.getListTYPE_COURS();
+        listeCOURS = edtsalle.getListCOURS();
+        listeENSEIGNANT = edtsalle.getlistENSEIGNANT();
 
-  /*class ItemState implements ItemListener{
-    public void itemStateChanged(ItemEvent e) {
-      
-      
-   
-    }               
-    }*/
-
-class ItemAction implements ActionListener{
-    public void actionPerformed(ActionEvent e) {
-      
-      if(combo.getSelectedItem() == "En grille")
-      {
-        COUNT=0;
-        intermediaire.add(edt(),BorderLayout.CENTER);
-        principal.add(intermediaire, BorderLayout.CENTER);
-      }
-      
-      else if(combo.getSelectedItem() == "En liste")
-      {
-        COUNT=1;
-        intermediaire.add(edt(),BorderLayout.CENTER);
-        principal.add(intermediaire, BorderLayout.CENTER);
-      }
-    }               
-  }
-
-    public JPanel getPan(){
-        return principal;
+    //Données du tableau
+    Object[][] data = remplissage();
+    for(SEANCE i : listSEANCE)
+    {
+        if(i.getSEMAINE() == semaine)
+        {
+            int x = 0,y=0;
+            switch(i.getDATE())
+        {
+            case ("LUNDI") :
+            {
+                x=1;
+                break;
+            }
+            case ("MARDI") :
+            {
+                x=2;
+                break;
+            }
+            case ("MERCREDI") :
+            {
+                x=3;
+                break;
+            }
+            case ("JEUDI") :
+            {
+                x=4;
+                break;
+            }
+            case ("VENDREDI") :
+            {
+                x=5;
+                break;
+            }
+        }
+        switch(i.getHEURE_DEBUT())
+        {
+            case ("8h30") :
+            {
+                y=0;
+                break;
+            }
+            case ("10h15") :
+            {
+                y=1;
+                break;
+            }
+            case ("12h") :
+            {
+                y=2;
+                break;
+            }
+            case ("13h45") :
+            {
+                y=3;
+                break;
+            }
+            case ("15h30") :
+            {
+                y=4;
+                break;
+            }
+        }
+        //On verifie que le cours n'est pas annulé
+        if(i.getETAT()==1){
+            infoSEANCE= "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            data[y][x] = infoSEANCE;
+        }
+        }
+        compteur++;
     }
+    return data;
+    }
+    
+    public Object[][] emploidutempsenseignant(UTILISATEUR enseignant, int week){
+        int compteur = 0;
+        String infoSEANCE;
+        ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
+        edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM());
+        listSEANCE = edtenseignant.getlistSEANCE();
+        listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
+        listeCOURS = edtenseignant.getListCOURS();
+        listeENSEIGNANT = edtenseignant.getlistENSEIGNANT();
+
+    //Données du tableau
+    Object[][] data = remplissage();
+    for(SEANCE i : listSEANCE)
+    {
+        if(i.getSEMAINE() == semaine)
+        {
+            int x = 0,y=0;
+            switch(i.getDATE())
+        {
+            case ("LUNDI") :
+            {
+                x=1;
+                break;
+            }
+            case ("MARDI") :
+            {
+                x=2;
+                break;
+            }
+            case ("MERCREDI") :
+            {
+                x=3;
+                break;
+            }
+            case ("JEUDI") :
+            {
+                x=4;
+                break;
+            }
+            case ("VENDREDI") :
+            {
+                x=5;
+                break;
+            }
+        }
+        switch(i.getHEURE_DEBUT())
+        {
+            case ("8h30") :
+            {
+                y=0;
+                break;
+            }
+            case ("10h15") :
+            {
+                y=1;
+                break;
+            }
+            case ("12h") :
+            {
+                y=2;
+                break;
+            }
+            case ("13h45") :
+            {
+                y=3;
+                break;
+            }
+            case ("15h30") :
+            {
+                y=4;
+                break;
+            }
+        }
+        //On verifie que le cours n'est pas annulé
+        if(i.getETAT()==1){
+            infoSEANCE= "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec le groupe" + listeENSEIGNANT.get(compteur).getNOM();
+            data[y][x] = infoSEANCE;
+        }
+        }
+        compteur++;
+    }
+    return data;
+    }
+    
+    //Rempli le tableau avec les horaires
+    public Object[][] remplissage() {
+    Object[][] donnee = {
+    {"8h30-10h", "", "", "", "", ""},
+      {"10h15-11h45", "", "", "", "", ""},
+      {"12h-13h30", "", "", "", "", ""},
+      {"13h45-15h15", "", "", "", "", ""},
+      {"15h30-17h", "", "", "", "", ""}
+    };
+    return donnee;
+}
     
 }
