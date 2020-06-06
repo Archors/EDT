@@ -133,9 +133,10 @@ public JPanel edt(){
     int compteurSALLE=0;
 
  //   AffecterEnseignant affecter = new AffecterEnseignant(ID);
-    ADD_SEANCE add = new ADD_SEANCE();
-    System.out.println(add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "TP", "Hina", "TD01", "104", "2023"));
-    
+
+AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
+System.out.println(ajout.AJOUTER_GROUPE_INSTANCE (1, "Jeudi", "15h30", "105", "TD02", "2022"));
+
     String infoSEANCE = "";
 
     calendrier.setLayout(new BorderLayout()); 

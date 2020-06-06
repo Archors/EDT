@@ -73,7 +73,7 @@ public class AJOUTER_GROUPE extends GROUPEDAO{
         try{
             
         
-            PreparedStatement recupSEANCE= this.connection.prepareStatement("SELECT s.ID FROM SEANCE s JOIN SEANCE_SALLE ss ON ss.ID_SEANCE = s.ID JOIN SALLE sa ON sa.ID = ss.ID_SEANCE WHERE s.SEMAINE = ? AND s.DATE = ? AND s.HEURE_DEBUT = ? AND sa.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement recupSEANCE= this.connection.prepareStatement("SELECT s.ID FROM SEANCE s JOIN SEANCE_SALLE ss ON ss.ID_SEANCE = s.ID JOIN SALLE sa ON sa.ID = ss.ID_SALLE WHERE s.SEMAINE = ? AND s.DATE = ? AND s.HEURE_DEBUT = ? AND sa.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             recupSEANCE.setInt(1,SEMAINE);
             recupSEANCE.setString(2,DATE);
             recupSEANCE.setString(3,HEURE_DEBUT);
