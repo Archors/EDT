@@ -16,6 +16,7 @@ import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
 import Controller.SALLE_EDT;
+import Controller.SUPPRIMER_SEANCE;
 import Model.COURS;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -134,8 +135,12 @@ public JPanel edt(){
 
  //   AffecterEnseignant affecter = new AffecterEnseignant(ID);
 
-AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
-System.out.println(ajout.AJOUTER_GROUPE_INSTANCE (1, "Jeudi", "15h30", "105", "TD02", "2022"));
+ SUPPRIMER_SEANCE supp_seance = new SUPPRIMER_SEANCE();
+ System.out.println(supp_seance.SUPPRIMER_SEANCE_INSTANCE(1,"MARDI","8h15","104"));
+ 
+ 
+//AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
+//System.out.println(ajout.AJOUTER_GROUPE_INSTANCE (1, "Jeudi", "15h30", "105", "TD02", "2022"));
 
     String infoSEANCE = "";
 
