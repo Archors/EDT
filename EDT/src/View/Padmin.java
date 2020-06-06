@@ -9,8 +9,16 @@ package View;
  *
  * @author Aurélien
  */
+import Controller.ADD_SEANCE;
+import Controller.AJOUTER_GROUPE;
+import Controller.AffecterEnseignant;
+import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
-import Controller.MODIFIER_ETAT_SEANCE;
+import Controller.GROUPE_EDT;
+import Controller.SALLE_EDT;
+import Controller.SEANCE_GROUPE;
+import Controller.SUPPRIMER_SEANCE;
+import Model.COURS;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -23,28 +31,23 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-
-
 import Model.ETUDIANT;
 import Model.ADMIN;
+import Model.GROUPE;
 import Model.SALLE;
 import Model.SEANCE;
+import Model.TYPE_COURS;
 import Model.UTILISATEUR;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-
-import java.awt.GridBagConstraints;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JFrame;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class Padmin extends JFrame{
   private Color color = Color.white;
-  private int COUNT = 0;
   private String message = "";
- // private GridBagConstraints gbc = new GridBagConstraints();
   private JPanel principal = new JPanel();
   private JPanel intermediaire = new JPanel();
   private JPanel pan1 = new JPanel();
@@ -52,32 +55,22 @@ public class Padmin extends JFrame{
   private JPanel calendrier = new JPanel();
   private JComboBox combo = new JComboBox();
   private ETUDIANT etudiant;
-  private EtudiantEDT studentEDT = new EtudiantEDT();
-  private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
-  private List<SALLE> listSALLE =new ArrayList<SALLE>();
-  private List<UTILISATEUR> listeENSEIGNANT = new ArrayList<UTILISATEUR>();
   private JTable tableau;
   private int semaine=1;
+  private int COUNT=0;
+  private String nameteacher="";
    
-  public Padmin(ADMIN admin){
-    //etudiant = recupEtudiant;    
+  public Padmin(ADMIN recupAdmin){
+    //etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-    intermediaire.add(edt(),BorderLayout.CENTER);
+    intermediaire.add(edtprof(""),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
-    //etudiant = recupEtudiant;
-   // System.out.print("L'etudiant 4 dans panneau est :");
-    //System.out.print(etudiant.getID());
-    //System.out.print(etudiant.getDROIT());
-    //System.out.println(etudiant.getNOM());
-  //  principal.add(menu());
-   
-    //etudiant.afficherETUDIANT();
   }
 
-  public JPanel menu(){
+ public JPanel menu(){
    //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
     JLabel groupe = new JLabel("Groupe : ");
     pan1.add(groupe);
@@ -90,7 +83,8 @@ public class Padmin extends JFrame{
     pan1.add(btngroupe);
 
     btngroupe.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent event){       
+      public void actionPerformed(ActionEvent event){   
+        System.out.println("bouton groupe");
         //sgroupe = groupefield.getText();
         //System.out.print("La string sprof : " + sprof);
         //principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
@@ -99,7 +93,7 @@ public class Padmin extends JFrame{
     });
     
     //Liste salle
-    /*JLabel salle = new JLabel("Salle : ");
+    JLabel salle = new JLabel("Salle : ");
     pan1.add(salle);
 
     JTextField sallefield = new JTextField();
@@ -116,7 +110,7 @@ public class Padmin extends JFrame{
         //principal.add(edtsalle(ssalle), BorderLayout.CENTER);
         
       }
-    });*/
+    });
 
     //Liste prof
     JLabel prof = new JLabel("Professeur : ");
@@ -130,11 +124,14 @@ public class Padmin extends JFrame{
     pan1.add(btnprof);
 
     btnprof.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent event){       
-        //sprof = groupefield.getText();
-        //System.out.print("La string sprof : " + sprof);
-        //principal.add(edtprof(sprof), BorderLayout.CENTER);
-        
+      public void actionPerformed(ActionEvent event){  
+        nameteacher = proffield.getText();
+        //intermediaire.removeAll();
+        intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
+        intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
+        principal.add(intermediaire, BorderLayout.CENTER);
+        System.out.println("bouton prof");
+        System.out.println(nameteacher);
       }
     });
 
@@ -142,206 +139,68 @@ public class Padmin extends JFrame{
 }
 
 public JPanel semaine(){
-
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
-        int numerobtn = i;
+        int btnsemaine = i;
         JButton bouton = new JButton(""+i);
         bouton.setPreferredSize(new Dimension(48,20));
         pan2.add(bouton);
         bouton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent event){       
-        
-        //sgroupe = groupefield.getText();
-        System.out.print("Le bouton est : " + numerobtn);
-        //principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
+        public void actionPerformed(ActionEvent event){
+            semaine = btnsemaine;
+            calendrier.removeAll();
+             intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
+            principal.add(intermediaire, BorderLayout.CENTER);
            }
         });
     }
     return pan2;
-    
-}
+  }
 
-public JPanel edt(){
+public JPanel edtprof(String nomprof){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
+
+    //calendrier.removeAll();
+    int ID=2;
+
     int compteurSALLE=0;
+
     String infoSEANCE = "";
+
+    EmploiTemps edtprof = new EmploiTemps();
+    
+    AffecterEnseignant affecter = new AffecterEnseignant(ID);
+
     calendrier.setLayout(new BorderLayout()); 
-    
-    /*
-    studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
-    
-    listSEANCE = studentEDT.getlistSEANCE();
-    listSALLE = studentEDT.getListSALLE();
- 
-    listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
-    */
-    
 
-    //Données du tableau
-    Object[][] data = {
-      {"8h30", "", "", "", "", ""},
-      {"10h", "", "", "", "", ""},
-      {"10h15", "", "", "", "", ""},
-      {"11h45", "", "", "", "", ""},
-      {"12h", "", "", "", "", ""},
-      {"13h30", "", "", "", "", ""},
-      {"13h45", "", "", "", "", ""},
-      {"15h15", "", "", "", "", ""},
-      {"15h30", "", "", "", "", ""},
-      {"17h", "", "", "", "", ""}
-    };
-/*
-    for(SEANCE i : listSEANCE)
-    {
-        if(i.getSEMAINE() == semaine)
-        {
-            int x = 0,y=0;
-            switch(i.getDATE())
-        {
-            case ("LUNDI") :
-            {
-                x=1;
-                break;
-            }
-            case ("MARDI") :
-            {
-                x=2;
-                break;
-            }
-            case ("MERCREDI") :
-            {
-                x=3;
-                break;
-            }
-            case ("JEUDI") :
-            {
-                x=4;
-                break;
-            }
-            case ("VENDREDI") :
-            {
-                x=5;
-                break;
-            }
-        }
-        switch(i.getHEURE_DEBUT())
-        {
-            case ("8h30") :
-            {
-                y=0;
-                break;
-            }
-            case ("10h15") :
-            {
-                y=2;
-                break;
-            }
-            case ("12h") :
-            {
-                y=4;
-                break;
-            }
-            case ("13h45") :
-            {
-                y=6;
-                break;
-            }
-            case ("15h30") :
-            {
-                y=8;
-                break;
-            }
-        }
-        //On verifie que le cours n'est pas annulé
-        if(i.getETAT()==1){
-            infoSEANCE= "Le cours a lieu en salle " + listSALLE.get(compteurSALLE).getNOM()+" avec " + listeENSEIGNANT.get(compteurSALLE).getNOM();
-            data[y][x] = infoSEANCE;
-        }
-        }
-        compteurSALLE++;
-    }*/
-    
-    
 
+    //Creation de la classe pour mettre les donne
+    ZModel model = new ZModel(edtprof.voiremploidutempsenseignant(nomprof,semaine), edtprof.setTitle());
     
-
-    //Les titres des colonnes
-
-    String  title[] = {"heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
-    
-    ZModel model = new ZModel(data, title);
-    
-    tableau = new JTable(model);
-    tableau.setRowHeight(65);
-    calendrier.add(new JScrollPane(tableau));
-    
-    //this.getContentPane().add(calendrier);
-    
-
-/*
- Object[][] data1 = {
-      {""},
-      {""}
-    }; 
-
-    //Les titres des colonnes
-    String  title1[] = {"Lundi"};
-    JTable tableau1 = new JTable(data1, title1);
-    tableau1.setPreferredSize(new Dimension(pan3.getWidth(), pan3.getHeight()));
-
-    //Nous ajoutons notre tableau à notre contentPane dans un scroll
-    //Sinon les titres des colonnes ne s'afficheront pas !
-
-    if(COUNT == 0){
-        pan3.removeAll();  
-        pan3.add(new JScrollPane(tableau));
-    }
-    else if(COUNT == 1){
-        pan3.removeAll();  
-        pan3.add(new JScrollPane(tableau1)); 
-    }
-*/
+        tableau = new JTable(model);
+        //Definition de la taille des lignes
+        tableau.setRowHeight(125);
+        //Changement de la taille des colonnes
+        setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+        //calendrier.removeAll();
+        calendrier.add(new JScrollPane(tableau));
+   
+   // edt().removeAll();
     return calendrier; 
 }
 
-/*
-  public void paintComponent(Graphics g){
-    
-    g.setColor(this.color);
-    g.fillRect(0, 0, this.getWidth(), this.getHeight());
-    g.setColor(Color.white);
-    g.setFont(new Font("Arial", Font.BOLD, 15));
-    g.drawString(this.message, 10, 20);
-  }*/
-  
-
-  /*class ItemState implements ItemListener{
-    public void itemStateChanged(ItemEvent e) {
-      
-      
-   
-    }               
-    }*/
-
-class ItemAction implements ActionListener{
-    public void actionPerformed(ActionEvent e) {
-      
-      if(combo.getSelectedItem() == "En grille")
-      {
-        COUNT=0;
-        
-        principal.add(edt());
-      }
-      
-      else if(combo.getSelectedItem() == "En liste")
-      {
-        COUNT=1;
-        
-        principal.add(edt());
-      }
-    }               
-  }
+//Fonction pour choisir la taille des colonnes du tableau avec des pourcentages
+//Source : https://kahdev.wordpress.com/2011/10/30/java-specifying-the-column-widths-of-a-jtable-as-percentages/
+private static void setWidthAsPercentages(JTable table,
+        double... percentages) {
+    final double factor = 10000;
+ 
+    TableColumnModel model = table.getColumnModel();
+    for (int columnIndex = 0; columnIndex < percentages.length; columnIndex++) {
+        TableColumn column = model.getColumn(columnIndex);
+        column.setPreferredWidth((int) (percentages[columnIndex] * factor));
+    }
+}
 
     public JPanel getPan(){
         return principal;
