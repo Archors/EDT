@@ -16,6 +16,7 @@ import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
 import Controller.SALLE_EDT;
+import Controller.SEANCE_GROUPE;
 import Controller.SUPPRIMER_SEANCE;
 import Model.COURS;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 
 import Model.ETUDIANT;
+import Model.GROUPE;
 import Model.SALLE;
 import Model.SEANCE;
 import Model.TYPE_COURS;
@@ -132,11 +134,17 @@ public JPanel edt(){
     int ID=2;
 
     int compteurSALLE=0;
+    List <GROUPE> listGROUPE = new ArrayList<>();
+
 
  //   AffecterEnseignant affecter = new AffecterEnseignant(ID);
 
- SUPPRIMER_SEANCE supp_seance = new SUPPRIMER_SEANCE();
- System.out.println(supp_seance.SUPPRIMER_SEANCE_INSTANCE(1,"MARDI","8h15","104"));
+ SEANCE_GROUPE seancegroupe =new SEANCE_GROUPE(1);
+ listGROUPE =  seancegroupe.getlistGROUPE();
+ 
+
+ 
+ 
  
  
 //AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
