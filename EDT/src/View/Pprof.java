@@ -37,6 +37,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JFrame;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class Pprof extends JFrame{
   private Color color = Color.white;
@@ -49,30 +51,27 @@ public class Pprof extends JFrame{
   private JPanel pan2 = new JPanel();
   private JPanel calendrier = new JPanel();
   private JComboBox combo = new JComboBox();
-  private ETUDIANT etudiant;
+  private UTILISATEUR prof;
   private EtudiantEDT studentEDT = new EtudiantEDT();
   private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
   private List<SALLE> listSALLE =new ArrayList<SALLE>();
   private List<UTILISATEUR> listeENSEIGNANT = new ArrayList<UTILISATEUR>();
   private JTable tableau;
   private int semaine=1;
+  private JTable tableauL;
+  private JTable tableauM;
+  private JTable tableauMe;
+  private JTable tableauJ;
+  private JTable tableauV;
    
   public Pprof(UTILISATEUR utilisateur){
-    //etudiant = recupEtudiant;    
+       prof = utilisateur;
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
     intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
-    //etudiant = recupEtudiant;
-   // System.out.print("L'etudiant 4 dans panneau est :");
-    //System.out.print(etudiant.getID());
-    //System.out.print(etudiant.getDROIT());
-    //System.out.println(etudiant.getNOM());
-  //  principal.add(menu());
-   
-    //etudiant.afficherETUDIANT();
   }
 
   public JPanel menu(){
@@ -80,201 +79,246 @@ public class Pprof extends JFrame{
     //this.add(top, BorderLayout.NORTH);
     combo.addItem("En grille");
     combo.addItem("En liste");
-
+    combo.addActionListener(new ItemAction());
     return pan1;
 }
 
 public JPanel semaine(){
-
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
+        int btnsemaine = i;
         JButton bouton = new JButton(""+i);
         bouton.setPreferredSize(new Dimension(48,20));
         pan2.add(bouton);
+        bouton.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            semaine = btnsemaine;
+            edt().removeAll();
+            intermediaire.add(edt(),BorderLayout.CENTER);
+            principal.add(intermediaire, BorderLayout.CENTER);
+           }
+        });
     }
     return pan2;
-    
-}
+  }
 
 public JPanel edt(){
-    //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
-    int compteurSALLE=0;
-    String infoSEANCE = "";
+    EmploiTemps edtprof = new EmploiTemps();
+
     calendrier.setLayout(new BorderLayout()); 
-    
-    /*
-    studentEDT.voirETUDIANT_SEANCE(etudiant.getNOM());
-    
-    listSEANCE = studentEDT.getlistSEANCE();
-    listSALLE = studentEDT.getListSALLE();
- 
-    listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
-    */
-    
-
-    //Données du tableau
-    Object[][] data = {
-      {"8h30", "", "", "", "", ""},
-      {"10h", "", "", "", "", ""},
-      {"10h15", "", "", "", "", ""},
-      {"11h45", "", "", "", "", ""},
-      {"12h", "", "", "", "", ""},
-      {"13h30", "", "", "", "", ""},
-      {"13h45", "", "", "", "", ""},
-      {"15h15", "", "", "", "", ""},
-      {"15h30", "", "", "", "", ""},
-      {"17h", "", "", "", "", ""}
-    };
-/*
-    for(SEANCE i : listSEANCE)
-    {
-        if(i.getSEMAINE() == semaine)
-        {
-            int x = 0,y=0;
-            switch(i.getDATE())
-        {
-            case ("LUNDI") :
-            {
-                x=1;
-                break;
-            }
-            case ("MARDI") :
-            {
-                x=2;
-                break;
-            }
-            case ("MERCREDI") :
-            {
-                x=3;
-                break;
-            }
-            case ("JEUDI") :
-            {
-                x=4;
-                break;
-            }
-            case ("VENDREDI") :
-            {
-                x=5;
-                break;
-            }
-        }
-        switch(i.getHEURE_DEBUT())
-        {
-            case ("8h30") :
-            {
-                y=0;
-                break;
-            }
-            case ("10h15") :
-            {
-                y=2;
-                break;
-            }
-            case ("12h") :
-            {
-                y=4;
-                break;
-            }
-            case ("13h45") :
-            {
-                y=6;
-                break;
-            }
-            case ("15h30") :
-            {
-                y=8;
-                break;
-            }
-        }
-        //On verifie que le cours n'est pas annulé
-        if(i.getETAT()==1){
-            infoSEANCE= "Le cours a lieu en salle " + listSALLE.get(compteurSALLE).getNOM()+" avec " + listeENSEIGNANT.get(compteurSALLE).getNOM();
-            data[y][x] = infoSEANCE;
-        }
-        }
-        compteurSALLE++;
-    }*/
-    
-    
-
-    
-
-    //Les titres des colonnes
-
-    String  title[] = {"heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
-    
-    ZModel model = new ZModel(data, title);
-    
-    tableau = new JTable(model);
-    tableau.setRowHeight(65);
-    calendrier.add(new JScrollPane(tableau));
-    
-    //this.getContentPane().add(calendrier);
-    
-
-/*
- Object[][] data1 = {
-      {""},
-      {""}
-    }; 
-
-    //Les titres des colonnes
-    String  title1[] = {"Lundi"};
-    JTable tableau1 = new JTable(data1, title1);
-    tableau1.setPreferredSize(new Dimension(pan3.getWidth(), pan3.getHeight()));
-
-    //Nous ajoutons notre tableau à notre contentPane dans un scroll
-    //Sinon les titres des colonnes ne s'afficheront pas !
-
     if(COUNT == 0){
-        pan3.removeAll();  
-        pan3.add(new JScrollPane(tableau));
+    //Creation de la classe pour mettre les donne
+    ZModel model = new ZModel(edtprof.emploidutempsenseignant(prof,semaine), edtprof.setTitle());
+    
+        tableau = new JTable(model);
+        //Definition de la taille des lignes
+        tableau.setRowHeight(125);
+        //Changement de la taille des colonnes
+        setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+        
+        calendrier.add(new JScrollPane(tableau));
     }
-    else if(COUNT == 1){
-        pan3.removeAll();  
-        pan3.add(new JScrollPane(tableau1)); 
+    else if(COUNT == 1)
+    {
+        JPanel calendrier1 = new JPanel();
+    JPanel calendrier2 = new JPanel();
+    JPanel calendrier3 = new JPanel();
+    calendrier.setLayout(new BorderLayout());
+    calendrier1.setLayout(new BorderLayout());
+    calendrier2.setLayout(new BorderLayout());
+    calendrier3.setLayout(new BorderLayout());
+    ListeEDT edtenListe = new ListeEDT();
+    edtenListe.ListeProfesseur(prof,semaine);
+
+      Object[][] dataL={
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
+    };
+      dataL[0]= edtenListe.getL();
+      int compteur = 0;
+      for(Object i : edtenListe.getL())
+        {
+            dataL[compteur][0] = i;
+            compteur++;
+            
+        }
+
+    //Les titres des colonnes
+    String  titleL[] = {"Lundi"};
+    ZModel modelL = new ZModel(dataL, titleL);
+    
+    tableauL = new JTable(modelL);
+    //Definition de la taille des lignes
+    tableauL.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    //calendrier.removeAll();
+    calendrier1.add(new JScrollPane(tableauL),BorderLayout.NORTH);
+    
+    /////////////////Mardi//////////////
+
+    Object[][] dataM = {
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
+    };
+    dataM[0] = edtenListe.getM();
+    compteur = 0;
+      for(Object i : edtenListe.getM())
+        {
+            dataM[compteur][0] = i;
+            compteur++;
+            
+        }
+    //Les titres des colonnes
+    String  titleM[] = {"Mardi"};
+
+    ZModel modelM = new ZModel(dataM, titleM);
+    
+    tableauM = new JTable(modelM);
+    //Definition de la taille des lignes
+    tableauM.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    //calendrier.removeAll();
+    calendrier1.add(new JScrollPane(tableauM),BorderLayout.CENTER);
+    
+
+    /////////////////Mercredi//////////////
+
+    Object[][] dataMe = {
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
+    };
+    dataMe[0]= edtenListe.getMe();
+    compteur = 0;
+      for(Object i : edtenListe.getMe())
+        {
+            dataMe[compteur][0] = i;
+            compteur++;
+            
+        }
+    //Les titres des colonnes
+    String  titleMe[] = {"Mercredi"};
+    
+    ZModel modelMe = new ZModel(dataMe, titleMe);
+    
+    tableauMe = new JTable(modelMe);
+    //Definition de la taille des lignes
+    tableauMe.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    
+    calendrier1.add(new JScrollPane(tableauMe),BorderLayout.SOUTH);
+    calendrier.add(calendrier1, BorderLayout.NORTH);
+
+    //////////Jeudi////////////
+
+    Object[][] dataJ = {
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
+    };
+    dataJ[0]= edtenListe.getJ();
+    compteur = 0;
+      for(Object i : edtenListe.getJ())
+        {
+            dataJ[compteur][0] = i;
+            compteur++;
+            
+        }
+    //Les titres des colonnes
+    String  titleJ[] = {"Jeudi"};
+    
+    ZModel modelJ = new ZModel(dataJ, titleJ);
+    
+    tableauJ = new JTable(modelJ);
+    //Definition de la taille des lignes
+    tableauJ.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    
+    calendrier2.add(new JScrollPane(tableauJ),BorderLayout.NORTH);
+    
+
+    /////////////////Vendredi/////////////////
+
+    Object[][] dataV = {
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
+    };
+    dataV[0]= edtenListe.getV();
+    compteur = 0;
+      for(Object i : edtenListe.getV())
+        {
+            dataV[compteur][0] = i;
+            compteur++;
+            
+        }
+    //Les titres des colonnes
+    String  titleV[] = {"Vendredi"};
+    
+    ZModel modelV = new ZModel(dataV, titleV);
+    
+    tableauV = new JTable(modelV);
+    //Definition de la taille des lignes
+    tableauV.setRowHeight(125);
+    //Changement de la taille des colonnes
+     //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+    
+    calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
+    calendrier.add(calendrier2,BorderLayout.CENTER);
     }
-*/
     return calendrier; 
 }
 
-/*
-  public void paintComponent(Graphics g){
+private static void setWidthAsPercentages(JTable table,
+        double... percentages) {
+    final double factor = 10000;
+ 
+    TableColumnModel model = table.getColumnModel();
+    for (int columnIndex = 0; columnIndex < percentages.length; columnIndex++) {
+        TableColumn column = model.getColumn(columnIndex);
+        column.setPreferredWidth((int) (percentages[columnIndex] * factor));
+    }
+}
+
     
-    g.setColor(this.color);
-    g.fillRect(0, 0, this.getWidth(), this.getHeight());
-    g.setColor(Color.white);
-    g.setFont(new Font("Arial", Font.BOLD, 15));
-    g.drawString(this.message, 10, 20);
-  }*/
-  
-
-  /*class ItemState implements ItemListener{
-    public void itemStateChanged(ItemEvent e) {
-      
-      
-   
-    }               
-    }*/
-
+    
 class ItemAction implements ActionListener{
     public void actionPerformed(ActionEvent e) {
-      
+
       if(combo.getSelectedItem() == "En grille")
       {
         COUNT=0;
-        
-        principal.add(edt());
       }
-      
+
       else if(combo.getSelectedItem() == "En liste")
       {
         COUNT=1;
-        
-        principal.add(edt());
       }
-    }               
+      edt().removeAll();
+      intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+      principal.add(intermediaire, BorderLayout.CENTER);
+    }
   }
 
     public JPanel getPan(){

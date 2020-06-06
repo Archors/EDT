@@ -255,7 +255,7 @@ public JPanel edt(){
         }
         //On verifie que le cours n'est pas annulé
         if(i.getETAT()==1){
-            infoSEANCE= "Le cours a lieu en salle " + listSALLE.get(compteurSALLE).getNOM()+" avec " + listeENSEIGNANT.get(compteurSALLE).getNOM();
+            infoSEANCE= "Le cours en salle " + listSALLE.get(compteurSALLE).getNOM()+" avec " + listeENSEIGNANT.get(compteurSALLE).getNOM();
             data[y][x] = infoSEANCE;
         }
         }

@@ -17,6 +17,7 @@ import Model.SEANCE;
 import Model.TYPE_COURS;
 import Model.UTILISATEUR;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,13 +26,13 @@ import java.util.List;
  */
 public class EmploiTemps {
     private EtudiantEDT studentEDT = new EtudiantEDT();
-  private List<SEANCE> listSEANCE =new ArrayList<>();
-  private List<SALLE> listSALLE =new ArrayList<>();
-  private List<UTILISATEUR> listeENSEIGNANT = new ArrayList<>();
-  private List<TYPE_COURS> listeTYPE_COURS = new ArrayList<>();
-  private List<COURS> listeCOURS = new ArrayList<>();
-  private List <GROUPE> listGROUPE = new ArrayList<>();
-  int compteur = 0;
+    private List<SEANCE> listSEANCE =new ArrayList<>();
+    private List<SALLE> listSALLE =new ArrayList<>();
+    private List<UTILISATEUR> listeENSEIGNANT = new ArrayList<>();
+    private List<TYPE_COURS> listeTYPE_COURS = new ArrayList<>();
+    private List<COURS> listeCOURS = new ArrayList<>();
+    private List <GROUPE> listGROUPE = new ArrayList<>();
+    private int compteur = 0;
   
     public EmploiTemps(){
         
@@ -46,11 +47,12 @@ public class EmploiTemps {
     listeTYPE_COURS = studentEDT.getListTYPE_COURS();
     listeCOURS = studentEDT.getListCOURS();
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
+    compteur=0;
 
     //Données du tableau
     Object[][] data = remplissage();
     
-    listSEANCE.stream().map((i) -> {
+    for(SEANCE i : listSEANCE) {
         if(i.getSEMAINE() == semaine)
         {
             Coordonnees coordo = findJour(i);
@@ -58,10 +60,9 @@ public class EmploiTemps {
             if(i.getETAT()==1){
                 data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
             }
-        }   return i;
-        }).forEachOrdered((_item) -> {
             compteur++;
-        });
+        }
+    }
     return data;
     }
     
@@ -72,23 +73,22 @@ public class EmploiTemps {
         listeTYPE_COURS = edtsalle.getListTYPE_COURS();
         listeCOURS = edtsalle.getListCOURS();
         listeENSEIGNANT = edtsalle.getlistENSEIGNANT();
+        compteur=0;
 
     //Données du tableau
     Object[][] data = remplissage();
-    listSEANCE.stream().map((i) -> {
+    for(SEANCE i : listSEANCE) {
         if(i.getSEMAINE() == semaine)
         {
-            int x = 0,y=0;
             Coordonnees coordo = findJour(i);
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
             }
-        }   return i;
-        }).forEachOrdered((_item) -> {
             compteur++;
-        });
+        }
+        }
     return data;
     }
     
@@ -96,13 +96,15 @@ public class EmploiTemps {
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
         edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM());
         listSEANCE = edtenseignant.getlistSEANCE();
+        listSALLE = edtenseignant.getListSALLE();
         listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
         listeCOURS = edtenseignant.getListCOURS();
         listeENSEIGNANT = edtenseignant.getlistENSEIGNANT();
+        compteur=0;
 
     //Données du tableau
     Object[][] data = remplissage();
-    listSEANCE.stream().map((i) -> {
+    for(SEANCE i : listSEANCE) {
         if(i.getSEMAINE() == semaine)
         {
             Coordonnees coordo = findJour(i);
@@ -110,12 +112,11 @@ public class EmploiTemps {
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
-                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(listGROUPE);
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
             }
-        }   return i;
-        }).forEachOrdered((_item) -> {
             compteur++;
-        });
+        }
+    }
     return data;
     }
     
@@ -190,6 +191,11 @@ public class EmploiTemps {
                 coord.sety(4);
                 break;
             }
+            case ("17h15") :
+            {
+                coord.sety(5);
+                break;
+            }
         }
         return coord;
     }
@@ -203,20 +209,16 @@ public class EmploiTemps {
     //Cree un String de groupe de TD qui ont cours
     public String groupe(List <GROUPE> list)
     {
-        String grp;
+        String grp = new String();
         if(list.size() == 1)
-            grp = "Le groupe "+list.get(1).getNOM();
-        else
+            grp = "Le groupe "+list.get(0).getNOM();
+        else if(list.size() > 1)
         {
             grp = "Les groupes : ";
-            grp = list.stream().map((i) -> i.getNOM()+",").reduce(grp, String::concat);
-            removeLastChar(grp);
+            for(GROUPE i : list)
+                grp += i.getNOM()+",";
         }
         return grp;
     }
-    
-    //Enleve le derniere caractere d'un String
-    private static String removeLastChar(String str) {
-    return str.substring(0, str.length() - 1);
-}
+
 }

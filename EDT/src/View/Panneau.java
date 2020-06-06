@@ -42,7 +42,6 @@ import javax.swing.table.TableColumnModel;
 public class Panneau extends JFrame{
   private Color color = Color.white;
   private String message = "";
- // private GridBagConstraints gbc = new GridBagConstraints();
   private JPanel principal = new JPanel();
   private JPanel intermediaire = new JPanel();
   private JPanel pan1 = new JPanel();
@@ -66,42 +65,19 @@ public class Panneau extends JFrame{
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
     intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
-    //principal.add(edt(), BorderLayout.SOUTH);
-    //principal.add(semaine(), BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
   }
 
   public JPanel menu(){
     //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
     pan1.add(combo);    
-    //this.add(top, BorderLayout.NORTH);
     combo.addItem("En grille");
     combo.addItem("En liste");
     combo.addActionListener(new ItemAction());
-  /*
-    //combo.addItemListener(new ItemState());
-     
-
-  JComboBox combo2 = new JComboBox();
-  
-    pan1.add(combo2);
-    //this.add(top, BorderLayout.NORTH);
-    
-    combo2.setPreferredSize(new Dimension(100, 20));
-    combo2.addItem("Saisie du nom");
-    combo2.addItem("Option 2");
-
-    JTextField textfield = new JTextField(" Edit me !!! ");
-    pan1.add(textfield);
-    //this.add(new JTextField());
-    */
-    
-    //this.color = color;
     return pan1;
 }
 
 public JPanel semaine(){
-
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
         int btnsemaine = i;
@@ -114,31 +90,22 @@ public JPanel semaine(){
             edt().removeAll();
             intermediaire.add(edt(),BorderLayout.CENTER);
             principal.add(intermediaire, BorderLayout.CENTER);
-        //sgroupe = groupefield.getText();
-            //System.out.print("Le bouton est : " + semaine);
-        //principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
            }
         });
     }
     return pan2;
-    
-}
+  }
 
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
-
+    EmploiTemps edtutilisateur = new EmploiTemps();
     int ID=2;
     AffecterEnseignant affecter = new AffecterEnseignant(ID);
-  //  ADD_SEANCE add = new ADD_SEANCE();
-  //  add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "CI", "Hina", "TD01","104");
-    
-    String infoSEANCE = "";
 
     calendrier.setLayout(new BorderLayout()); 
 
     if(COUNT == 0){
     //Creation de la classe pour mettre les donne
-    EmploiTemps edtutilisateur = new EmploiTemps();
     ZModel model = new ZModel(edtutilisateur.emploidutempsetudiant(etudiant,semaine), edtutilisateur.setTitle());
     
         tableau = new JTable(model);
@@ -150,7 +117,6 @@ public JPanel edt(){
         calendrier.add(new JScrollPane(tableau));
     }
     else if(COUNT == 1){
-
     JPanel calendrier1 = new JPanel();
     JPanel calendrier2 = new JPanel();
     JPanel calendrier3 = new JPanel();
@@ -158,16 +124,28 @@ public JPanel edt(){
     calendrier1.setLayout(new BorderLayout());
     calendrier2.setLayout(new BorderLayout());
     calendrier3.setLayout(new BorderLayout());
+    ListeEDT edtenListe = new ListeEDT();
+    edtenListe.ListeEtudiant(etudiant,semaine);
 
-      Object[][] dataL = {
-      {""},
-      {""}
-      
+      Object[][] dataL={
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
     };
+      dataL[0]= edtenListe.getL();
+      int compteur = 0;
+      for(Object i : edtenListe.getL())
+        {
+            dataL[compteur][0] = i;
+            compteur++;
+            
+        }
 
     //Les titres des colonnes
     String  titleL[] = {"Lundi"};
-    
     ZModel modelL = new ZModel(dataL, titleL);
     
     tableauL = new JTable(modelL);
@@ -177,18 +155,28 @@ public JPanel edt(){
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauL),BorderLayout.NORTH);
-
+    
     /////////////////Mardi//////////////
 
     Object[][] dataM = {
-      {""},
-      {""}
-     
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
     };
-
+    dataM[0] = edtenListe.getM();
+    compteur = 0;
+      for(Object i : edtenListe.getM())
+        {
+            dataM[compteur][0] = i;
+            compteur++;
+            
+        }
     //Les titres des colonnes
     String  titleM[] = {"Mardi"};
-    
+
     ZModel modelM = new ZModel(dataM, titleM);
     
     tableauM = new JTable(modelM);
@@ -198,15 +186,26 @@ public JPanel edt(){
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauM),BorderLayout.CENTER);
+    
 
     /////////////////Mercredi//////////////
 
     Object[][] dataMe = {
-      {""},
-      {""}
-     
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
     };
-
+    dataMe[0]= edtenListe.getMe();
+    compteur = 0;
+      for(Object i : edtenListe.getMe())
+        {
+            dataMe[compteur][0] = i;
+            compteur++;
+            
+        }
     //Les titres des colonnes
     String  titleMe[] = {"Mercredi"};
     
@@ -224,11 +223,21 @@ public JPanel edt(){
     //////////Jeudi////////////
 
     Object[][] dataJ = {
-      {""},
-      {""}
-     
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
     };
-
+    dataJ[0]= edtenListe.getJ();
+    compteur = 0;
+      for(Object i : edtenListe.getJ())
+        {
+            dataJ[compteur][0] = i;
+            compteur++;
+            
+        }
     //Les titres des colonnes
     String  titleJ[] = {"Jeudi"};
     
@@ -246,17 +255,27 @@ public JPanel edt(){
     /////////////////Vendredi/////////////////
 
     Object[][] dataV = {
-      {""},
-      {""}
-     
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"", "", "", "", "", ""},
+      {"","", "", "", "", ""}
     };
-
+    dataV[0]= edtenListe.getV();
+    compteur = 0;
+      for(Object i : edtenListe.getV())
+        {
+            dataV[compteur][0] = i;
+            compteur++;
+            
+        }
     //Les titres des colonnes
     String  titleV[] = {"Vendredi"};
     
     ZModel modelV = new ZModel(dataV, titleV);
     
-    tableauV = new JTable(modelMe);
+    tableauV = new JTable(modelV);
     //Definition de la taille des lignes
     tableauV.setRowHeight(125);
     //Changement de la taille des colonnes
