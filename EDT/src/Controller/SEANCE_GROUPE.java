@@ -29,8 +29,8 @@ import java.util.List;
  * @author Milou
  */
 public class SEANCE_GROUPE extends SEANCEDAO{
-    private List <GROUPE> listGROUPE = new ArrayList<GROUPE>();
-    SEANCE_GROUPE(int SEANCEID)
+    private List <GROUPE> listGROUPE = new ArrayList<>();
+    public SEANCE_GROUPE(int SEANCEID)
     {
     
 try{
