@@ -109,6 +109,7 @@ public class EmploiDuTemps {
             
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(listGROUPE);
             }
         }   return i;
