@@ -46,7 +46,6 @@ public boolean update(SEANCE obj){
       
       //on déclare un objet séance et on le remplit grace aux informations récupéré par la requete ResultSet result
       seance=new SEANCE(ID, result.getInt("SEMAINE"), result.getString("DATE"), result.getString("HEURE_DEBUT"), result.getString("HEURE_FIN"), result.getInt("ETAT"));
-      seance.afficherSEANCE();
       
       //Grace a la relation SEANCE_GROUPE, qui associe une séance a un groupe, on initialisé un objet GROUPE contenant les informations récupérés
       GROUPE groupetest= new GROUPE();

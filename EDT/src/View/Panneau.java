@@ -10,6 +10,7 @@ package View;
  * @author Aurélien
  */
 import Controller.ADD_SEANCE;
+import Controller.AJOUTER_GROUPE;
 import Controller.AffecterEnseignant;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
@@ -121,10 +122,11 @@ public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
     int ID=2;
-    AffecterEnseignant affecter = new AffecterEnseignant(ID);
-  //  ADD_SEANCE add = new ADD_SEANCE();
-  //  add.AJOUTER_SEANCE(1, "MARDI", "10h15", "11h45", 1, "Web", "CI", "Hina", "TD01","104");
-    
+   // AffecterEnseignant affecter = new AffecterEnseignant(ID);
+   // ADD_SEANCE add = new ADD_SEANCE();
+   // System.out.println(add.AJOUTER_SEANCE(1, "LUNDI", "8h", "11h45", 1, "Web", "TP", "Hina", "TD01","105"));
+   AJOUTER_GROUPE ajoutgroupe = new AJOUTER_GROUPE();
+   System.out.println(ajoutgroupe.AJOUTER_GROUPE_INSTANCE(1,"LUNDI","10h15","104","TD02","2023"));
     int compteurSALLE=0;
     String infoSEANCE = "";
     int compteur=0;

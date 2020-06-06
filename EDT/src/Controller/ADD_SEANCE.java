@@ -55,8 +55,8 @@ public class ADD_SEANCE extends SEANCEDAO {
 
 
     public ADD_SEANCE(){}
-/*
-    public String AJOUTER_SEANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, String NomCours, String Type_CoursNom, String ENSEIGNANTNOM, String GROUPENOM, String SALLENOM)
+
+    public String AJOUTER_SEANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN, int ETAT, String NomCours, String Type_CoursNom, String ENSEIGNANTNOM, String GROUPENOM, String SALLENOM, String NomPROMOTION)
     { 
         
         int resultat;
@@ -225,10 +225,10 @@ public class ADD_SEANCE extends SEANCEDAO {
                    //GROUPE
 
             GROUPE_EDT groupedt = new GROUPE_EDT();
-                   //on utilise la fonction dans le controller qui permet de trouver toutes les séances associées à la salle
                    
-            PreparedStatement recupGROUPE= this.connection.prepareStatement("SELECT ID FROM GROUPE g WHERE g.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement recupGROUPE= this.connection.prepareStatement("SELECT g.ID JOIN PROMOTION p ON p.ID=g.ID_PROMOTION FROM GROUPE g WHERE g.NOM = ? AND p.NOM=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             recupGROUPE.setString(1,GROUPENOM);
+            recupGROUPE.setString(2,NomPROMOTION);
             ResultSet recupGROUPEset = recupGROUPE.executeQuery();
             if(recupGROUPEset.first()==false)
             { 
@@ -247,43 +247,33 @@ public class ADD_SEANCE extends SEANCEDAO {
                    }
                    if(i==0)
                    {
-                  PreparedStatement supprimerSEANCE= this.connection.prepareStatement("DELETE FROM SEANCE ORDER by ID desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                  resultatsupp = supprimerSEANCE.executeUpdate();
                   
                   PreparedStatement supprimerSEANCE_ENSEIGNANT = this.connection.prepareStatement("DELETE FROM SEANCE_ENSEIGNANT ORDER by ID_SEANCE desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                   Supprimer_seance_salle = supprimerSEANCE_ENSEIGNANT.executeUpdate();
                        
-                  PreparedStatement supprimerSEANCE_SALLE = this.connection.prepareStatement("DELETE FROM SEANCE ORDER by ID desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                  PreparedStatement supprimerSEANCE_SALLE = this.connection.prepareStatement("DELETE FROM SEANCE_SALLE ORDER by ID_SEANCE desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                   resultsallesupp = supprimerSEANCE_SALLE.executeUpdate();
+                  
+                  PreparedStatement supprimerSEANCE= this.connection.prepareStatement("DELETE FROM SEANCE ORDER by ID desc limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                  resultatsupp = supprimerSEANCE.executeUpdate();
+                  
                   return "LE GROUPE N'EST PAS DISPO";
                        
                    }
-                   else{
-                       
-                   PreparedStatement retrouvegroupe= this.connection.prepareStatement("SELECT ID FROM UTILISATEUR WHERE NOM= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                   retrouverenseignant.setString(1,ENSEIGNANTNOM);
-                   ResultSet enseignantrecuperer = retrouverenseignant.executeQuery(); 
-                   if(enseignantrecuperer.first()==false)
-                   {
-                       return "Le nom de l'utilisateur est invalide";
-                   }
-                   else 
-                   {
+                   else{                   
                    
-                   
-                   PreparedStatement ajouterenseignant= this.connection.prepareStatement("INSERT INTO SEANCE_ENSEIGNANT (ID_SEANCE, ID_ENSEIGNANT) VALUES ((SELECT MAX(ID) FROM SEANCE),?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                    
-                   
-                   ajouterenseignant.setInt(1,enseignantrecuperer.getInt("ID"));
-                   resultatenseignant = ajouterenseignant.executeUpdate();
+                   PreparedStatement ajoutergroupe= this.connection.prepareStatement("INSERT INTO SEANCE_GROUPE (ID_GROUPE, ID_SEANCE) VALUES (?,(SELECT MAX(ID) FROM SEANCE))", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+                   ajoutergroupe.setInt(1,recupGROUPEset.getInt("ID"));
+                   resultatenseignant = ajoutergroupe.executeUpdate();
                    }
                      
-                   }
+                   }  //recup
                 
             }
                    }
                 }
-            }
+            
                    
             
                         
@@ -293,5 +283,5 @@ public class ADD_SEANCE extends SEANCEDAO {
         
 return "COURS CORRECTEMENT AJOUTER";
 
-    } */
+    } 
 }
