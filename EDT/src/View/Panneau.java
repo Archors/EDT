@@ -80,25 +80,7 @@ public class Panneau extends JFrame{
     combo.addItem("En grille");
     combo.addItem("En liste");
     combo.addActionListener(new ItemAction());
-  /*
-    //combo.addItemListener(new ItemState());
-     
-
-  JComboBox combo2 = new JComboBox();
   
-    pan1.add(combo2);
-    //this.add(top, BorderLayout.NORTH);
-    
-    combo2.setPreferredSize(new Dimension(100, 20));
-    combo2.addItem("Saisie du nom");
-    combo2.addItem("Option 2");
-
-    JTextField textfield = new JTextField(" Edit me !!! ");
-    pan1.add(textfield);
-    //this.add(new JTextField());
-    */
-    
-    //this.color = color;
     return pan1;
 }
 
@@ -114,6 +96,7 @@ public JPanel semaine(){
         public void actionPerformed(ActionEvent event){
             semaine = btnsemaine;
             edt().removeAll();
+         
             intermediaire.add(edt(),BorderLayout.CENTER);
             principal.add(intermediaire, BorderLayout.CENTER);
         //sgroupe = groupefield.getText();
@@ -128,19 +111,10 @@ public JPanel semaine(){
 
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
-
+    //calendrier.removeAll();
     int ID=2;
 
     int compteurSALLE=0;
-
- //   AffecterEnseignant affecter = new AffecterEnseignant(ID);
-
- SUPPRIMER_SEANCE supp_seance = new SUPPRIMER_SEANCE();
- System.out.println(supp_seance.SUPPRIMER_SEANCE_INSTANCE(1,"MARDI","8h15","104"));
- 
- 
-//AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
-//System.out.println(ajout.AJOUTER_GROUPE_INSTANCE (1, "Jeudi", "15h30", "105", "TD02", "2022"));
 
     String infoSEANCE = "";
 
@@ -227,7 +201,7 @@ public JPanel edt(){
     tableauMe.setRowHeight(125);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-    
+    //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauMe),BorderLayout.SOUTH);
     calendrier.add(calendrier1, BorderLayout.NORTH);
 
@@ -299,16 +273,22 @@ class ItemAction implements ActionListener{
 
       if(combo.getSelectedItem() == "En grille")
       {
+      edt().removeAll();
         COUNT=0;
+        intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+      principal.add(intermediaire, BorderLayout.CENTER);
       }
 
       else if(combo.getSelectedItem() == "En liste")
       {
-        COUNT=1;
-      }
       edt().removeAll();
-      intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+        COUNT=1;
+        intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
       principal.add(intermediaire, BorderLayout.CENTER);
+      }
+       //calendrier.removeAll();
+      
+      
     }
   }
 

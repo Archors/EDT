@@ -99,7 +99,7 @@ public class Padmin extends JFrame{
     });
     
     //Liste salle
-    JLabel salle = new JLabel("Salle : ");
+    /*JLabel salle = new JLabel("Salle : ");
     pan1.add(salle);
 
     JTextField sallefield = new JTextField();
@@ -116,7 +116,7 @@ public class Padmin extends JFrame{
         //principal.add(edtsalle(ssalle), BorderLayout.CENTER);
         
       }
-    });
+    });*/
 
     //Liste prof
     JLabel prof = new JLabel("Professeur : ");
