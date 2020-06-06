@@ -8,8 +8,10 @@ package View;
 import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.SALLE_EDT;
+import Controller.SEANCE_GROUPE;
 import Model.COURS;
 import Model.ETUDIANT;
+import Model.GROUPE;
 import Model.SALLE;
 import Model.SEANCE;
 import Model.TYPE_COURS;
@@ -28,13 +30,14 @@ public class EmploiDuTemps {
   private List<UTILISATEUR> listeENSEIGNANT = new ArrayList<>();
   private List<TYPE_COURS> listeTYPE_COURS = new ArrayList<>();
   private List<COURS> listeCOURS = new ArrayList<>();
+  private List <GROUPE> listGROUPE = new ArrayList<>();
+  int compteur = 0;
   
     public EmploiDuTemps(){
         
     }
     public Object[][] emploidutempsetudiant(ETUDIANT student, int semaine){
-        int compteur = 0;
-        String infoSEANCE;
+        
         //Creation de l'objet qui contient les données de l'etudiant
     studentEDT.voirETUDIANT_SEANCE(student.getNOM());
     //Recuperation des données sur les cours de l'etudiant dans la classe
@@ -47,25 +50,22 @@ public class EmploiDuTemps {
     //Données du tableau
     Object[][] data = remplissage();
     
-    for(SEANCE i : listSEANCE)
-    {
+    listSEANCE.stream().map((i) -> {
         if(i.getSEMAINE() == semaine)
         {
             Coordonnees coordo = findJour(i);
-        //On verifie que le cours n'est pas annulé
-        if(i.getETAT()==1){
-            infoSEANCE= "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
-            data[coordo.gety()][coordo.getx()] = infoSEANCE;
-        }
-        }
-        compteur++;
-    }
+            //On verifie que le cours n'est pas annulé
+            if(i.getETAT()==1){
+                data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            }
+        }   return i;
+        }).forEachOrdered((_item) -> {
+            compteur++;
+        });
     return data;
     }
     
     public Object[][] emploidutempssalle(SALLE salle, int semaine){
-        int compteur = 0;
-        String infoSEANCE;
         SALLE_EDT edtsalle = new SALLE_EDT();
         edtsalle.voirSALLE_EDT(salle.getNOM());
         listSEANCE = edtsalle.getlistSEANCE();
@@ -75,26 +75,24 @@ public class EmploiDuTemps {
 
     //Données du tableau
     Object[][] data = remplissage();
-    for(SEANCE i : listSEANCE)
-    {
+    listSEANCE.stream().map((i) -> {
         if(i.getSEMAINE() == semaine)
         {
             int x = 0,y=0;
             Coordonnees coordo = findJour(i);
-        //On verifie que le cours n'est pas annulé
-        if(i.getETAT()==1){
-            infoSEANCE= "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
-            data[coordo.gety()][coordo.getx()] = infoSEANCE;
-        }
-        }
-        compteur++;
-    }
+            //On verifie que le cours n'est pas annulé
+            if(i.getETAT()==1){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+        }   return i;
+        }).forEachOrdered((_item) -> {
+            compteur++;
+        });
     return data;
     }
     
     public Object[][] emploidutempsenseignant(UTILISATEUR enseignant, int semaine){
-        int compteur = 0;
-        String infoSEANCE;
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
         edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM());
         listSEANCE = edtenseignant.getlistSEANCE();
@@ -104,20 +102,19 @@ public class EmploiDuTemps {
 
     //Données du tableau
     Object[][] data = remplissage();
-    for(SEANCE i : listSEANCE)
-    {
+    listSEANCE.stream().map((i) -> {
         if(i.getSEMAINE() == semaine)
         {
             Coordonnees coordo = findJour(i);
             
-        //On verifie que le cours n'est pas annulé
-        if(i.getETAT()==1){
-            infoSEANCE= "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec le groupe" + listeENSEIGNANT.get(compteur).getNOM();
-            data[coordo.gety()][coordo.getx()] = infoSEANCE;
-        }
-        }
-        compteur++;
-    }
+            //On verifie que le cours n'est pas annulé
+            if(i.getETAT()==1){
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(listGROUPE);
+            }
+        }   return i;
+        }).forEachOrdered((_item) -> {
+            compteur++;
+        });
     return data;
     }
     
@@ -133,6 +130,7 @@ public class EmploiDuTemps {
     return donnee;
 }
     
+    //Cherche quel est le jour et l'heure de la seance
     public Coordonnees findJour(SEANCE cours){
         Coordonnees coord = new Coordonnees();
         switch(cours.getDATE())
@@ -193,8 +191,30 @@ public class EmploiDuTemps {
         }
         return coord;
     }
+    
+    //Crée l'entete du tableau
     public String[] setTitle(){
         String  title[] = {"Heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
         return title;
     }
+    
+    //Cree un String de groupe de TD qui ont cours
+    public String groupe(List <GROUPE> list)
+    {
+        String grp;
+        if(list.size() == 1)
+            grp = "Le groupe "+list.get(1).getNOM();
+        else
+        {
+            grp = "Les groupes : ";
+            grp = list.stream().map((i) -> i.getNOM()+",").reduce(grp, String::concat);
+            removeLastChar(grp);
+        }
+        return grp;
+    }
+    
+    //Enleve le derniere caractere d'un String
+    private static String removeLastChar(String str) {
+    return str.substring(0, str.length() - 1);
+}
 }
