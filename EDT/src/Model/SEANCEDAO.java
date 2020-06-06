@@ -45,7 +45,9 @@ public boolean update(SEANCE obj){
         if(result.first())
 
       //on déclare un objet séance et on le remplit grace aux informations récupéré par la requete ResultSet result
-      seance=new SEANCE(ID, result.getInt("SEMAINE"), result.getString("DATE"), result.getString("HEURE_DEBUT"), result.getString("HEURE_FIN"), result.getInt("ETAT"));
+
+      seance=new SEANCE(ID, result.getInt("SEMAINE"), result.getString("DATE"), result.getString("HEURE_DEBUT"), result.getString("HEURE_FIN"), result.getInt("ETAT"));      
+                            
 
     }catch (SQLException e){
         e.printStackTrace();

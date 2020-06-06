@@ -31,7 +31,7 @@ import Model.SEANCE;
 
 import Controller.ADD_SEANCE;
 import Controller.AJOUTER_GROUPE;
-import Controller.SUPPRIMER_SCEANCE;
+import Controller.SUPPRIMER_SEANCE;
 
 import java.awt.GridBagConstraints;
 import java.util.HashSet;
@@ -319,7 +319,8 @@ public JPanel annuler(){
             String ssalle = textesalle.getText();
             //System.out.println("le résultat est : " + testr);
             SUPPRIMER_SEANCE supp_seance = new SUPPRIMER_SEANCE();
-            String sp = supp_seance.SUPPRIMER_SEANCE_INSTANCE(isemaine,sdate,sheuredeb,ssalle));
+            String sp = supp_seance.SUPPRIMER_SEANCE_INSTANCE(isemaine,sdate,sheuredeb,ssalle);
+            JOptionPane jop2 = new JOptionPane();
             jop2.showMessageDialog(null, sp, "Suppression", JOptionPane.INFORMATION_MESSAGE);
            }
         });
