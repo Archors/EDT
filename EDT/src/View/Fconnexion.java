@@ -86,7 +86,6 @@ public class Fconnexion extends JFrame {
         JLabel labpassword = new JLabel("Password");
         pw.add(labpassword);
 
-<<<<<<< HEAD
         JTextField username = new JTextField();
         username.setPreferredSize(new Dimension(110, 20));
         use.add(username);
@@ -94,14 +93,6 @@ public class Fconnexion extends JFrame {
         JPasswordField password = new JPasswordField();
         password.setPreferredSize(new Dimension(110, 20));
         pw.add(password);
-=======
-        JTextField username = new JTextField("anbari@gmail.com");
-        pan.add(username);
-        
-
-        JPasswordField password = new JPasswordField("anbari");
-        pan.add(password);
->>>>>>> 29ce808d5fe2dc1d60c55dc98657484fbe55cdf9
 
         JButton login = new JButton("Login");
         btnlog.add(login); 
@@ -134,7 +125,6 @@ public class Fconnexion extends JFrame {
             //System.out.println("test 3:");
             ETUDIANT etudiant = new ETUDIANT();
             etudiant=connect.getEtudiant();
-<<<<<<< HEAD
             //etudiant.afficherETUDIANT(); 
             //con = 1;
 
@@ -142,19 +132,6 @@ public class Fconnexion extends JFrame {
             System.out.print(etudiant.getID());
             System.out.print(etudiant.getDROIT());
             System.out.print(etudiant.getNOM());
-=======
-            con = 1;
-            //student = etudiant; 
-            
-            //pr.removeAll();
-            //Panneau tPan = new Panneau(etudiant);
-            //pr.paint();
-            Fetudiant fetudiant = new Fetudiant(etudiant);
-            
-            //fenetre.dispose();
-            //this.dispose();
-            //eleve(student); 
->>>>>>> 29ce808d5fe2dc1d60c55dc98657484fbe55cdf9
             
             Fetudiant fetudiant = new Fetudiant(etudiant);
        
@@ -193,25 +170,6 @@ public class Fconnexion extends JFrame {
 
 
 
-<<<<<<< HEAD
-=======
-  public void eleve(ETUDIANT etudiant){
-    
-    JTabbedPane onglet;
-    //Création de plusieurs Panneau
-    Panneau tPan = new Panneau(etudiant);
-    Recapitulatif recap = new Recapitulatif();
-    //Création de notre conteneur d'onglets
-    onglet = new JTabbedPane();
-
-    //Méthode d'ajout d'onglet
-     onglet.add("Emploi du temps", tPan.getPan());
-     onglet.add("Récapitulatif de cours", recap);
-      
-    
-    this.getContentPane().add(onglet);
-    }
-
   
-}
->>>>>>> 29ce808d5fe2dc1d60c55dc98657484fbe55cdf9
+
+

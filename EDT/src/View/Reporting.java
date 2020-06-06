@@ -25,7 +25,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.util.Rotation;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -88,7 +88,7 @@ public JPanel graphgroupe(){
     pieDataset.setValue("Valeur3", new Integer(50)); 
     pieDataset.setValue("Valeur4", new Integer(5)); 
 
-    JFreeChart pieChart = ChartFactory.createPieChart("Groupes", 
+    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par groupe", 
      pieDataset, true, true, true); 
     ChartPanel cPanel = new ChartPanel(pieChart); 
     graph.add(cPanel); 
@@ -106,7 +106,7 @@ public JPanel graphprof(){
     pieDataset.setValue("Valeur3", new Integer(50)); 
     pieDataset.setValue("Valeur4", new Integer(5)); 
 
-    JFreeChart pieChart = ChartFactory.createPieChart("Professeurs", 
+    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par pprofesseurs", 
      pieDataset, true, true, true); 
     ChartPanel cPanel = new ChartPanel(pieChart); 
     graph.add(cPanel); 
@@ -124,7 +124,7 @@ public JPanel graphsalle(){
     pieDataset.setValue("Valeur3", new Integer(50)); 
     pieDataset.setValue("Valeur4", new Integer(5)); 
 
-    JFreeChart pieChart = ChartFactory.createPieChart("Salles", 
+    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par salles", 
      pieDataset, true, true, true); 
     ChartPanel cPanel = new ChartPanel(pieChart); 
     graph.add(cPanel); 
