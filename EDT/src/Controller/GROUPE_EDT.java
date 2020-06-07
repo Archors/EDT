@@ -62,7 +62,7 @@ public class GROUPE_EDT extends GROUPEDAO {
       try{
           
        
-        PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM GROUPE JOIN SEANCE_GROUPE a ON GROUPE.ID = a.ID_GROUPE JOIN SEANCE b ON a.ID_SEANCE = b.ID JOIN SEANCE_SALLE d ON b.ID = d.ID_SEANCE JOIN SALLE e ON d.ID_SALLE = e.ID JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR WHERE GROUPE.ID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM GROUPE JOIN SEANCE_GROUPE a ON GROUPE.ID = a.ID_GROUPE JOIN SEANCE b ON a.ID_SEANCE = b.ID JOIN SEANCE_SALLE d ON b.ID = d.ID_SEANCE JOIN SALLE e ON d.ID_SALLE = e.ID JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR WHERE GROUPE.ID = ? ORDER BY SEMAINE ASC, DATE ASC, HEURE_DEBUT DESC", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setInt(1,ID);
         ResultSet result = ps.executeQuery();
         int i=0;
@@ -89,6 +89,9 @@ public class GROUPE_EDT extends GROUPEDAO {
         DAO<COURS> recupcoursdao = new COURSDAO();
         recupcours=recupcoursdao.find(result.getInt("ID_COURS"));
         listCOURS.add(recupcours);
+        System.out.println("VOICI LE COURS: "); 
+        afficherCOURS();
+        
         
         UTILISATEUR saignant = new UTILISATEUR();
         DAO <UTILISATEUR> testsaignant = new UTILISATEURDAO();
@@ -149,6 +152,25 @@ public void afficherLISTEPROMOTION(){
     }
     
     }
+
+public void afficherTYPE_COURS(){
+           
+    for (TYPE_COURS type : listTYPE_COURS)
+    {
+        System.out.println(type.getNOM());
+    }
+    
+    }
+
+public void afficherCOURS(){
+           
+    for (COURS cours : listCOURS)
+    {
+        System.out.println(cours.getNOM());
+    }
+    
+    }
+
     public void addSEANCE (SEANCE seance){
         if(this.listSEANCE.contains(seance)!=true)
             this.listSEANCE.add(seance);

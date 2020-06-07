@@ -58,6 +58,7 @@ public class EmploiTemps {
             Coordonnees coordo = findJour(i);
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
+                System.out.println("VOICI LE COURS VERSION2 : " + listeCOURS.get(compteur).getNOM());
                 data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
             }
             compteur++;

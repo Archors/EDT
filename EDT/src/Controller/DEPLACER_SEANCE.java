@@ -138,7 +138,7 @@ public class DEPLACER_SEANCE extends SEANCEDAO{
             }
             
             ADD_SEANCE add = new ADD_SEANCE();
-           recup= add.AJOUTER_SEANCE(newSEMAINE, newDATE, newHEURE_DEBUT, newHEURE_FIN, 1, recupcoursset.getString("NOM"), recuptype_coursset.getString("NOM"), recupenseignantset.getString("NOM"), recupGROUPEset.getString("NOM"), recupSALLEset.getString("NOM"), recupPROMOTIONset.getString("NOM"));
+           recup= add.AJOUTER_SEANCE(newSEMAINE, newDATE, newHEURE_DEBUT, newHEURE_FIN, 2, recupcoursset.getString("NOM"), recuptype_coursset.getString("NOM"), recupenseignantset.getString("NOM"), recupGROUPEset.getString("NOM"), recupSALLEset.getString("NOM"), recupPROMOTIONset.getString("NOM"));
             if(recup.equals("COURS CORRECTEMENT AJOUTEE"))
             {
                 SUPPRIMER_SEANCE supp = new SUPPRIMER_SEANCE();

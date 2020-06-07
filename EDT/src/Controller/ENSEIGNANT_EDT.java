@@ -55,7 +55,7 @@ public class ENSEIGNANT_EDT extends UTILISATEURDAO {
       try{
           
        
-        PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM UTILISATEUR a JOIN ENSEIGNANT b ON b.ID_UTILISATEUR = a.ID JOIN SEANCE_ENSEIGNANT c ON c.ID_ENSEIGNANT = b.ID_UTILISATEUR JOIN SEANCE d ON d.ID = c.ID_SEANCE JOIN SEANCE_SALLE e ON e.ID_SEANCE=d.ID JOIN SALLE f ON f.ID = e.ID_SALLE WHERE a.NOM = ?  ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM UTILISATEUR a JOIN ENSEIGNANT b ON b.ID_UTILISATEUR = a.ID JOIN SEANCE_ENSEIGNANT c ON c.ID_ENSEIGNANT = b.ID_UTILISATEUR JOIN SEANCE d ON d.ID = c.ID_SEANCE JOIN SEANCE_SALLE e ON e.ID_SEANCE=d.ID JOIN SALLE f ON f.ID = e.ID_SALLE JOIN COURS g ON (g.ID = d.ID_COURS AND g.ID = b.ID_COURS) WHERE a.NOM =?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1,Nom);
         ResultSet result = ps.executeQuery();
         
