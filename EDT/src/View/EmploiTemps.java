@@ -32,7 +32,7 @@ public class EmploiTemps {
     private List<TYPE_COURS> listeTYPE_COURS = new ArrayList<>();
     private List<COURS> listeCOURS = new ArrayList<>();
     private List <GROUPE> listGROUPE = new ArrayList<>();
-    private int compteur = 0;
+    private int compteur=0;
   
     public EmploiTemps(){
         
@@ -40,14 +40,15 @@ public class EmploiTemps {
     public Object[][] emploidutempsetudiant(ETUDIANT student, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
-    studentEDT.voirETUDIANT_SEANCE(student.getNOM());
+    studentEDT.voirETUDIANT_SEANCE(student.getNOM(), semaine);
     //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
     listeTYPE_COURS = studentEDT.getListTYPE_COURS();
     listeCOURS = studentEDT.getListCOURS();
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
-    compteur=0;
+    int compteur=0;
+    
 
     //Données du tableau
     Object[][] data = remplissage();
@@ -58,7 +59,16 @@ public class EmploiTemps {
             Coordonnees coordo = findJour(i);
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
+                System.out.println("VOICI LE COURS VERSION2 : " + listeCOURS.get(compteur).getNOM());
                 data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            }
+            else if(i.getETAT()==0)
+            {
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            }
+            else if(i.getETAT()==2)
+            {
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
             }
             compteur++;
         }
@@ -85,6 +95,14 @@ public class EmploiTemps {
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
             }
             compteur++;
         }
@@ -113,6 +131,14 @@ public class EmploiTemps {
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
             }
             compteur++;
         }

@@ -59,7 +59,7 @@ public class PROMOTION_EDT extends ETUDIANTDAO {
     
     public PROMOTION_EDT(){}
 
-    public void voirPROMOTION_SEANCE(String Nom)
+    public void voirPROMOTION_SEANCE(String Nom, int SEMAINE)
     {
         //retrouver le groupe en question
 
@@ -71,7 +71,7 @@ public class PROMOTION_EDT extends ETUDIANTDAO {
 
       while(resultat.next())
         { 
-        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID")); 
+        groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID"), SEMAINE); 
         listSEANCE=groupeedt.getlistSEANCE();
         listTYPE_COURS=groupeedt.getListTYPE_COURS();
         }

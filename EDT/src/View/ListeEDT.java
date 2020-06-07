@@ -44,7 +44,7 @@ public class ListeEDT {
     public void ListeEtudiant(ETUDIANT eleve, int semaine)
     {
         //Creation de l'objet qui contient les données de l'etudiant
-        studentEDT.voirETUDIANT_SEANCE(eleve.getNOM());
+        studentEDT.voirETUDIANT_SEANCE(eleve.getNOM(), semaine);
         //Recuperation des données sur les cours de l'etudiant dans la classe
         listSEANCE = studentEDT.getlistSEANCE();
         listSALLE = studentEDT.getListSALLE();
@@ -67,8 +67,6 @@ public class ListeEDT {
             Coordonnees coordo = emploidutemps.findJour(i);
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
-                System.out.println("ICIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-                System.out.println(dataM.size());
                 switch(coordo.getx())
                 {
                     //Lundi
@@ -287,7 +285,6 @@ public class ListeEDT {
         {
             dataV.remove("");
         }
-        System.out.println("taille :"+dataM.size());
         if(dataL.isEmpty())
             dataL.add("");
         if(dataM.isEmpty())
@@ -508,7 +505,7 @@ public class ListeEDT {
                             }
                             case (4):
                             {
-                                dataV.add(coordo.gety(),"15h30 : Cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM());
+                                dataV.add(coordo.gety(),"15h30 : Cours de " /*+ listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()*/);
                                 break;
                             }
                             case (5):
@@ -520,44 +517,41 @@ public class ListeEDT {
                         break;
                     }
                 }
+                
             }
             compteur++;
         }
         }
         for(int obj=0;obj<dataL.size();obj++)
         {
-            if(dataL.get(obj)=="")
-                dataL.remove(obj);
+            dataL.remove("");
         }
         for(int obj=0;obj<dataM.size();obj++)
         {
-            if(dataM.get(obj)=="")
-                dataM.remove(obj);
+            dataM.remove("");
         }
+        
         for(int obj=0;obj<dataMe.size();obj++)
         {
-            if(dataMe.get(obj)=="")
-                dataMe.remove(obj);
+            dataMe.remove("");
         }
         for(int obj=0;obj<dataJ.size();obj++)
         {
-            if(dataJ.get(obj)=="")
-                dataJ.remove(obj);
+            dataJ.remove("");
         }
         for(int obj=0;obj<dataV.size();obj++)
         {
-            if(dataV.get(obj)=="")
-                dataV.remove(obj);
+            dataV.remove("");
         }
-        if(dataL.size()==0)
+        if(dataL.isEmpty())
             dataL.add("");
-        if(dataM.size()==0)
+        if(dataM.isEmpty())
             dataM.add("");
-        if(dataMe.size()==0)
+        if(dataM.isEmpty())
             dataMe.add("");
-        if(dataJ.size()==0)
+        if(dataJ.isEmpty())
             dataJ.add("");
-        if(dataV.size()==0)
+        if(dataV.isEmpty())
             dataV.add("");
 }
     
