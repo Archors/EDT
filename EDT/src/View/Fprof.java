@@ -29,6 +29,8 @@ import Model.UTILISATEUR;
  *
  * @author Aurélien
  */
+
+//classe affichant la fenetre avec les onglets d'un prof
 public class Fprof extends JFrame {
 
     //ETUDIANT student = new ETUDIANT();

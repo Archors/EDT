@@ -44,6 +44,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+
 /** Classe permettant l'affichage et la gestion de l'emploi du temps par un professeur referent*/
 public class Preferent extends JFrame{
   private Color color = Color.white;
@@ -122,7 +123,7 @@ public class Preferent extends JFrame{
         //calendrier.removeAll();
         typesemaine = 2;
         intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-        intermediaire.add(edtprof(nameroom),BorderLayout.CENTER);
+        intermediaire.add(edtsalle(nameroom),BorderLayout.CENTER);
         principal.add(intermediaire, BorderLayout.CENTER);
         //System.out.println("bouton el");
         //System.out.println(nameroom);

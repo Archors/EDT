@@ -38,6 +38,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.BorderLayout;
 
+
+//classe de la fenêtre de connexion
 public class Fconnexion extends JFrame {
 
   

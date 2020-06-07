@@ -41,6 +41,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.table.TableColumn;
 
+
+//classe gérant les modifications des séances
 public class Modification extends JPanel{
   private Color color = Color.white;
   

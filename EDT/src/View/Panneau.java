@@ -39,11 +39,13 @@ import Model.SEANCE;
 import Model.TYPE_COURS;
 import Model.UTILISATEUR;
 import java.awt.BorderLayout;
+import javax.swing.ScrollPaneLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+
 
 /** Classe permettant l'affichage et la gestion de l'emploi du temps par un etudiant*/
 public class Panneau extends JFrame{
@@ -51,9 +53,11 @@ public class Panneau extends JFrame{
   private String message = "";
   private JPanel principal = new JPanel();
   private JPanel intermediaire = new JPanel();
+  private JPanel intermediairebis = new JPanel();
   private JPanel pan1 = new JPanel();
   private JPanel pan2 = new JPanel();
   private JPanel calendrier = new JPanel();
+  private JPanel calendrierscroll = new JPanel();
   private JComboBox combo = new JComboBox();
   private ETUDIANT etudiant;
   private JTable tableau;
@@ -64,6 +68,7 @@ public class Panneau extends JFrame{
   private JTable tableauMe;
   private JTable tableauJ;
   private JTable tableauV;
+  JScrollPane testscroll = new JScrollPane(); 
   //private 
    
   /** Intialise les valeurs des données d'un etudiant*/
@@ -71,6 +76,7 @@ public class Panneau extends JFrame{
     etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
+    intermediairebis.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
     //intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
@@ -99,10 +105,15 @@ public JPanel semaine(){
         bouton.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent event){
             semaine = btnsemaine;
+            //testscroll.removeAll()
             edt().removeAll();
-           
-            intermediaire.add(edt(),BorderLayout.CENTER);
+            intermediairebis.removeAll();
+            //intermediaire.paint();
+            intermediairebis.add(new JScrollPane(edt()),BorderLayout.CENTER);
+            intermediaire.add(intermediairebis,BorderLayout.CENTER);
+            
             principal.add(intermediaire, BorderLayout.CENTER);
+            
            }
         });
     }
@@ -115,20 +126,12 @@ public JPanel edt(){
     //calendrier.removeAll();
     int ID=2;
 
-    
-
 
     int compteurSALLE=0;
 
     String infoSEANCE = "";
 
     EmploiTemps edtutilisateur = new EmploiTemps();
-    
-    
-
-    
-    
-    
 
     
   //  DEPLACER_SEANCE dep =new DEPLACER_SEANCE();
@@ -142,21 +145,16 @@ public JPanel edt(){
 
  SEANCE_GROUPE seancegroupe =new SEANCE_GROUPE(1);
  listGROUPE =  seancegroupe.getlistGROUPE();
- 
 
- 
- 
- 
  
 //AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
 //System.out.println(ajout.AJOUTER_GROUPE_INSTANCE (1, "Jeudi", "15h30", "105", "TD02", "2022"));
 
     //String infoSEANCE = "";
 
-
-
-
     calendrier.setLayout(new BorderLayout()); 
+    calendrierscroll.setLayout(new BorderLayout()); 
+    
 
     if(COUNT == 0){
     //Creation de la classe pour mettre les donne
@@ -179,6 +177,7 @@ public JPanel edt(){
     calendrier1.setLayout(new BorderLayout());
     calendrier2.setLayout(new BorderLayout());
     calendrier3.setLayout(new BorderLayout());
+    testscroll.setLayout(new ScrollPaneLayout());
     ListeEDT edtenListe = new ListeEDT();
     edtenListe.ListeEtudiant(etudiant,semaine);
     
@@ -206,7 +205,8 @@ public JPanel edt(){
     
     tableauL = new JTable(modelL);
     //Definition de la taille des lignes
-    tableauL.setRowHeight(125);
+    tableauL.setRowHeight(25);
+    //tableauL.setPreferredSize(new Dimension(1350, 200));
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
@@ -239,12 +239,12 @@ public JPanel edt(){
     
     tableauM = new JTable(modelM);
     //Definition de la taille des lignes
-    tableauM.setRowHeight(125);
+    tableauM.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauM),BorderLayout.CENTER);
-    }
+}
     
 
     /////////////////Mercredi//////////////
@@ -273,13 +273,15 @@ public JPanel edt(){
     
     tableauMe = new JTable(modelMe);
     //Definition de la taille des lignes
-    tableauMe.setRowHeight(125);
+    tableauMe.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauMe),BorderLayout.SOUTH);
     }
-    calendrier.add(new JScrollPane(calendrier1), BorderLayout.NORTH);
+    //calendrier1.setPreferredSize(new Dimension(800, 1100));
+    
+    calendrier.add(calendrier1, BorderLayout.NORTH);
 
     //////////Jeudi////////////
 
@@ -307,7 +309,7 @@ public JPanel edt(){
     
     tableauJ = new JTable(modelJ);
     //Definition de la taille des lignes
-    tableauJ.setRowHeight(125);
+    tableauJ.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     
@@ -340,15 +342,17 @@ public JPanel edt(){
     
     tableauV = new JTable(modelV);
     //Definition de la taille des lignes
-    tableauV.setRowHeight(125);
+    tableauV.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
     calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
       }
-    calendrier.add(new JScrollPane(calendrier2),BorderLayout.CENTER);
+    calendrier.add(calendrier2,BorderLayout.CENTER);
+    //calendrier.add(testscroll,BorderLayout.CENTER);
     }
    // edt().removeAll();
+    //calendrierscroll.add(new JScrollPane(calendrier));
     return calendrier; 
 }
 

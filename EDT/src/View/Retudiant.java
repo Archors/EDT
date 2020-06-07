@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+/**Recapitulatif d'etudiant */
 public class Retudiant extends JPanel{
   private Color color = Color.white;
   private static int COUNT = 0;

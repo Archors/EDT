@@ -44,6 +44,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+//classe affichant l'option d'emploi du temps d'un admin
 public class Padmin extends JFrame{
   private Color color = Color.white;
   private String message = "";
@@ -60,7 +61,8 @@ public class Padmin extends JFrame{
   private String nameteacher="";
   private String namestudent="";
   private String nameroom="";
-  private int typesemaine; 
+  private int typesemaine;
+ 
   public Padmin(ADMIN recupAdmin){
     //etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
@@ -118,7 +120,7 @@ public class Padmin extends JFrame{
         //calendrier.removeAll();
         typesemaine = 2;
         intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-        intermediaire.add(edtprof(nameroom),BorderLayout.CENTER);
+        intermediaire.add(edtsalle(nameroom),BorderLayout.CENTER);
         principal.add(intermediaire, BorderLayout.CENTER);
         //System.out.println("bouton el");
         //System.out.println(nameroom);
@@ -174,7 +176,7 @@ public JPanel semaine(){
                 intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
             }
             //intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
-            System.out.println("je suis sur la semaine prof");
+            //System.out.println("je suis sur la semaine prof");
             principal.add(intermediaire, BorderLayout.CENTER);
            }
         });

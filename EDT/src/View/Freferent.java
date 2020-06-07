@@ -30,6 +30,8 @@ import java.awt.BorderLayout;
  *
  * @author Aurélien
  */
+
+//classe affichant la fenetre d'onglets d'un referent
 public class Freferent extends JFrame {
 
     //ETUDIANT student = new ETUDIANT();
@@ -45,14 +47,13 @@ public class Freferent extends JFrame {
         JTabbedPane onglet;
         //Création de plusieurs Panneau
         Preferent tPan = new Preferent();
-        //Rreferent recap = new Retudiant();
+        Rreferent recap = new Rreferent();
         //System.out.println("test methode :");
         //Création de notre conteneur d'onglets
         onglet = new JTabbedPane();
         //Méthode d'ajout d'onglet
         onglet.add("Emploi du temps", tPan.getPan());
-        //onglet.add("Récapitulatif de cours", recap.getPan());
-
+        onglet.add("Récapitulatif de cours", recap.getPan());
 
         this.getContentPane().add(onglet);
         this.setVisible(true);

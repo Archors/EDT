@@ -25,7 +25,6 @@ import java.util.List;
  *
  * @author Antoine
  */
-
 /** Fonction qui recupere les données du <b>controller</b> et qui s'occupe de les associer avec le <b>view</b> (Swing)*/
 public class EmploiTemps {
     private EtudiantEDT studentEDT = new EtudiantEDT();
@@ -179,6 +178,14 @@ public class EmploiTemps {
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
             }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
             compteur++;
         }
     }
@@ -189,7 +196,11 @@ public class EmploiTemps {
     public Object[][] voiremploidutempsetudiant(String nomet, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
+
+
+
     studentEDT.voirETUDIANT_SEANCE(nomet,semaine);
+
     //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
@@ -207,7 +218,16 @@ public class EmploiTemps {
             Coordonnees coordo = findJour(i);
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
-                data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
             }
             compteur++;
         }
@@ -384,6 +404,52 @@ public class EmploiTemps {
             }
             compteur++;
         }
+        return data;
+    }
+
+    public Object[][] voirreporting(String nominatif)
+    {
+        System.out.println(nominatif);
+        List<UTILISATEUR> listprof =new ArrayList<>();
+        List <Integer> nbSeance =new ArrayList<Integer>();
+        List<COURS> listCOURS =new ArrayList<COURS>();
+        List<SEANCE> listSEANCEprems =new ArrayList<SEANCE>();
+        List<SEANCE> listSEANCElast =new ArrayList<SEANCE>();
+        
+        REPORTING_DONNEE report = new REPORTING_DONNEE();
+        
+        report.REPORTING_DONNEE();
+        
+        listprof = report.getlistENSEIGNANT();
+        nbSeance = report.getnbSeance();
+        listCOURS = report.getlistCOURS();
+        listSEANCEprems = report.getlistSEANCEprems();
+        listSEANCElast = report.getlistCOURSlast();
+        
+        int compteur = 0;
+        Object[][] data = {
+      {"", "", "", "", ""},
+      {"", "", "", "", ""},
+      {"", "", "", "", ""},
+      {"", "", "", "", ""},
+      {"", "", "", "", ""}
+    };
+        int cours=0;
+        for(UTILISATEUR iprof : listprof)
+        {
+            //System.out.println(iprof.getNOM());
+            if(iprof.getNOM().equals(nominatif))
+            {
+                data[cours][0] = listCOURS.get(compteur).getNOM();
+                data[cours][1] = "Semaine "+ listSEANCEprems.get(compteur).getSEMAINE()+" "+listSEANCEprems.get(compteur).getDATE()+" à "+listSEANCEprems.get(compteur).getHEURE_DEBUT();
+                data[cours][2] = "Semaine "+ listSEANCElast.get(compteur).getSEMAINE()+" "+listSEANCElast.get(compteur).getDATE()+" à "+listSEANCElast.get(compteur).getHEURE_DEBUT();
+                data[cours][3] = nbSeance.get(compteur)*1.5 +"h";
+                data[cours][4] = nbSeance.get(compteur);
+                cours++;
+            }
+            compteur++;
+        }
+        
         return data;
     }
 

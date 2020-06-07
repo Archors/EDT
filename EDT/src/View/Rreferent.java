@@ -25,7 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 //classe affichant le choix de récapitulatif pour un admin
-public class Radmin extends JPanel{
+public class Rreferent extends JPanel{
   private Color color = Color.white;
   private static int COUNT = 0;
   private String message = "";
@@ -37,7 +37,7 @@ public class Radmin extends JPanel{
   private String sgroupe = "";
   
 
-  public Radmin(){
+  public Rreferent(){
     principal.setLayout(new BorderLayout());
     //principal.add(edt(), BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);

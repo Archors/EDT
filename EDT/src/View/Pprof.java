@@ -47,6 +47,7 @@ public class Pprof extends JFrame{
  // private GridBagConstraints gbc = new GridBagConstraints();
   private JPanel principal = new JPanel();
   private JPanel intermediaire = new JPanel();
+  private JPanel intermediairebis = new JPanel();
   private JPanel pan1 = new JPanel();
   private JPanel pan2 = new JPanel();
   private JPanel calendrier = new JPanel();
@@ -64,12 +65,14 @@ public class Pprof extends JFrame{
   private JTable tableauJ;
   private JTable tableauV;
    
+//classe affichant l'edt d'un prof
   public Pprof(UTILISATEUR utilisateur){
        prof = utilisateur;
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
+    intermediairebis.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-    intermediaire.add(edt(),BorderLayout.CENTER);
+    //intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
   }
@@ -94,7 +97,10 @@ public JPanel semaine(){
         public void actionPerformed(ActionEvent event){
             semaine = btnsemaine;
             edt().removeAll();
-            intermediaire.add(edt(),BorderLayout.CENTER);
+            intermediairebis.removeAll();
+            //intermediaire.paint();
+            intermediairebis.add(new JScrollPane(edt()),BorderLayout.CENTER);
+            intermediaire.add(intermediairebis,BorderLayout.CENTER);
             principal.add(intermediaire, BorderLayout.CENTER);
            }
         });
@@ -155,7 +161,7 @@ public JPanel edt(){
     
     tableauL = new JTable(modelL);
     //Definition de la taille des lignes
-    tableauL.setRowHeight(125);
+    tableauL.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
@@ -188,7 +194,7 @@ public JPanel edt(){
     
     tableauM = new JTable(modelM);
     //Definition de la taille des lignes
-    tableauM.setRowHeight(125);
+    tableauM.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
@@ -222,7 +228,7 @@ public JPanel edt(){
     
     tableauMe = new JTable(modelMe);
     //Definition de la taille des lignes
-    tableauMe.setRowHeight(125);
+    tableauMe.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     
@@ -256,7 +262,7 @@ public JPanel edt(){
     
     tableauJ = new JTable(modelJ);
     //Definition de la taille des lignes
-    tableauJ.setRowHeight(125);
+    tableauJ.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     
@@ -290,7 +296,7 @@ public JPanel edt(){
     
     tableauV = new JTable(modelV);
     //Definition de la taille des lignes
-    tableauV.setRowHeight(125);
+    tableauV.setRowHeight(25);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     
@@ -326,9 +332,9 @@ class ItemAction implements ActionListener{
       {
         COUNT=1;
       }
-      edt().removeAll();
-      intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
-      principal.add(intermediaire, BorderLayout.CENTER);
+      //edt().removeAll();
+      //intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+      //principal.add(intermediaire, BorderLayout.CENTER);
     }
   }
 
