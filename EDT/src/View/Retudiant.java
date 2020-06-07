@@ -33,7 +33,7 @@ public class Retudiant extends JPanel{
     principal.setLayout(new BorderLayout());
     principal.add(edt(), BorderLayout.CENTER);
     //principal.add(menu(), BorderLayout.NORTH);
- 
+    
   }
 
   public JPanel menu(){
@@ -54,7 +54,8 @@ public class Retudiant extends JPanel{
 
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
-    calendrier.setLayout(new BorderLayout()); 
+    calendrier.setLayout(new BorderLayout());
+    EmploiTemps edtProf = new EmploiTemps();
     Object[][] data = {
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},
