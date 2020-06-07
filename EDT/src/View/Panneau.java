@@ -16,6 +16,7 @@ import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
 import Controller.MODIFIER_ETAT_SEANCE;
+import Controller.REPORTING_DONNEE;
 import Controller.SALLE_EDT;
 import Controller.SEANCE_GROUPE;
 import Controller.SUPPRIMER_SEANCE;
@@ -105,6 +106,9 @@ public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
     EmploiTemps edtutilisateur = new EmploiTemps();
     int ID=2;
+    
+    REPORTING_DONNEE report = new REPORTING_DONNEE();
+    report.REPORTING_DONNEE();
 
     
   //  DEPLACER_SEANCE dep =new DEPLACER_SEANCE();

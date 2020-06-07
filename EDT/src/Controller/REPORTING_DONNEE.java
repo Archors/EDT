@@ -41,7 +41,9 @@ import Model.UTILISATEURDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -52,27 +54,60 @@ public class REPORTING_DONNEE extends UTILISATEURDAO{
 
    
    public REPORTING_DONNEE (){}
-    
+private List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
+private List <Integer> nbSeance =new ArrayList<Integer>();
+
+
+
    public void REPORTING_DONNEE()
-   {/*
+   {
        try {
             PreparedStatement recupenseignant= this.connection.prepareStatement("SELECT DISTINCT ID_UTILISATEUR FROM ENSEIGNANT", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet result = recupenseignant.executeQuery();
+            ResultSet result = recupenseignant.executeQuery();
         
         while(result.next())         
         { 
-            PreparedStatement recupenseignant= this.connection.prepareStatement("SELECT * FROM SEANCE_ENSEIGNANT se WHERE se.ID_ENSEIGNANT=", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            UTILISATEUR saignant = new UTILISATEUR();
+            DAO <UTILISATEUR> testsaignant = new UTILISATEURDAO();
+            saignant=testsaignant.find(result.getInt("ID_UTILISATEUR"));
+            listENSEIGNANT.add(saignant);
+            PreparedStatement recupcours= this.connection.prepareStatement("SELECT DISTINCT ID_SEANCE FROM SEANCE_ENSEIGNANT se WHERE se.ID_ENSEIGNANT=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            recupcours.setInt(1,result.getInt("ID_UTILISATEUR"));
+            ResultSet resultnbcours = recupcours.executeQuery();
 
+
+            
+            if(resultnbcours.first()==false)
+            {
+                nbSeance.add(0);
+            }
+            else{
+                resultnbcours.last();
+                nbSeance.add(resultnbcours.getRow()); 
+            }
         }
+        
         
 
        }catch (SQLException e){
         e.printStackTrace();
     }
-     */
+     
    }
    
-   }
-  
    
+
+      public List<UTILISATEUR> getlistENSEIGNANT(){
+        return listENSEIGNANT;
+    }
+
+    public void addUTILISATEUR (UTILISATEUR utilisateur){
+        if(this.listENSEIGNANT.contains(utilisateur)!=true)
+            this.listENSEIGNANT.add(utilisateur);
+    }
     
+        public List getnbSeance(){
+        return nbSeance;
+    }
+   
+}
