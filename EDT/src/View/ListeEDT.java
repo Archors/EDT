@@ -67,6 +67,8 @@ public class ListeEDT {
             Coordonnees coordo = emploidutemps.findJour(i);
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
+                System.out.println("ICIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+                System.out.println(dataM.size());
                 switch(coordo.getx())
                 {
                     //Lundi
@@ -263,42 +265,40 @@ public class ListeEDT {
             }
             compteur++;
         }
+        }
         for(int obj=0;obj<dataL.size();obj++)
         {
-            if(dataL.get(obj)=="")
-                dataL.remove(obj);
+            dataL.remove("");
         }
         for(int obj=0;obj<dataM.size();obj++)
         {
-            if(dataM.get(obj)=="")
-                dataM.remove(obj);
+            dataM.remove("");
         }
+        
         for(int obj=0;obj<dataMe.size();obj++)
         {
-            if(dataMe.get(obj)=="")
-                dataMe.remove(obj);
+            dataMe.remove("");
         }
         for(int obj=0;obj<dataJ.size();obj++)
         {
-            if(dataJ.get(obj)=="")
-                dataJ.remove(obj);
+            dataJ.remove("");
         }
         for(int obj=0;obj<dataV.size();obj++)
         {
-            if(dataV.get(obj)=="")
-                dataV.remove(obj);
+            dataV.remove("");
         }
-        if(dataL.size()==0)
+        System.out.println("taille :"+dataM.size());
+        if(dataL.isEmpty())
             dataL.add("");
-        if(dataM.size()==0)
+        if(dataM.isEmpty())
             dataM.add("");
-        if(dataMe.size()==0)
+        if(dataM.isEmpty())
             dataMe.add("");
-        if(dataJ.size()==0)
+        if(dataJ.isEmpty())
             dataJ.add("");
-        if(dataV.size()==0)
+        if(dataV.isEmpty())
             dataV.add("");
-    }
+    
 }
     
     public void ListeProfesseur(UTILISATEUR prof, int semaine)
@@ -523,6 +523,7 @@ public class ListeEDT {
             }
             compteur++;
         }
+        }
         for(int obj=0;obj<dataL.size();obj++)
         {
             if(dataL.get(obj)=="")
@@ -558,7 +559,6 @@ public class ListeEDT {
             dataJ.add("");
         if(dataV.size()==0)
             dataV.add("");
-    }
 }
     
     public Object[] getL()

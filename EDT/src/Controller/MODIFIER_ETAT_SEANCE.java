@@ -53,21 +53,40 @@ public class MODIFIER_ETAT_SEANCE extends SEANCEDAO{
    
    public MODIFIER_ETAT_SEANCE (){}
     
-   public MODIFIER_ETAT_SEANCE(int ID, int etat)
+   public String MODIFIER_ETAT_SEANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String SALLENOM, int etat)
    {
        try {
+            PreparedStatement recupSEANCE= this.connection.prepareStatement("SELECT s.ID FROM SEANCE s JOIN SEANCE_SALLE ss ON ss.ID_SEANCE = s.ID JOIN SALLE sa ON sa.ID = ss.ID_SALLE WHERE s.SEMAINE = ? AND s.DATE = ? AND s.HEURE_DEBUT = ? AND sa.NOM = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            recupSEANCE.setInt(1,SEMAINE);
+            recupSEANCE.setString(2,DATE);
+            recupSEANCE.setString(3,HEURE_DEBUT);
+            recupSEANCE.setString(4,SALLENOM);
+            ResultSet recupseanceorigine = recupSEANCE.executeQuery();
+            if(recupseanceorigine.first()==false)
+            { 
+                return "SEANCE N'EXISTE PAS";
+            } 
+            else {
+                
+            
+           
+           
     PreparedStatement ps= this.connection.prepareStatement("UPDATE SEANCE  SET SEANCE.ETAT = ?  WHERE SEANCE.ID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     ps.setInt(1, etat);
-    ps.setInt(2,ID);
+    ps.setInt(2,recupseanceorigine.getInt("ID"));
      int resultat = ps.executeUpdate();
+            }
 
        }catch (SQLException e){
         e.printStackTrace();
     }
-      
+     return "ETAT CORRECTEMENT CHANGE"; 
    }
    
    }
+  
+   
+    
   
    
     

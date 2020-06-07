@@ -12,6 +12,7 @@ package View;
 import Controller.ADD_SEANCE;
 import Controller.AJOUTER_GROUPE;
 import Controller.AffecterEnseignant;
+import Controller.DEPLACER_SEANCE;
 import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
@@ -67,7 +68,7 @@ public class Panneau extends JFrame{
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-    intermediaire.add(edt(),BorderLayout.CENTER);
+    //intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
   }
@@ -109,13 +110,41 @@ public JPanel edt(){
     //calendrier.removeAll();
     int ID=2;
 
+
     int compteurSALLE=0;
 
     String infoSEANCE = "";
 
     EmploiTemps edtutilisateur = new EmploiTemps();
     
+
+    
+  //  DEPLACER_SEANCE dep =new DEPLACER_SEANCE();
+  //  dep.DEPLACER_SEANCE_INSTANCE(2, "MARDI", "10h15", "104", 1, "LUNDI", "10h15", "11h30");
+    
+    
+    //int compteurSALLE=0;
+    List <GROUPE> listGROUPE = new ArrayList<>();
+
+
+ //   AffecterEnseignant affecter = new AffecterEnseignant(ID);
+
+ SEANCE_GROUPE seancegroupe =new SEANCE_GROUPE(1);
+ listGROUPE =  seancegroupe.getlistGROUPE();
+ 
+
+ 
+ 
+ 
+ 
+//AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
+//System.out.println(ajout.AJOUTER_GROUPE_INSTANCE (1, "Jeudi", "15h30", "105", "TD02", "2022"));
+
+    //String infoSEANCE = "";
+
+
     AffecterEnseignant affecter = new AffecterEnseignant(ID);
+
 
     calendrier.setLayout(new BorderLayout()); 
 
@@ -325,16 +354,16 @@ class ItemAction implements ActionListener{
       {
       edt().removeAll();
         COUNT=0;
-        intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
-      principal.add(intermediaire, BorderLayout.CENTER);
+        //intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+      //principal.add(intermediaire, BorderLayout.CENTER);
       }
 
       else if(combo.getSelectedItem() == "En liste")
       {
       edt().removeAll();
         COUNT=1;
-        intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
-      principal.add(intermediaire, BorderLayout.CENTER);
+        //intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+        //principal.add(intermediaire, BorderLayout.CENTER);
       }
        //calendrier.removeAll();
       

@@ -59,13 +59,15 @@ public class Padmin extends JFrame{
   private int semaine=1;
   private int COUNT=0;
   private String nameteacher="";
-   
+  private String namestudent="";
+  private String nameroom="";
+
   public Padmin(ADMIN recupAdmin){
     //etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
-    intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-    intermediaire.add(edtprof(""),BorderLayout.CENTER);
+    //intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
+    //intermediaire.add(edtprof(""),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
   }
@@ -85,10 +87,13 @@ public class Padmin extends JFrame{
     btngroupe.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){   
         System.out.println("bouton groupe");
-        //sgroupe = groupefield.getText();
-        //System.out.print("La string sprof : " + sprof);
-        //principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
-        
+        namestudent = groupefield.getText();
+        //intermediaire.removeAll();
+        intermediaire.add(new JScrollPane(semaineetudiant()),BorderLayout.NORTH);
+        intermediaire.add(edteleve(namestudent),BorderLayout.CENTER);
+        principal.add(intermediaire, BorderLayout.CENTER);
+        System.out.println("bouton el");
+        System.out.println(namestudent);
       }
     });
     
@@ -105,10 +110,14 @@ public class Padmin extends JFrame{
 
     btnsalle.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){       
-        //ssalle = groupefield.getText();
-        //System.out.print("La string sprof : " + sprof);
-        //principal.add(edtsalle(ssalle), BorderLayout.CENTER);
-        
+        //System.out.println("bouton groupe");
+        nameroom = sallefield.getText();
+        //intermediaire.removeAll();
+        intermediaire.add(new JScrollPane(semainesalle()),BorderLayout.NORTH);
+        intermediaire.add(edteleve(nameroom),BorderLayout.CENTER);
+        principal.add(intermediaire, BorderLayout.CENTER);
+        //System.out.println("bouton el");
+        //System.out.println(nameroom);
       }
     });
 
@@ -127,7 +136,7 @@ public class Padmin extends JFrame{
       public void actionPerformed(ActionEvent event){  
         nameteacher = proffield.getText();
         //intermediaire.removeAll();
-        intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
+        intermediaire.add(new JScrollPane(semaineprof()),BorderLayout.NORTH);
         intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
         principal.add(intermediaire, BorderLayout.CENTER);
         System.out.println("bouton prof");
@@ -138,7 +147,7 @@ public class Padmin extends JFrame{
     return pan1;
 }
 
-public JPanel semaine(){
+public JPanel semaineprof(){
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
         int btnsemaine = i;
@@ -150,6 +159,44 @@ public JPanel semaine(){
             semaine = btnsemaine;
             calendrier.removeAll();
              intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
+            principal.add(intermediaire, BorderLayout.CENTER);
+           }
+        });
+    }
+    return pan2;
+  }
+
+public JPanel semaineetudiant(){
+    //JPanel top = new JPanel();
+    for(int i = 1; i <= 52; i++){
+        int btnsemaine = i;
+        JButton bouton = new JButton(""+i);
+        bouton.setPreferredSize(new Dimension(48,20));
+        pan2.add(bouton);
+        bouton.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            semaine = btnsemaine;
+            calendrier.removeAll();
+             intermediaire.add(edteleve(namestudent),BorderLayout.CENTER);
+            principal.add(intermediaire, BorderLayout.CENTER);
+           }
+        });
+    }
+    return pan2;
+  }
+
+public JPanel semainesalle(){
+    //JPanel top = new JPanel();
+    for(int i = 1; i <= 52; i++){
+        int btnsemaine = i;
+        JButton bouton = new JButton(""+i);
+        bouton.setPreferredSize(new Dimension(48,20));
+        pan2.add(bouton);
+        bouton.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            semaine = btnsemaine;
+            calendrier.removeAll();
+             intermediaire.add(edtsalle(nameroom),BorderLayout.CENTER);
             principal.add(intermediaire, BorderLayout.CENTER);
            }
         });
@@ -176,6 +223,70 @@ public JPanel edtprof(String nomprof){
 
     //Creation de la classe pour mettre les donne
     ZModel model = new ZModel(edtprof.voiremploidutempsenseignant(nomprof,semaine), edtprof.setTitle());
+    
+        tableau = new JTable(model);
+        //Definition de la taille des lignes
+        tableau.setRowHeight(125);
+        //Changement de la taille des colonnes
+        setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+        //calendrier.removeAll();
+        calendrier.add(new JScrollPane(tableau));
+   
+   // edt().removeAll();
+    return calendrier; 
+}
+
+public JPanel edteleve(String nomeleve){
+    //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
+
+    //calendrier.removeAll();
+    int ID=2;
+
+    int compteurSALLE=0;
+
+    String infoSEANCE = "";
+
+    EmploiTemps edtet = new EmploiTemps();
+    
+    AffecterEnseignant affecter = new AffecterEnseignant(ID);
+
+    calendrier.setLayout(new BorderLayout()); 
+
+
+    //Creation de la classe pour mettre les donne
+    ZModel model = new ZModel(edtet.voiremploidutempsetudiant(nomeleve,semaine), edtet.setTitle());
+    
+        tableau = new JTable(model);
+        //Definition de la taille des lignes
+        tableau.setRowHeight(125);
+        //Changement de la taille des colonnes
+        setWidthAsPercentages(tableau, 0.04, 0.196, 0.196,0.196,0.196,0.196);
+        //calendrier.removeAll();
+        calendrier.add(new JScrollPane(tableau));
+   
+   // edt().removeAll();
+    return calendrier; 
+}
+
+public JPanel edtsalle(String nomsalle){
+    //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
+
+    //calendrier.removeAll();
+    int ID=2;
+
+    int compteurSALLE=0;
+
+    String infoSEANCE = "";
+
+    EmploiTemps edtet = new EmploiTemps();
+    
+    AffecterEnseignant affecter = new AffecterEnseignant(ID);
+
+    calendrier.setLayout(new BorderLayout()); 
+
+
+    //Creation de la classe pour mettre les donne
+    ZModel model = new ZModel(edtet.voiremploidutempssalle(nomsalle,semaine), edtet.setTitle());
     
         tableau = new JTable(model);
         //Definition de la taille des lignes
