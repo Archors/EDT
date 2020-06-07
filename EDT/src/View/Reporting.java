@@ -34,7 +34,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/** Classe qui affiche le reporting*/
 public class Reporting extends JPanel{
   private Color color = Color.white;
   private static int COUNT = 0;

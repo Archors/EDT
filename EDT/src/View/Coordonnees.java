@@ -9,7 +9,7 @@ package View;
  *
  * @author Antoine
  */
-//classe pour l'utilisation des coordonnées du tableau
+/**classe pour l'utilisation des coordonnées du tableau*/
 public class Coordonnees {
     private int x=0;
     private int y=0;

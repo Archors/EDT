@@ -22,7 +22,7 @@ import java.util.List;
  * @author Antoine
  */
 
-//classe permettant d'afficher les emplois du temps en ligne
+/**classe permettant d'afficher les emplois du temps en ligne*/
 public class ListeEDT {
     
     private List<Object> dataL =new ArrayList<>();
