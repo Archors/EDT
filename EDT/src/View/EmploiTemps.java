@@ -597,4 +597,50 @@ public class EmploiTemps {
         return data;
     }
 
+    public Object[][] voirreporting(String nominatif)
+    {
+        System.out.println(nominatif);
+        List<UTILISATEUR> listprof =new ArrayList<>();
+        List <Integer> nbSeance =new ArrayList<Integer>();
+        List<COURS> listCOURS =new ArrayList<COURS>();
+        List<SEANCE> listSEANCEprems =new ArrayList<SEANCE>();
+        List<SEANCE> listSEANCElast =new ArrayList<SEANCE>();
+        
+        REPORTING_DONNEE report = new REPORTING_DONNEE();
+        
+        report.REPORTING_DONNEE();
+        
+        listprof = report.getlistENSEIGNANT();
+        nbSeance = report.getnbSeance();
+        listCOURS = report.getlistCOURS();
+        listSEANCEprems = report.getlistSEANCEprems();
+        listSEANCElast = report.getlistCOURSlast();
+        
+        int compteur = 0;
+        Object[][] data = {
+      {"", "", "", "", ""},
+      {"", "", "", "", ""},
+      {"", "", "", "", ""},
+      {"", "", "", "", ""},
+      {"", "", "", "", ""}
+    };
+        int cours=0;
+        for(UTILISATEUR iprof : listprof)
+        {
+            //System.out.println(iprof.getNOM());
+            if(iprof.getNOM().equals(nominatif))
+            {
+                data[cours][0] = listCOURS.get(compteur).getNOM();
+                data[cours][1] = "Semaine "+ listSEANCEprems.get(compteur).getSEMAINE()+" "+listSEANCEprems.get(compteur).getDATE()+" à "+listSEANCEprems.get(compteur).getHEURE_DEBUT();
+                data[cours][2] = "Semaine "+ listSEANCElast.get(compteur).getSEMAINE()+" "+listSEANCElast.get(compteur).getDATE()+" à "+listSEANCElast.get(compteur).getHEURE_DEBUT();
+                data[cours][3] = nbSeance.get(compteur)*1.5 +"h";
+                data[cours][4] = nbSeance.get(compteur);
+                cours++;
+            }
+            compteur++;
+        }
+        
+        return data;
+    }
+
 }

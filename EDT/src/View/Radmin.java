@@ -60,9 +60,9 @@ public class Radmin extends JPanel{
 
     btngroupe.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){       
-        sgroupe = groupefield.getText();
+        //sgroupe = groupefield.getText();
         //System.out.print("La string sprof : " + sprof);
-        principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
+        //principal.add(edtgroupe(sgroupe), BorderLayout.CENTER);
         
       }
     });
@@ -100,16 +100,16 @@ public class Radmin extends JPanel{
 
     btnprof.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){       
-        sprof = groupefield.getText();
+        sprof = proffield.getText();
         //System.out.print("La string sprof : " + sprof);
-        principal.add(edtprof(sprof), BorderLayout.CENTER);
         
+        principal.add(edtprofe(sprof), BorderLayout.CENTER);      
       }
     });
 
     return menu;
 }
-
+/*
 public JPanel edtgroupe(String groupe){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
     calendrier.setLayout(new BorderLayout()); 
@@ -124,7 +124,7 @@ public JPanel edtgroupe(String groupe){
 
 
     Object[][] data = {
-      {tes, "", "", "", "", ""},
+      {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},
@@ -150,33 +150,15 @@ public JPanel edtgroupe(String groupe){
 
     return calendrier; 
 
-}
+}*/
 
-public JPanel edtsalle(String salle){
+public JPanel edtprofe(String prof){
+    
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
     calendrier.setLayout(new BorderLayout()); 
-
-    String tes = "test";
-
-    
-
-    if(salle.equals("minot")){
-        tes = "minot";
-    }
-
-
-    Object[][] data = {
-      {tes, "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""}
-    };
+    Object[][] data ;
+    EmploiTemps edtProf = new EmploiTemps();
+    data = edtProf.voirreporting(prof);
 
     //Les titres des colonnes
 
@@ -192,47 +174,6 @@ public JPanel edtsalle(String salle){
 
     return calendrier; 
 
-}
-
-public JPanel edtprof(String prof){
-    //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
-    calendrier.setLayout(new BorderLayout()); 
-
-    String tes = "test";
-
-    
-
-    if(prof.equals("minot")){
-        tes = "minot";
-    }
-
-
-    Object[][] data = {
-      {tes, "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""}
-    };
-
-    //Les titres des colonnes
-
-    String  title[] = {"Matières", "Première séance", "Dernière séance", "Durée", "Nb"};
-    
-    ZModel model = new ZModel(data, title);
-    
-    tableau = new JTable(model);
-    tableau.setRowHeight(65);
-    calendrier.add(new JScrollPane(tableau));
-    
-    //this.getContentPane().add(calendrier);
-
-    return calendrier; 
 
 }
 
