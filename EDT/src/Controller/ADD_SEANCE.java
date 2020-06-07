@@ -240,7 +240,7 @@ public class ADD_SEANCE extends SEANCEDAO {
             }
 
             else{
-            groupedt.voirGROUPE_SEANCE(recupGROUPEset.getInt("ID"));
+            groupedt.voirGROUPE_SEANCE(recupGROUPEset.getInt("ID"), SEMAINE);
             listSEANCEGROUPE = groupedt.getlistSEANCE();
                        for(SEANCE seancelibreGROUPE : listSEANCEGROUPE)
                    {

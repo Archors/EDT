@@ -32,7 +32,7 @@ public class EmploiTemps {
     private List<TYPE_COURS> listeTYPE_COURS = new ArrayList<>();
     private List<COURS> listeCOURS = new ArrayList<>();
     private List <GROUPE> listGROUPE = new ArrayList<>();
-    private int compteur = 0;
+    private int compteur=0;
   
     public EmploiTemps(){
         
@@ -40,14 +40,15 @@ public class EmploiTemps {
     public Object[][] emploidutempsetudiant(ETUDIANT student, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
-    studentEDT.voirETUDIANT_SEANCE(student.getNOM());
+    studentEDT.voirETUDIANT_SEANCE(student.getNOM(), semaine);
     //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
     listeTYPE_COURS = studentEDT.getListTYPE_COURS();
     listeCOURS = studentEDT.getListCOURS();
     listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
-    compteur=0;
+    int compteur=0;
+    
 
     //Données du tableau
     Object[][] data = remplissage();

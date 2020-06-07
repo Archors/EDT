@@ -50,7 +50,7 @@ public class GROUPE_EDT extends GROUPEDAO {
     private List<COURS> listCOURS = new ArrayList<COURS>();
     private List <SALLE> listSALLE = new ArrayList<SALLE>();
 
-    public void voirGROUPE_SEANCE(int ID)
+    public void voirGROUPE_SEANCE(int ID, int Semaine)
     {
         //retrouver le groupe en question
         GROUPE groupe = new GROUPE();
@@ -62,8 +62,9 @@ public class GROUPE_EDT extends GROUPEDAO {
       try{
           
        
-        PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM GROUPE JOIN SEANCE_GROUPE a ON GROUPE.ID = a.ID_GROUPE JOIN SEANCE b ON a.ID_SEANCE = b.ID JOIN SEANCE_SALLE d ON b.ID = d.ID_SEANCE JOIN SALLE e ON d.ID_SALLE = e.ID JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR WHERE GROUPE.ID = ? ORDER BY SEMAINE ASC, DATE ASC, HEURE_DEBUT DESC", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM GROUPE JOIN SEANCE_GROUPE a ON GROUPE.ID = a.ID_GROUPE JOIN SEANCE b ON a.ID_SEANCE = b.ID JOIN SEANCE_SALLE d ON b.ID = d.ID_SEANCE JOIN SALLE e ON d.ID_SALLE = e.ID JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR WHERE GROUPE.ID = ? AND b.SEMAINE = ? ORDER BY SEMAINE ASC, DATE ASC, HEURE_DEBUT DESC", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setInt(1,ID);
+        ps.setInt(2,Semaine);
         ResultSet result = ps.executeQuery();
         int i=0;
         while(result.next()) 

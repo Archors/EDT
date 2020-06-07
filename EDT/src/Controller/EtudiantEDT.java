@@ -58,7 +58,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
     
     public EtudiantEDT(){}
 
-    public void voirETUDIANT_SEANCE(String Nom)
+    public void voirETUDIANT_SEANCE(String Nom, int Semaine)
     {
         //retrouver le groupe en question
 
@@ -78,7 +78,7 @@ public class EtudiantEDT extends ETUDIANTDAO {
         etudiant.afficherETUDIANT();
         listETUDIANT.add(etudiant);
         
-       groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"));
+       groupeedt.voirGROUPE_SEANCE(resultat.getInt("ID_GROUPE"), Semaine);
        listSEANCE=groupeedt.getlistSEANCE();  
        listTYPE_COURS=groupeedt.getListTYPE_COURS();
        listCOURS=groupeedt.getListCOURS();

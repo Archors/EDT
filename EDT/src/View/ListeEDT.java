@@ -44,7 +44,7 @@ public class ListeEDT {
     public void ListeEtudiant(ETUDIANT eleve, int semaine)
     {
         //Creation de l'objet qui contient les données de l'etudiant
-        studentEDT.voirETUDIANT_SEANCE(eleve.getNOM());
+        studentEDT.voirETUDIANT_SEANCE(eleve.getNOM(), semaine);
         //Recuperation des données sur les cours de l'etudiant dans la classe
         listSEANCE = studentEDT.getlistSEANCE();
         listSALLE = studentEDT.getListSALLE();
