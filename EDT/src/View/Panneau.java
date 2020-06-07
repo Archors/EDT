@@ -45,6 +45,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+/** Classe permettant l'affichage et la gestion de l'emploi du temps par un etudiant*/
 public class Panneau extends JFrame{
   private Color color = Color.white;
   private String message = "";
@@ -65,6 +66,7 @@ public class Panneau extends JFrame{
   private JTable tableauV;
   //private 
    
+  /** Intialise les valeurs des données d'un etudiant*/
   public Panneau(ETUDIANT recupEtudiant){
     etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
@@ -75,6 +77,7 @@ public class Panneau extends JFrame{
     principal.add(menu(), BorderLayout.NORTH);
   }
 
+  /** Affiche le menu d'un etudiant*/
   public JPanel menu(){
     //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
     pan1.add(combo);    

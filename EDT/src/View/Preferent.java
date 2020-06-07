@@ -44,6 +44,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+/** Classe permettant l'affichage et la gestion de l'emploi du temps par un professeur referent*/
 public class Preferent extends JFrame{
   private Color color = Color.white;
   private String message = "";
@@ -62,6 +63,7 @@ public class Preferent extends JFrame{
   private String nameroom="";
   private int typesemaine; 
 
+  /** Intialise les valeurs des données d'un referent*/
   public Preferent(){
     //etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
@@ -74,6 +76,7 @@ public class Preferent extends JFrame{
     
   }
 
+  /** Affiche le menu du referent*/
  public JPanel menu(){
    //Pan1 correspond a la partie supérieur de la page ou se situe les boutons de choix grille et liste
     JLabel groupe = new JLabel("Etudiant : ");
@@ -154,6 +157,7 @@ public class Preferent extends JFrame{
     return pan1;
 }
 
+ /** Fonction qui affiche et qui surveille les 52 boutons de changement de semaine pour un prof*/
 public JPanel semaine(){
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
@@ -174,8 +178,6 @@ public JPanel semaine(){
             else if(typesemaine == 3){
                 intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
             }
-            //intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
-            System.out.println("je suis sur la semaine prof");
             principal.add(intermediaire, BorderLayout.CENTER);
            }
         });
@@ -183,6 +185,7 @@ public JPanel semaine(){
     return pan2;
   }
 
+/** Fonction qui affiche et qui surveille les 52 boutons de changement de semaine pour un eleve*/
 public JPanel semaineetudiant(){
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
@@ -203,6 +206,7 @@ public JPanel semaineetudiant(){
     return pan2;
   }
 
+/** Fonction qui affiche et qui surveille les 52 boutons de changement de semaine pour une salle*/
 public JPanel semainesalle(){
     //JPanel top = new JPanel();
     for(int i = 1; i <= 52; i++){
@@ -223,6 +227,7 @@ public JPanel semainesalle(){
     return pan2;
   }
 
+/** Fonction qui affiche un tableau contenant l'emploi du temps d'un professeur*/
 public JPanel edtprof(String nomprof){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
@@ -252,6 +257,7 @@ public JPanel edtprof(String nomprof){
     return calendrier; 
 }
 
+/** Fonction qui affiche un tableau contenant l'emploi du temps d'un eleve*/
 public JPanel edteleve(String nomeleve){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
@@ -282,6 +288,7 @@ public JPanel edteleve(String nomeleve){
     return calendrier; 
 }
 
+/** Fonction qui affiche un tableau contenant l'emploi du temps d'une salle*/
 public JPanel edtsalle(String nomsalle){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
 
@@ -312,7 +319,7 @@ public JPanel edtsalle(String nomsalle){
     return calendrier; 
 }
 
-//Fonction pour choisir la taille des colonnes du tableau avec des pourcentages
+/**Fonction pour choisir la taille des colonnes du tableau avec des pourcentages*/
 //Source : https://kahdev.wordpress.com/2011/10/30/java-specifying-the-column-widths-of-a-jtable-as-percentages/
 private static void setWidthAsPercentages(JTable table,
         double... percentages) {

@@ -25,6 +25,8 @@ import java.util.List;
  *
  * @author Antoine
  */
+
+/** Fonction qui recupere les données du <b>controller</b> et qui s'occupe de les associer avec le <b>view</b> (Swing)*/
 public class EmploiTemps {
     private EtudiantEDT studentEDT = new EtudiantEDT();
     private List<SEANCE> listSEANCE =new ArrayList<>();
@@ -35,9 +37,9 @@ public class EmploiTemps {
     private List <GROUPE> listGROUPE = new ArrayList<>();
     private int compteur=0;
   
-    public EmploiTemps(){
-        
-    }
+    public EmploiTemps(){}
+    
+    /** Recupere le String du nom d'un etudiant et la semaine pour rentrer les données dans un tableau d'Object renvoyé à la fin pour l'affichage par l'etudiant*/
     public Object[][] emploidutempsetudiant(ETUDIANT student, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
@@ -77,6 +79,7 @@ public class EmploiTemps {
     return data;
     }
     
+    /** Recupere le String d'une salle et la semaine pour rentrer les données dans un tableau d'Object renvoyé à la fin pour l'affichage par un admin*/
     public Object[][] emploidutempssalle(SALLE salle, int semaine){
         SALLE_EDT edtsalle = new SALLE_EDT();
         edtsalle.voirSALLE_EDT(salle.getNOM());
@@ -110,7 +113,7 @@ public class EmploiTemps {
         }
     return data;
     }
-    
+    /** Recupere le String du nom d'un professeur et la semaine pour rentrer les données dans un tableau d'Object renvoyé à la fin pour l'affichage par le professeur*/
     public Object[][] emploidutempsenseignant(UTILISATEUR enseignant, int semaine){
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
         edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM(),semaine);
@@ -153,6 +156,7 @@ public class EmploiTemps {
     return data;
     }
 
+    /** Recupere le String du nom d'un professeur et la semaine pour rentrer les données dans un tableau d'Object renvoyé à la fin pour l'affichage par un admin*/
     public Object[][] voiremploidutempsenseignant(String enseignant, int semaine){
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
         edtenseignant.voirENSEIGNANT_EDT(enseignant,semaine);
@@ -180,7 +184,8 @@ public class EmploiTemps {
     }
     return data;
     }
-
+    
+    /** Recupere le String du nom d'un etudiant et la semaine pour rentrer les données dans un tableau d'Object renvoyé à la fin pour l'affichage par un admin*/
     public Object[][] voiremploidutempsetudiant(String nomet, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
@@ -209,7 +214,8 @@ public class EmploiTemps {
     }
     return data;
     }
-
+    
+    /** Recupere le String d'une salle et la semaine pour rentrer les données dans un tableau d'Object renvoyé à la fin pour l'affichage par un admin*/
     public Object[][] voiremploidutempssalle(String salle, int semaine){
         SALLE_EDT edtsalle = new SALLE_EDT();
         edtsalle.voirSALLE_EDT(salle);
@@ -236,7 +242,7 @@ public class EmploiTemps {
     return data;
     }
     
-    //Rempli le tableau avec les horaires
+    /**Rempli le tableau avec les horaires */
     public Object[][] remplissage() {
     Object[][] donnee = {
     {"8h30-10h", "", "", "", "", ""},
@@ -249,7 +255,7 @@ public class EmploiTemps {
     return donnee;
 }
     
-    //Cherche quel est le jour et l'heure de la seance
+    /**Cherche quel est le jour et l'heure de la seance*/
     public Coordonnees findJour(SEANCE cours){
         Coordonnees coord = new Coordonnees();
         switch(cours.getDATE())
@@ -316,13 +322,13 @@ public class EmploiTemps {
         return coord;
     }
     
-    //Crée l'entete du tableau
+    /**Crée l'entete du tableau*/
     public String[] setTitle(){
         String  title[] = {"Heure","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
         return title;
     }
     
-    //Cree un String de groupe de TD qui ont cours
+    /**Cree un String de groupe de TD qui ont cours*/
     public String groupe(List <GROUPE> list)
     {
         String grp = new String();
@@ -336,208 +342,15 @@ public class EmploiTemps {
         }
         return grp;
     }
-    
-    /*public Object[][] reporting(UTILISATEUR leprof)
-    {
-        List<UTILISATEUR> listprof =new ArrayList<>();
-        List <Integer> nbSeance =new ArrayList<Integer>();
-        
-        ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
-        edtenseignant.voirENSEIGNANT_EDT(leprof.getNOM());
-        listSEANCE = edtenseignant.getlistSEANCE();
-        listSALLE = edtenseignant.getListSALLE();
-        listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
-        listeCOURS = edtenseignant.getListCOURS();
-        listeENSEIGNANT = edtenseignant.getlistENSEIGNANT();
-        List<SEANCE> premieresemaine =new ArrayList<>();
-        List<SEANCE> premierjour =new ArrayList<>();
-        List<SEANCE> dernieresemaine =new ArrayList<>();
-        List<SEANCE> dernierjour =new ArrayList<>();
-        //String cours1 = new String();
-        //String cours2 = new String();
-        //int compteurcours1 = 0;
-        //3int compteurcours2 = 0;
-        
-        Object[][] data = {
-      {"", "", "", "", ""},
-      {"", "", "", "", ""},
-      {"", "", "", "", ""},
-      {"", "", "", "", ""},
-      {"", "", "", "", ""}
-    };
-        REPORTING_DONNEE report = new REPORTING_DONNEE();
-        report.REPORTING_DONNEE();
-        listprof = report.getlistENSEIGNANT();
-        nbSeance = report.getnbSeance();
-        int compteur = 0;
-        int firstsemaine = 0;
-        String firstjour = new String();
-        SEANCE firstSEANCE = new SEANCE();
-        int lastsemaine = 0;
-        String lastjour = new String();
-        SEANCE lastSEANCE = new SEANCE();
-        
-        //On cherche la 1ere semaine
-        for(int i=0; i<listSEANCE.size();i++)
-        {
-            if(i==0)
-            {
-                firstsemaine = listSEANCE.get(0).getSEMAINE();
-            }
-            
-            if(firstsemaine > listSEANCE.get(i).getSEMAINE())
-            {
-                firstsemaine = listSEANCE.get(i).getSEMAINE();
-            }
-            
-        }
-        //On ajoute a la liste toute les seance de la 1ere semaine
-        for(SEANCE i : listSEANCE)
-        {
-            if(firstsemaine == i.getSEMAINE()){
-                premieresemaine.add(i);
-            }
-        }
-        System.out.println("Il y a "+premieresemaine.size()+" cours la premiere semaine");
-        //On cherche le jour de la permiere seance
-        for(int i=0; i<premieresemaine.size();i++)
-        {
-            if(i==0)
-            {
-                firstjour = premieresemaine.get(0).getDATE();
-                System.out.println(premieresemaine.get(0).getDATE());
-                if(firstjour.equals("LUNDI"))
-                    break;
-            }
-            System.out.println("firstjour= "+firstjour);
-            if(firstjour.compareTo("VENDREDI") == 0)
-            {
-                if(firstjour.compareTo(premieresemaine.get(i).getDATE()) != 0)
-                    firstjour = premieresemaine.get(i).getDATE();
-            }
-            if (firstjour.compareTo("JEUDI") == 0 && firstjour.compareTo(premieresemaine.get(i).getDATE()) < 0 && firstjour.compareTo("VENDREDI") != 0)
-                firstjour = premieresemaine.get(i).getDATE();
-            if (firstjour.compareTo("MERCREDI") == 0 && firstjour.compareTo(premieresemaine.get(i).getDATE()) > 0 && firstjour.compareTo("JEUDI") != 0)
-                firstjour = premieresemaine.get(i).getDATE();
-            if (firstjour.compareTo("MARDI") == 0 && firstjour.compareTo(premieresemaine.get(i).getDATE()) < 0 && firstjour.compareTo("JEUDI") != 0)
-                firstjour = premieresemaine.get(i).getDATE();
-            if(firstjour.equals("LUNDI"))
-                break;
-        }
-        //On ajoute à la liste toutes les seances du premier jour
-        for(SEANCE i : premieresemaine)
-        {
-            if(firstjour.equals(i.getDATE()))
-                premierjour.add(i);
-        }
-        //On cherche l'heure de la première seance
-        for(int i =0 ; i<premierjour.size();i++)
-        {
-            if(i==0)
-            {
-                firstSEANCE = premierjour.get(0);
-                if(firstSEANCE.getHEURE_DEBUT().equals("8h30")){
-                    firstSEANCE = premierjour.get(0);
-                    break;
-                }
-            }
-            if (firstSEANCE.getHEURE_DEBUT().compareTo(premierjour.get(i).getHEURE_DEBUT()) > 0)
-                firstSEANCE = premierjour.get(i);
-            if(firstSEANCE.getHEURE_DEBUT().equals("8h30"))
-                break;
-        }
-        
-        
-        //On cherche la derniere semaine
-        for(int i=0; i<listSEANCE.size();i++)
-        {
-            if(i==0)
-            {
-                lastsemaine = listSEANCE.get(0).getSEMAINE();
-            }
-                else if(lastsemaine < listSEANCE.get(i).getSEMAINE())
-            {
-                lastsemaine = listSEANCE.get(i).getSEMAINE();
-            }
-            
-        }
-        //On ajoute a la liste toute les seance de la derniere semaine
-        for(SEANCE i : listSEANCE)
-        {
-            if(lastsemaine == i.getSEMAINE())
-                dernieresemaine.add(i);
-        }
-        //On cherche le jour de la derniere seance
-        for(int i=0; i<dernieresemaine.size();i++)
-        {
-            if(i==0)
-            {
-                lastjour = dernieresemaine.get(0).getDATE();
-                if(lastjour.compareTo("VENDREDI")== 0)
-                    break;
-            }
-            if(lastjour.compareTo("LUNDI")== 0 && lastjour.compareTo(dernieresemaine.get(i).getDATE()) != 0)
-            {
-                lastjour = premieresemaine.get(i).getDATE();
-            }
-            if (lastjour.compareTo("MARDI")== 0 && (lastjour.compareTo(dernieresemaine.get(i).getDATE()) < 0 || lastjour.compareTo("JEUDI")== 0))
-                lastjour = dernieresemaine.get(i).getDATE();
-            if (lastjour.compareTo("MERCREDI")== 0 && (dernieresemaine.get(i).getDATE().compareTo("JEUDI") == 0 || dernieresemaine.get(i).getDATE().compareTo("VENDREDI") == 0))
-                lastjour = dernieresemaine.get(i).getDATE();
-            if (lastjour.compareTo("JEUDI")== 0 && dernieresemaine.get(i).getDATE().compareTo("VENDREDI") == 0)
-                lastjour = dernieresemaine.get(i).getDATE();
-            if(lastjour.compareTo("VENDREDI")== 0)
-                break;
-        }
-        //On ajoute à la liste toutes les seances du premier jour
-        for(SEANCE i : dernieresemaine)
-        {
-            if(lastjour.compareTo(i.getDATE()) == 0)
-                dernierjour.add(i);
-        }
-        System.out.println("taille :" +dernierjour.size());
-        //On cherche l'heure de la première seance
-        for(int i =0 ; i<dernierjour.size();i++)
-        {
-            if(i==0)
-            {
-                lastSEANCE = dernierjour.get(0);
-                if(lastSEANCE.getHEURE_DEBUT().equals("17h15")){
-                    lastSEANCE = dernierjour.get(0);
-                    break;
-                }
-            }
-            if (lastSEANCE.getHEURE_DEBUT().compareTo(dernierjour.get(i).getHEURE_DEBUT()) < 0)
-                lastSEANCE = dernierjour.get(i);
-            if(lastSEANCE.getHEURE_DEBUT().equals("17h15"))
-                break;
-        }
-        
-        
-        for(UTILISATEUR iprof : listprof)
-        {
-            iprof.afficherUTILISATEUR();
-            if(iprof.getID() == leprof.getID())
-            {
-                data[0][0] = listeCOURS.get(0).getNOM();
-                data[0][1] = "Semaine " +firstSEANCE.getSEMAINE()+" le "+firstSEANCE.getDATE()+" à "+firstSEANCE.getHEURE_DEBUT();
-                data[0][2] = "Semaine " +lastSEANCE.getSEMAINE()+" le "+lastSEANCE.getDATE()+" à "+lastSEANCE.getHEURE_DEBUT();
-                data[0][3] = nbSeance.get(compteur)*1.5 +"h";
-                data[0][4] = nbSeance.get(compteur);
-            }
-            compteur++;
-        }
-        
-        return data;
-    }*/
-    
+
+    /** Recupere un tableau d'objet qui est rempli avec le descriptif des cours */
     public Object[][] reporting(UTILISATEUR leprof)
     {
         List<UTILISATEUR> listprof =new ArrayList<>();
-        List <Integer> nbSeance =new ArrayList<Integer>();
-        List<COURS> listCOURS =new ArrayList<COURS>();
-        List<SEANCE> listSEANCEprems =new ArrayList<SEANCE>();
-        List<SEANCE> listSEANCElast =new ArrayList<SEANCE>();
+        List <Integer> nbSeance =new ArrayList<>();
+        List<COURS> listCOURS =new ArrayList<>();
+        List<SEANCE> listSEANCEprems =new ArrayList<>();
+        List<SEANCE> listSEANCElast =new ArrayList<>();
         
         REPORTING_DONNEE report = new REPORTING_DONNEE();
         
@@ -571,7 +384,6 @@ public class EmploiTemps {
             }
             compteur++;
         }
-        
         return data;
     }
 
