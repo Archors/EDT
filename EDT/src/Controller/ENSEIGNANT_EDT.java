@@ -193,6 +193,4 @@ public void afficherLISTEPROMOTION(){
     public void setListSALLE(List<SALLE> listSALLE) {
         this.listSALLE = listSALLE;
     }
-
-
-    }
+}
