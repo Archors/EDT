@@ -40,6 +40,9 @@ import java.util.Set;
  *
  * @author Milou
  */
+
+
+/** recup les infos d'un enseignant pour le retrouver grace a la méthode find des differents dao et affiche tout son edt en récupérant les infos par requete sql */
 public class ENSEIGNANT_EDT extends UTILISATEURDAO {
     public ENSEIGNANT_EDT(){}
 

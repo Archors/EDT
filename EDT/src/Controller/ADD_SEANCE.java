@@ -47,6 +47,9 @@ import java.util.List;
  *
  * @author Milou
  */
+
+/** Fonction qui prend en parametre des infos sur la séance qui doit etre ajouté et qui ajoute la séance seulement si la salle (capacité (si CI)+ dispo), groupe, enseignant est libre        */
+
 public class ADD_SEANCE extends SEANCEDAO {
   private List<SEANCE> listSEANCE =new ArrayList<SEANCE>();
   private List<SEANCE> listSEANCESALLE =new ArrayList<SEANCE>();

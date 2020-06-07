@@ -49,6 +49,10 @@ import java.util.List;
  *
  * @author Milou
  */
+
+
+/** Fonction qui permet de deplacer une seance si le creneau est libre (prof, etudiant etc.)     */
+
 public class DEPLACER_SEANCE extends SEANCEDAO{
     //premiere etape, je recuperer la séance actuelle afin de recuperer les infos
     public DEPLACER_SEANCE() {} 

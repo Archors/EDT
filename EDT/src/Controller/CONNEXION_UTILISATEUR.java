@@ -48,6 +48,10 @@ import java.util.Set;
  *
  * @author Milou
  */
+
+/**  Fonction qui recoit l'email et le password rentré et verifie si l'utilisateur existe et quel droit il possede    */
+
+
 public class CONNEXION_UTILISATEUR extends UTILISATEURDAO{
    private boolean connexion;
    private int droit;
