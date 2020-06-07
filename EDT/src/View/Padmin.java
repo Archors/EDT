@@ -235,7 +235,6 @@ public JPanel edtprof(String nomprof){
     String infoSEANCE = "";
 
     EmploiTemps edtprof = new EmploiTemps();
-    
     calendrier.setLayout(new BorderLayout()); 
 
     //Creation de la classe pour mettre les donne
@@ -294,7 +293,6 @@ public JPanel edtsalle(String nomsalle){
     String infoSEANCE = "";
 
     EmploiTemps edtet = new EmploiTemps();
-    
     calendrier.setLayout(new BorderLayout()); 
 
 

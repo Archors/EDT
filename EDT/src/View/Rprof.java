@@ -5,6 +5,7 @@
  */
 
 package View;
+import Model.UTILISATEUR;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -28,12 +29,13 @@ public class Rprof extends JPanel{
   private JPanel principal = new JPanel();
   private JPanel calendrier = new JPanel();
   private JTable tableau;
+  private UTILISATEUR prof;
 
-  public Rprof(){
+  public Rprof(UTILISATEUR theprof){
+    prof = theprof;
     principal.setLayout(new BorderLayout());
     principal.add(edt(), BorderLayout.CENTER);
-    //principal.add(menu(), BorderLayout.NORTH);
- 
+    //principal.add(menu(), BorderLayout.NORTH); 
   }
 
   public JPanel menu(){
@@ -55,18 +57,9 @@ public class Rprof extends JPanel{
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
     calendrier.setLayout(new BorderLayout()); 
-    Object[][] data = {
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""},
-      {"", "", "", "", "", ""}
-    };
+    Object[][] data ;
+    EmploiTemps edtProf = new EmploiTemps();
+    data = edtProf.reporting(prof);
 
     //Les titres des colonnes
 

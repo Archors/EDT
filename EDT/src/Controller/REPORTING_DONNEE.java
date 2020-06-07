@@ -57,6 +57,9 @@ public class REPORTING_DONNEE extends UTILISATEURDAO{
 private List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
 private List <Integer> nbSeance =new ArrayList<Integer>();
 private List<COURS> listCOURS =new ArrayList<COURS>();
+private List<SEANCE> listSEANCEprems =new ArrayList<SEANCE>();
+private List<SEANCE> listSEANCElast =new ArrayList<SEANCE>();
+
 
 
 
@@ -64,7 +67,7 @@ private List<COURS> listCOURS =new ArrayList<COURS>();
    public void REPORTING_DONNEE()
    {
        try {
-            PreparedStatement recupenseignant= this.connection.prepareStatement("SELECT DISTINCT ID_UTILISATEUR FROM ENSEIGNANT", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement recupenseignant= this.connection.prepareStatement("SELECT ID_UTILISATEUR FROM ENSEIGNANT", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet result = recupenseignant.executeQuery();
         
         while(result.next())         
@@ -76,8 +79,8 @@ private List<COURS> listCOURS =new ArrayList<COURS>();
             PreparedStatement recupcours= this.connection.prepareStatement("SELECT DISTINCT ID_SEANCE FROM SEANCE_ENSEIGNANT se WHERE se.ID_ENSEIGNANT=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             recupcours.setInt(1,result.getInt("ID_UTILISATEUR"));
             ResultSet resultnbcours = recupcours.executeQuery();
-
-
+            
+            
             
             if(resultnbcours.first()==false)
             {
@@ -89,24 +92,69 @@ private List<COURS> listCOURS =new ArrayList<COURS>();
             PreparedStatement recupnomcours= this.connection.prepareStatement("SELECT DISTINCT e.ID_COURS FROM ENSEIGNANT e JOIN SEANCE_ENSEIGNANT se ON se.ID_ENSEIGNANT=e.ID_UTILISATEUR JOIN SEANCE s ON s.ID=se.ID_SEANCE WHERE s.ID=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             recupnomcours.setInt(1,resultnbcours.getInt("ID_SEANCE"));
             ResultSet recupnomcoursfinal = recupnomcours.executeQuery();
-            if(recupnomcoursfinal.first()==false)
-            {}
-            else{
-            COURS cours = new COURS();
-            DAO <COURS> coursdao = new COURSDAO();
-            cours=coursdao.find(recupnomcoursfinal.getInt("ID_COURS"));
-            listCOURS.add(cours);
+            
+            resultnbcours.last();
+            nbSeance.add(resultnbcours.getRow());
+            
+            while(recupnomcoursfinal.next()){
+                
+                COURS cours = new COURS();
+                DAO <COURS> coursdao = new COURSDAO();
+                cours=coursdao.find(recupnomcoursfinal.getInt("ID_COURS"));
+                listCOURS.add(cours);
+
+            
+            //RECUPERATION DE LA TOUTE PREMIERE SEANCE DU PROF AVEC LE COURS ASSOCI´E
+            PreparedStatement recupseancefirst= this.connection.prepareStatement("SELECT ID_SEANCE FROM SEANCE b JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR JOIN COURS c ON c.ID=b.ID_COURS WHERE g.ID_UTILISATEUR = ? AND c.ID = ? ORDER BY SEMAINE ASC, DATE ASC, HEURE_DEBUT DESC", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            recupseancefirst.setInt(1,result.getInt("ID_UTILISATEUR"));
+            recupseancefirst.setInt(2,recupnomcoursfinal.getInt("ID_COURS"));
+            ResultSet recupseanceprems = recupseancefirst.executeQuery();
             
             
-                resultnbcours.last();
-                nbSeance.add(resultnbcours.getRow());
+           if(recupseanceprems.first()==false)
+            {
+            }
+           else {
+               SEANCE seance = new SEANCE();
+               DAO <SEANCE> seancedao = new SEANCEDAO();
+               seance = seancedao.find(recupseanceprems.getInt("ID_SEANCE"));
+               listSEANCEprems.add(seance);
+           }
+           
+           // RECUPERATION LAST COURS
+            PreparedStatement recupseancelast= this.connection.prepareStatement("SELECT * FROM SEANCE b JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR JOIN COURS c ON c.ID=b.ID_COURS WHERE g.ID_UTILISATEUR = ? AND c.ID = ?  ORDER BY SEMAINE DESC, DATE DESC, HEURE_DEBUT ASC", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            recupseancelast.setInt(1,result.getInt("ID_UTILISATEUR"));
+            recupseancelast.setInt(2,recupnomcoursfinal.getInt("ID_COURS"));
+            ResultSet recupseancelasts = recupseancelast.executeQuery();
+            
+            
+           if(recupseancelasts.first()==false)
+            {
+            }
+           else {
+               SEANCE seancelast = new SEANCE();
+               DAO <SEANCE> seancedaolast = new SEANCEDAO();
+               seancelast = seancedaolast.find(recupseancelasts.getInt("ID_SEANCE"));
+               listSEANCElast.add(seancelast);
+           }
+           
+           
+           
+            }
+            
+            
+            
+//SELECT * FROM SEANCE b JOIN SEANCE_ENSEIGNANT f ON b.ID = f.ID_SEANCE JOIN ENSEIGNANT g ON f.ID_ENSEIGNANT = g.ID_UTILISATEUR JOIN COURS c ON c.ID=b.ID_COURS WHERE g.ID_UTILISATEUR = 22 AND c.ID = 7  ORDER BY SEMAINE DESC, DATE DESC, HEURE_DEBUT ASC
                 
             }
             }
+        
+
+
     
         
             
-        }
+        
         
         
 
@@ -127,6 +175,16 @@ private List<COURS> listCOURS =new ArrayList<COURS>();
             this.listENSEIGNANT.add(utilisateur);
     }
     
+          public List<SEANCE> getlistSEANCEprems(){
+        return listSEANCEprems;
+    }
+          
+    public void addSEANCEprems (SEANCE seance){
+        if(this.listSEANCEprems.contains(seance)!=true)
+            this.listSEANCEprems.add(seance);
+    }
+    
+    
         public List getnbSeance(){
         return nbSeance;
     }
@@ -139,5 +197,11 @@ private List<COURS> listCOURS =new ArrayList<COURS>();
         if(this.listCOURS.contains(cours)!=true)
             this.listCOURS.add(cours);
     }
+             
+             
+         public List<SEANCE> getlistCOURSlast(){
+        return listSEANCElast;
+    }
    
 }
+

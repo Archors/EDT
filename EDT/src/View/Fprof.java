@@ -36,7 +36,6 @@ public class Fprof extends JFrame {
     //ETUDIANT student = new ETUDIANT();
     public Fprof(){}
     public Fprof(UTILISATEUR utilisateur){
-        
         this.setLocationRelativeTo(null);
         this.setTitle("Professeur");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,7 +45,7 @@ public class Fprof extends JFrame {
         JTabbedPane onglet;
         //Création de plusieurs Panneau
         Pprof tPan = new Pprof(utilisateur);
-        Rprof recap = new Rprof();
+        Rprof recap = new Rprof(utilisateur);
         
         //System.out.println("test methode :");
         //Création de notre conteneur d'onglets

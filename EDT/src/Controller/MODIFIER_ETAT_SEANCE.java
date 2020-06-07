@@ -67,7 +67,6 @@ public class MODIFIER_ETAT_SEANCE extends SEANCEDAO{
                 return "SEANCE N'EXISTE PAS";
             } 
             else {
-
     PreparedStatement ps= this.connection.prepareStatement("UPDATE SEANCE  SET SEANCE.ETAT = ?  WHERE SEANCE.ID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     ps.setInt(1, etat);
     ps.setInt(2,recupseanceorigine.getInt("ID"));

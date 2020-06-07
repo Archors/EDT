@@ -33,7 +33,7 @@ public class Retudiant extends JPanel{
     principal.setLayout(new BorderLayout());
     principal.add(edt(), BorderLayout.CENTER);
     //principal.add(menu(), BorderLayout.NORTH);
- 
+    
   }
 
   public JPanel menu(){
