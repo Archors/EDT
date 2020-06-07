@@ -301,7 +301,7 @@ public class ListeEDT {
     public void ListeProfesseur(UTILISATEUR prof, int semaine)
     {
         //Creation de l'objet qui contient les données de l'etudiant
-        enseignantEDT.voirENSEIGNANT_EDT(prof.getNOM());
+        enseignantEDT.voirENSEIGNANT_EDT(prof.getNOM(),semaine);
         //Recuperation des données sur les cours de l'etudiant dans la classe
         listSEANCE = enseignantEDT.getlistSEANCE();
         listSALLE = enseignantEDT.getListSALLE();

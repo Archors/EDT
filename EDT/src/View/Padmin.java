@@ -11,7 +11,6 @@ package View;
  */
 import Controller.ADD_SEANCE;
 import Controller.AJOUTER_GROUPE;
-import Controller.AffecterEnseignant;
 import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
@@ -235,8 +234,6 @@ public JPanel edtprof(String nomprof){
 
     EmploiTemps edtprof = new EmploiTemps();
     
-    AffecterEnseignant affecter = new AffecterEnseignant(ID);
-
     calendrier.setLayout(new BorderLayout()); 
 
     //Creation de la classe pour mettre les donne
@@ -266,8 +263,6 @@ public JPanel edteleve(String nomeleve){
 
     EmploiTemps edtet = new EmploiTemps();
     
-    AffecterEnseignant affecter = new AffecterEnseignant(ID);
-
     calendrier.setLayout(new BorderLayout()); 
 
 
@@ -298,8 +293,6 @@ public JPanel edtsalle(String nomsalle){
 
     EmploiTemps edtet = new EmploiTemps();
     
-    AffecterEnseignant affecter = new AffecterEnseignant(ID);
-
     calendrier.setLayout(new BorderLayout()); 
 
 

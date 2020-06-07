@@ -112,12 +112,18 @@ public class EmploiTemps {
     
     public Object[][] emploidutempsenseignant(UTILISATEUR enseignant, int semaine){
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
-        edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM());
+        edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM(),semaine);
         listSEANCE = edtenseignant.getlistSEANCE();
         listSALLE = edtenseignant.getListSALLE();
         listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
         listeCOURS = edtenseignant.getListCOURS();
         listeENSEIGNANT = edtenseignant.getlistENSEIGNANT();
+        
+        for(SALLE salle : listSALLE)
+        {
+            System.out.println(salle.getNOM());
+        }
+        
         compteur=0;
 
     //Données du tableau
@@ -148,7 +154,7 @@ public class EmploiTemps {
 
     public Object[][] voiremploidutempsenseignant(String enseignant, int semaine){
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
-        edtenseignant.voirENSEIGNANT_EDT(enseignant);
+        edtenseignant.voirENSEIGNANT_EDT(enseignant,semaine);
         listSEANCE = edtenseignant.getlistSEANCE();
         listSALLE = edtenseignant.getListSALLE();
         listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
@@ -177,7 +183,11 @@ public class EmploiTemps {
     public Object[][] voiremploidutempsetudiant(String nomet, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
+<<<<<<< HEAD
     studentEDT.voirETUDIANT_SEANCE(nomet,semaine);
+=======
+    studentEDT.voirETUDIANT_SEANCE(nomet, semaine);
+>>>>>>> e64bd4fef6935f1892cb4041555ce79b72b66893
     //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();

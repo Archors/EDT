@@ -5,6 +5,8 @@
  */
 
 package View;
+import Controller.REPORTING_DONNEE;
+import Model.UTILISATEUR;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -29,6 +31,8 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.util.Rotation;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Reporting extends JPanel{
@@ -78,20 +82,43 @@ public class Reporting extends JPanel{
 }
 
 public JPanel graphgroupe(){
-     graph = new JPanel(new BorderLayout()); 
+     graph = new JPanel(new BorderLayout());
+     List <Integer> nbSeance =new ArrayList<Integer>();
+     List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
+
+
     //setContentPane(graph); 
     setSize(400, 250); 
+    
+     DefaultPieDataset pieDataset = new DefaultPieDataset();
+     
+    REPORTING_DONNEE rep = new REPORTING_DONNEE();
+    rep.REPORTING_DONNEE();
+    nbSeance = rep.getnbSeance();
+    listENSEIGNANT = rep.getlistENSEIGNANT();
+    int i=0;
+    
+    for(UTILISATEUR enseignant : listENSEIGNANT)
+    {
+        
 
-    DefaultPieDataset pieDataset = new DefaultPieDataset(); 
-    pieDataset.setValue("Valeur1", new Integer(27)); 
-    pieDataset.setValue("Valeur2", new Integer(10)); 
-    pieDataset.setValue("Valeur3", new Integer(50)); 
-    pieDataset.setValue("Valeur4", new Integer(5)); 
+        pieDataset.setValue(enseignant.getNOM(), new Integer(nbSeance.get(i)));
 
-    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par groupe", 
+        
+        
+        i++;
+        
+    }
+    
+
+    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de séance par prof", 
      pieDataset, true, true, true); 
+    
     ChartPanel cPanel = new ChartPanel(pieChart); 
-    graph.add(cPanel); 
+    
+    graph.add(cPanel);
+    
+    
     return graph;
 }
 

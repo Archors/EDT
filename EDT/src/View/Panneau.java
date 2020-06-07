@@ -16,6 +16,7 @@ import Controller.ENSEIGNANT_EDT;
 import Controller.EtudiantEDT;
 import Controller.GROUPE_EDT;
 import Controller.MODIFIER_ETAT_SEANCE;
+import Controller.REPORTING_DONNEE;
 import Controller.SALLE_EDT;
 import Controller.SEANCE_GROUPE;
 import Controller.SUPPRIMER_SEANCE;
@@ -111,12 +112,19 @@ public JPanel edt(){
     //calendrier.removeAll();
     int ID=2;
 
+    
+
 
     int compteurSALLE=0;
 
     String infoSEANCE = "";
 
     EmploiTemps edtutilisateur = new EmploiTemps();
+    
+    
+
+    
+    
     
 
     
