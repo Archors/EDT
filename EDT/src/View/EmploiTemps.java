@@ -113,12 +113,18 @@ public class EmploiTemps {
     
     public Object[][] emploidutempsenseignant(UTILISATEUR enseignant, int semaine){
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
-        edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM());
+        edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM(),semaine);
         listSEANCE = edtenseignant.getlistSEANCE();
         listSALLE = edtenseignant.getListSALLE();
         listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
         listeCOURS = edtenseignant.getListCOURS();
         listeENSEIGNANT = edtenseignant.getlistENSEIGNANT();
+        
+        for(SALLE salle : listSALLE)
+        {
+            System.out.println(salle.getNOM());
+        }
+        
         compteur=0;
 
     //Données du tableau
@@ -149,7 +155,7 @@ public class EmploiTemps {
 
     public Object[][] voiremploidutempsenseignant(String enseignant, int semaine){
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
-        edtenseignant.voirENSEIGNANT_EDT(enseignant);
+        edtenseignant.voirENSEIGNANT_EDT(enseignant,semaine);
         listSEANCE = edtenseignant.getlistSEANCE();
         listSALLE = edtenseignant.getListSALLE();
         listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
@@ -552,10 +558,8 @@ public class EmploiTemps {
         int cours=0;
         for(UTILISATEUR iprof : listprof)
         {
-            iprof.afficherUTILISATEUR();
             if(iprof.getID() == leprof.getID())
             {
-                System.out.println(report.getlistCOURS().get(compteur).getNOM());
                 data[cours][0] = listCOURS.get(compteur).getNOM();
                 data[cours][1] = "Semaine "+ listSEANCEprems.get(compteur).getSEMAINE()+" "+listSEANCEprems.get(compteur).getDATE()+" à "+listSEANCEprems.get(compteur).getHEURE_DEBUT();
                 data[cours][2] = "Semaine "+ listSEANCElast.get(compteur).getSEMAINE()+" "+listSEANCElast.get(compteur).getDATE()+" à "+listSEANCElast.get(compteur).getHEURE_DEBUT();

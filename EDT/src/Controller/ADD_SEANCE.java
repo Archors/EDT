@@ -114,7 +114,7 @@ public class ADD_SEANCE extends SEANCEDAO {
                      
                      //On insere l'enseignant qui donnera le cours de la nouvelle séance
                    ENSEIGNANT_EDT enseignantedt = new ENSEIGNANT_EDT();
-                   enseignantedt.voirENSEIGNANT_EDT(ENSEIGNANTNOM);
+                   enseignantedt.voirENSEIGNANT_EDT(ENSEIGNANTNOM,SEMAINE);
                    listSEANCE = enseignantedt.getlistSEANCE();
                    
                    for(SEANCE seancelibre : listSEANCE)

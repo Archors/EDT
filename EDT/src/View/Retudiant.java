@@ -53,9 +53,8 @@ public class Retudiant extends JPanel{
 }
 
 public JPanel edt(){
-    //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
-    calendrier.setLayout(new BorderLayout());
-    EmploiTemps edtProf = new EmploiTemps();
+    
+    calendrier.setLayout(new BorderLayout()); 
     Object[][] data = {
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},

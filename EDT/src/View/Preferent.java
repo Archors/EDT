@@ -44,7 +44,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-public class Padmin extends JFrame{
+public class Preferent extends JFrame{
   private Color color = Color.white;
   private String message = "";
   private JPanel principal = new JPanel();
@@ -61,7 +61,8 @@ public class Padmin extends JFrame{
   private String namestudent="";
   private String nameroom="";
   private int typesemaine; 
-  public Padmin(ADMIN recupAdmin){
+
+  public Preferent(){
     //etudiant = recupEtudiant;
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
@@ -233,6 +234,7 @@ public JPanel edtprof(String nomprof){
     String infoSEANCE = "";
 
     EmploiTemps edtprof = new EmploiTemps();
+
     calendrier.setLayout(new BorderLayout()); 
 
     //Creation de la classe pour mettre les donne
@@ -261,7 +263,7 @@ public JPanel edteleve(String nomeleve){
     String infoSEANCE = "";
 
     EmploiTemps edtet = new EmploiTemps();
-    
+
     calendrier.setLayout(new BorderLayout()); 
 
 
@@ -291,6 +293,7 @@ public JPanel edtsalle(String nomsalle){
     String infoSEANCE = "";
 
     EmploiTemps edtet = new EmploiTemps();
+
     calendrier.setLayout(new BorderLayout()); 
 
 
