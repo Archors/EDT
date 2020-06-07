@@ -54,6 +54,10 @@ import java.util.List;
 //si la séance comporte moins de 3 groupes (max groupes pour CI)
 //le groupe est-il libre ? 
 //si tous les critères sont réunis, 
+
+/** le but de cette classe est de pouvoir ajouter un groupe à un CI on vérie si la séance existe si le type_cours de la séance est bien un CI si la séance comporte moins de 3 groupes (max groupes pour CI) le groupe est-il libre ? si tous les critères sont réunis. */
+
+
 public class AJOUTER_GROUPE extends GROUPEDAO{
     private int nbgroupe=0;
     private List<SEANCE> listSEANCEGROUPE =new ArrayList<SEANCE>();

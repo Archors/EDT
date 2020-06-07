@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+
 package Controller;
 
 import Model.ADMIN;
@@ -50,6 +53,9 @@ import java.util.Set;
  *
  * @author Milou
  */
+
+/** Permet de récupérer toutes les séances de tous les profs et donne le nombre de séance donné par professeur */
+
 public class REPORTING_DONNEE extends UTILISATEURDAO{
 
    

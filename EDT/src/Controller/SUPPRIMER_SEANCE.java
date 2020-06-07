@@ -16,6 +16,8 @@ import java.sql.SQLException;
  *
  * @author Milou
  */
+
+/** Recoit une séance, vérifie si elle existe et supprime tout ce qui lui est relié dans la BDD */ 
 public class SUPPRIMER_SEANCE extends SEANCEDAO{
     public SUPPRIMER_SEANCE() {}
     public String SUPPRIMER_SEANCE_INSTANCE(int SEMAINE, String DATE, String HEURE_DEBUT, String SALLENOM)
