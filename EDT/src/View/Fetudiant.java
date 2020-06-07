@@ -30,6 +30,8 @@ import java.awt.BorderLayout;
  *
  * @author Aurélien
  */
+
+//classe de la fenetre affichant les onglets d'un etudiant
 public class Fetudiant extends JFrame {
 
     //ETUDIANT student = new ETUDIANT();

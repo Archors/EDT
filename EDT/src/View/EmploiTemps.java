@@ -24,6 +24,7 @@ import java.util.List;
  *
  * @author Antoine
  */
+//classe pour afficher les emplois du temps en grille
 public class EmploiTemps {
     private EtudiantEDT studentEDT = new EtudiantEDT();
     private List<SEANCE> listSEANCE =new ArrayList<>();
@@ -174,6 +175,14 @@ public class EmploiTemps {
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
             }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
             compteur++;
         }
     }
@@ -183,11 +192,9 @@ public class EmploiTemps {
     public Object[][] voiremploidutempsetudiant(String nomet, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
-<<<<<<< HEAD
-    studentEDT.voirETUDIANT_SEANCE(nomet,semaine);
-=======
+
     studentEDT.voirETUDIANT_SEANCE(nomet, semaine);
->>>>>>> e64bd4fef6935f1892cb4041555ce79b72b66893
+
     //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();
@@ -205,7 +212,16 @@ public class EmploiTemps {
             Coordonnees coordo = findJour(i);
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
-                data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
             }
             compteur++;
         }
@@ -213,9 +229,9 @@ public class EmploiTemps {
     return data;
     }
 
-    public Object[][] voiremploidutempssalle(String salle, int semaine){
+    public Object[][] voiremploidutempssalle(String salles, int semaine){
         SALLE_EDT edtsalle = new SALLE_EDT();
-        edtsalle.voirSALLE_EDT(salle);
+        edtsalle.voirSALLE_EDT(salles);
         listSEANCE = edtsalle.getlistSEANCE();
         listeTYPE_COURS = edtsalle.getListTYPE_COURS();
         listeCOURS = edtsalle.getListCOURS();

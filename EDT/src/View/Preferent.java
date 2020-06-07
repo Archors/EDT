@@ -45,6 +45,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+//classe affichant le choix d'edt pour un référent
 public class Preferent extends JFrame{
   private Color color = Color.white;
   private String message = "";
@@ -120,7 +121,7 @@ public class Preferent extends JFrame{
         //calendrier.removeAll();
         typesemaine = 2;
         intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-        intermediaire.add(edtprof(nameroom),BorderLayout.CENTER);
+        intermediaire.add(edtsalle(nameroom),BorderLayout.CENTER);
         principal.add(intermediaire, BorderLayout.CENTER);
         //System.out.println("bouton el");
         //System.out.println(nameroom);
@@ -176,7 +177,7 @@ public JPanel semaine(){
                 intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
             }
             //intermediaire.add(edtprof(nameteacher),BorderLayout.CENTER);
-            System.out.println("je suis sur la semaine prof");
+            //System.out.println("je suis sur la semaine prof");
             principal.add(intermediaire, BorderLayout.CENTER);
            }
         });

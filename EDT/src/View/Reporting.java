@@ -47,39 +47,11 @@ public class Reporting extends JPanel{
   public Reporting(){
     //principal.add(menu());
     principal.setLayout(new BorderLayout());
-    principal.add(menu(),BorderLayout.NORTH);
-    //principal.add(graph(),BorderLayout.CENTER);
+    //principal.add(menu(),BorderLayout.NORTH);
+    principal.add(graphgroupe(),BorderLayout.CENTER);
  
   }
 
-    public JPanel menu(){
-    
-    pan1.add(combo);    
-
-    combo.addItem("groupe");
-    combo.addItem("professeur");
-    combo.addItem("salle");
-
-    combo.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent event){       
-        if(combo.getSelectedItem() == "groupe")
-        {
-          principal.add(graphgroupe(), BorderLayout.CENTER);
-        }
-
-        else if(combo.getSelectedItem() == "professeur")
-        {
-          principal.add(graphprof(), BorderLayout.CENTER);
-        }
-        else if(combo.getSelectedItem() == "salle")
-        {
-          principal.add(graphsalle(), BorderLayout.CENTER);
-        }
-      }
-    });
-
-    return pan1;
-}
 
 public JPanel graphgroupe(){
      graph = new JPanel(new BorderLayout());
@@ -111,7 +83,7 @@ public JPanel graphgroupe(){
     }
     
 
-    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de séance par prof", 
+    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de séances par professeur", 
      pieDataset, true, true, true); 
     
     ChartPanel cPanel = new ChartPanel(pieChart); 
@@ -122,41 +94,6 @@ public JPanel graphgroupe(){
     return graph;
 }
 
-public JPanel graphprof(){
-     graph = new JPanel(new BorderLayout()); 
-    //setContentPane(graph); 
-    setSize(400, 250); 
-
-    DefaultPieDataset pieDataset = new DefaultPieDataset(); 
-    pieDataset.setValue("Valeur1", new Integer(27)); 
-    pieDataset.setValue("Valeur2", new Integer(10)); 
-    pieDataset.setValue("Valeur3", new Integer(50)); 
-    pieDataset.setValue("Valeur4", new Integer(5)); 
-
-    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par professeurs", 
-     pieDataset, true, true, true); 
-    ChartPanel cPanel = new ChartPanel(pieChart); 
-    graph.add(cPanel); 
-    return graph;
-}
-
-public JPanel graphsalle(){
-     graph = new JPanel(new BorderLayout()); 
-    //setContentPane(graph); 
-    setSize(400, 250); 
-
-    DefaultPieDataset pieDataset = new DefaultPieDataset(); 
-    pieDataset.setValue("Valeur1", new Integer(27)); 
-    pieDataset.setValue("Valeur2", new Integer(10)); 
-    pieDataset.setValue("Valeur3", new Integer(50)); 
-    pieDataset.setValue("Valeur4", new Integer(5)); 
-
-    JFreeChart pieChart = ChartFactory.createPieChart("Nombre de cours par salles", 
-     pieDataset, true, true, true); 
-    ChartPanel cPanel = new ChartPanel(pieChart); 
-    graph.add(cPanel); 
-    return graph;
-}
 
  public JPanel getPan(){
         return principal;
