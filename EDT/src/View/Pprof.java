@@ -136,7 +136,7 @@ public JPanel edt(){
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},
-      {"","", "", "", "", ""}
+      {"", "", "", "", "", ""}
     };
       dataL[0]= edtenListe.getL();
       int compteur = 0;
@@ -148,6 +148,8 @@ public JPanel edt(){
         }
 
     //Les titres des colonnes
+    if(dataL[0][0] !="")
+    {
     String  titleL[] = {"Lundi"};
     ZModel modelL = new ZModel(dataL, titleL);
     
@@ -158,6 +160,7 @@ public JPanel edt(){
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauL),BorderLayout.NORTH);
+    }
     
     /////////////////Mardi//////////////
 
@@ -178,6 +181,7 @@ public JPanel edt(){
             
         }
     //Les titres des colonnes
+    if(dataM[0][0] != ""){
     String  titleM[] = {"Mardi"};
 
     ZModel modelM = new ZModel(dataM, titleM);
@@ -188,7 +192,7 @@ public JPanel edt(){
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     //calendrier.removeAll();
-    calendrier1.add(new JScrollPane(tableauM),BorderLayout.CENTER);
+    calendrier1.add(new JScrollPane(tableauM),BorderLayout.CENTER);}
     
 
     /////////////////Mercredi//////////////
@@ -210,6 +214,8 @@ public JPanel edt(){
             
         }
     //Les titres des colonnes
+    if(dataMe[0][0] !="")
+    {
     String  titleMe[] = {"Mercredi"};
     
     ZModel modelMe = new ZModel(dataMe, titleMe);
@@ -221,6 +227,7 @@ public JPanel edt(){
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     
     calendrier1.add(new JScrollPane(tableauMe),BorderLayout.SOUTH);
+    }
     calendrier.add(calendrier1, BorderLayout.NORTH);
 
     //////////Jeudi////////////
@@ -242,6 +249,7 @@ public JPanel edt(){
             
         }
     //Les titres des colonnes
+    if(dataJ[0][0] !=""){
     String  titleJ[] = {"Jeudi"};
     
     ZModel modelJ = new ZModel(dataJ, titleJ);
@@ -253,6 +261,7 @@ public JPanel edt(){
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     
     calendrier2.add(new JScrollPane(tableauJ),BorderLayout.NORTH);
+    }
     
 
     /////////////////Vendredi/////////////////
@@ -274,6 +283,7 @@ public JPanel edt(){
             
         }
     //Les titres des colonnes
+    if(dataV[0][0] !=""){
     String  titleV[] = {"Vendredi"};
     
     ZModel modelV = new ZModel(dataV, titleV);
@@ -285,6 +295,7 @@ public JPanel edt(){
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
     
     calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
+}
     calendrier.add(calendrier2,BorderLayout.CENTER);
     }
     return calendrier; 

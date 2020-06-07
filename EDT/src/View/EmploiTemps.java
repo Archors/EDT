@@ -61,6 +61,14 @@ public class EmploiTemps {
                 System.out.println("VOICI LE COURS VERSION2 : " + listeCOURS.get(compteur).getNOM());
                 data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
             }
+            else if(i.getETAT()==0)
+            {
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            }
+            else if(i.getETAT()==2)
+            {
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            }
             compteur++;
         }
     }
@@ -86,6 +94,14 @@ public class EmploiTemps {
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
             }
             compteur++;
         }
@@ -114,6 +130,14 @@ public class EmploiTemps {
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
                 data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
+            if(i.getETAT()==0){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
+            if(i.getETAT()==2){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
             }
             compteur++;
         }

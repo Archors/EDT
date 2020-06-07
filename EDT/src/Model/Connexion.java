@@ -21,10 +21,10 @@ public class Connexion {
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
     
-    private static String url ="jdbc:mysql://localhost:8889/edt";
+    private static String url ="jdbc:mysql://localhost:3306/edt";
     private static String nameuser="root";
 
-    private static String psswd = "root";
+    private static String psswd = "";
 
     
     public Connection getConnexion() {
