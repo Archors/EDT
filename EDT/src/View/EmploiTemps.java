@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author Antoine
  */
-/** Fonction qui recupere les données du <b>controller</b> et qui s'occupe de les associer avec le <b>view</b> (Swing)*/
+/** Classe qui recupere les données du <b>controller</b> et qui s'occupe de les associer avec le <b>view</b> (Swing)*/
 public class EmploiTemps {
     private EtudiantEDT studentEDT = new EtudiantEDT();
     private List<SEANCE> listSEANCE =new ArrayList<>();
@@ -97,15 +97,15 @@ public class EmploiTemps {
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
-                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM();
             }
             if(i.getETAT()==0){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
-                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+                data[coordo.gety()][coordo.getx()] = "ANNULE : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM();
             }
             if(i.getETAT()==2){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
-                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+                data[coordo.gety()][coordo.getx()] = "EN COURS DE VALIDATION : Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM();
             }
             compteur++;
         }
@@ -254,7 +254,7 @@ public class EmploiTemps {
             //On verifie que le cours n'est pas annulé
             if(i.getETAT()==1){
                 SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
-                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM();
             }
             compteur++;
         }

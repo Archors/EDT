@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+/** Classe qui affiche le panneau de prof*/
 public class Rprof extends JPanel{
   private Color color = Color.white;
   private static int COUNT = 0;

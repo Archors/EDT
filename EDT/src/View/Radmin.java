@@ -24,7 +24,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-//classe affichant le choix de récapitulatif pour un admin
+/**classe affichant le choix de récapitulatif pour un admin*/
 public class Radmin extends JPanel{
   private Color color = Color.white;
   private static int COUNT = 0;

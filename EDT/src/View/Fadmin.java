@@ -30,7 +30,7 @@ import Model.UTILISATEUR;
  * @author Aurélien
  */
 
-//classe affichant la fenêtre d'un administrateur (onglets)
+/**classe affichant la fenêtre d'un administrateur (onglets)*/
 public class Fadmin extends JFrame {
 
     //ETUDIANT student = new ETUDIANT();

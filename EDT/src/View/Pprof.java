@@ -40,6 +40,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+/** Classe qui affiche le panneau de prof*/
 public class Pprof extends JFrame{
   private Color color = Color.white;
   private int COUNT = 0;

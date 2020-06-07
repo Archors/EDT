@@ -44,7 +44,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-//classe affichant l'option d'emploi du temps d'un admin
+/**classe affichant l'option d'emploi du temps d'un admin*/
 public class Padmin extends JFrame{
   private Color color = Color.white;
   private String message = "";
