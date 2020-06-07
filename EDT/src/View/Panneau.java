@@ -62,6 +62,7 @@ public class Panneau extends JFrame{
   private JTable tableauMe;
   private JTable tableauJ;
   private JTable tableauV;
+  //private 
    
   public Panneau(ETUDIANT recupEtudiant){
     etudiant = recupEtudiant;
@@ -95,7 +96,7 @@ public JPanel semaine(){
         public void actionPerformed(ActionEvent event){
             semaine = btnsemaine;
             edt().removeAll();
-         
+           
             intermediaire.add(edt(),BorderLayout.CENTER);
             principal.add(intermediaire, BorderLayout.CENTER);
            }
@@ -158,7 +159,8 @@ public JPanel edt(){
         //calendrier.removeAll();
         calendrier.add(new JScrollPane(tableau));
     }
-    else if(COUNT == 1){
+    else if(COUNT == 1){    
+    
     JPanel calendrier1 = new JPanel();
     JPanel calendrier2 = new JPanel();
     JPanel calendrier3 = new JPanel();
@@ -168,7 +170,7 @@ public JPanel edt(){
     calendrier3.setLayout(new BorderLayout());
     ListeEDT edtenListe = new ListeEDT();
     edtenListe.ListeEtudiant(etudiant,semaine);
-
+    
       Object[][] dataL={
       {"", "", "", "", "", ""},
       {"", "", "", "", "", ""},
@@ -266,7 +268,7 @@ public JPanel edt(){
     //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauMe),BorderLayout.SOUTH);
     }
-    calendrier.add(calendrier1, BorderLayout.NORTH);
+    calendrier.add(new JScrollPane(calendrier1), BorderLayout.NORTH);
 
     //////////Jeudi////////////
 
@@ -333,7 +335,7 @@ public JPanel edt(){
     //calendrier.removeAll();
     calendrier2.add(new JScrollPane(tableauV),BorderLayout.CENTER);
       }
-    calendrier.add(calendrier2,BorderLayout.CENTER);
+    calendrier.add(new JScrollPane(calendrier2),BorderLayout.CENTER);
     }
    // edt().removeAll();
     return calendrier; 

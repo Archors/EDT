@@ -177,7 +177,7 @@ public class EmploiTemps {
     public Object[][] voiremploidutempsetudiant(String nomet, int semaine){
         
         //Creation de l'objet qui contient les données de l'etudiant
-    studentEDT.voirETUDIANT_SEANCE(nomet);
+    studentEDT.voirETUDIANT_SEANCE(nomet,semaine);
     //Recuperation des données sur les cours de l'etudiant dans la classe
     listSEANCE = studentEDT.getlistSEANCE();
     listSALLE = studentEDT.getListSALLE();

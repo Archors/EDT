@@ -146,9 +146,10 @@ public class Fconnexion extends JFrame {
         
         else if (connect.getDroit()==2)
         {
-            REFERENT referent = new REFERENT();
+            /*REFERENT referent = new REFERENT();
             referent=connect.getReferent();
-            referent.afficherREFERENT();
+            referent.afficherREFERENT();*/
+            Freferent fref = new Freferent();
             
         }
         else if (connect.getDroit()==3)
