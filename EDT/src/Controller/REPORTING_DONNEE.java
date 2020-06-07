@@ -157,7 +157,6 @@ private List<SEANCE> listSEANCElast =new ArrayList<SEANCE>();
         
         
         
-        
 
        }catch (SQLException e){
         e.printStackTrace();

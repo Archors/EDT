@@ -538,15 +538,17 @@ public class EmploiTemps {
         List<COURS> listCOURS =new ArrayList<COURS>();
         List<SEANCE> listSEANCEprems =new ArrayList<SEANCE>();
         List<SEANCE> listSEANCElast =new ArrayList<SEANCE>();
+        
         REPORTING_DONNEE report = new REPORTING_DONNEE();
+        
         report.REPORTING_DONNEE();
+        
         listprof = report.getlistENSEIGNANT();
         nbSeance = report.getnbSeance();
         listCOURS = report.getlistCOURS();
         listSEANCEprems = report.getlistSEANCEprems();
         listSEANCElast = report.getlistCOURSlast();
-        report.REPORTING_DONNEE();
-        nbSeance = report.getnbSeance();
+        
         int compteur = 0;
         Object[][] data = {
       {"", "", "", "", ""},
