@@ -32,6 +32,9 @@ import Model.SEANCE;
 import Controller.ADD_SEANCE;
 import Controller.AJOUTER_GROUPE;
 import Controller.SUPPRIMER_SEANCE;
+import Controller.MODIFIER_ETAT_SEANCE;
+
+import Controller.DEPLACER_SEANCE;
 
 import java.awt.GridBagConstraints;
 import java.util.HashSet;
@@ -48,7 +51,7 @@ public class Modification extends JPanel{
   CardLayout cl = new CardLayout();
   JPanel content = new JPanel();
   //Liste des noms de nos conteneurs pour la pile de cartes
-  String[] listContent = {"CARD_1", "CARD_2", "CARD_3", "CARD_4", "CARD_5", "CARD_6"};
+  String[] listContent = {"CARD_1", "CARD_2", "CARD_3", "CARD_5", "CARD_6"};
   //int indice = 0;
 
    
@@ -68,22 +71,22 @@ public class Modification extends JPanel{
     JPanel card3 = new JPanel();
     card3=ajouter();
     //card3.setBackground(Color.green);
-    JPanel card4 = new JPanel();
+    //JPanel card4 = new JPanel();
     //card4=retirer();
-    card4.setBackground(Color.black);		
+    //card4.setBackground(Color.black);		
     JPanel card5 = new JPanel();
-    //card5=deplacer();
-    card5.setBackground(Color.white);		
+    card5=deplacer();
+    //card5.setBackground(Color.white);		
     JPanel card6 = new JPanel();
-    //card6=modifier();
-    card6.setBackground(Color.orange);
+    card6=modifier();
+    //card6.setBackground(Color.orange);
 
     //panel bouton et création des boutons
     JPanel boutonPane = new JPanel();
     JButton creer = new JButton("Ajouter groupe");
     JButton supprimer = new JButton("Supprimer séance");
     JButton ajouter = new JButton("Ajouter séance");
-    JButton retirer = new JButton("Retirer séance");
+    //JButton retirer = new JButton("Retirer séance");
     JButton deplacer = new JButton("Déplacer séance");
     JButton modifier = new JButton("Modifier état séance");
 
@@ -110,23 +113,23 @@ public class Modification extends JPanel{
     });
 
     //action bouton retirer
-    retirer.addActionListener(new ActionListener(){
+    /*retirer.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){       
         cl.show(content, listContent[3]);
       }
-    });
+    });*/
 
     //action bouton deplacer
     deplacer.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){       
-        cl.show(content, listContent[4]);
+        cl.show(content, listContent[3]);
       }
     });
 
     //action bouton modifier
     modifier.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event){       
-        cl.show(content, listContent[5]);
+        cl.show(content, listContent[4]);
       }
     });
 	
@@ -134,7 +137,7 @@ public class Modification extends JPanel{
     boutonPane.add(creer);
     boutonPane.add(supprimer);
     boutonPane.add(ajouter);
-    boutonPane.add(retirer);
+    //boutonPane.add(retirer);
     boutonPane.add(deplacer);
     boutonPane.add(modifier);
     
@@ -144,9 +147,9 @@ public class Modification extends JPanel{
     content.add(card1, listContent[0]);
     content.add(card2, listContent[1]);
     content.add(card3, listContent[2]);
-    content.add(card4, listContent[3]);
-    content.add(card5, listContent[4]);
-    content.add(card6, listContent[5]);
+    //content.add(card4, listContent[3]);
+    content.add(card5, listContent[3]);
+    content.add(card6, listContent[4]);
 
     principal.add(boutonPane, BorderLayout.NORTH);
     principal.add(content, BorderLayout.CENTER);
@@ -441,9 +444,153 @@ public JPanel ajouter(){
 
 //public JPanel retirer(){}
 
-//public JPanel deplacer(){}
+public JPanel deplacer(){
+    JPanel deplacer = new JPanel();
 
-//public JPanel modifier(){}
+        JLabel semaine = new JLabel("Semaine : ");
+        deplacer.add(semaine);
+
+        JTextField textsemaine = new JTextField();
+        textsemaine.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textsemaine);
+
+        JLabel date = new JLabel("Date : ");
+        deplacer.add(date);
+         
+        JTextField textdate = new JTextField();
+        textdate.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textdate);
+
+        JLabel heuredeb = new JLabel("Heure de début : ");
+        deplacer.add(heuredeb);
+         
+        JTextField textheuredeb = new JTextField();
+        textheuredeb.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textheuredeb);
+
+        JLabel nom = new JLabel("Nom de la salle : ");
+        deplacer.add(nom);
+         
+        JTextField textnom = new JTextField();
+        textnom.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textnom);
+
+        JLabel newsemaine = new JLabel("Nouvelle semaine : ");
+        deplacer.add(newsemaine);
+         
+        JTextField textnewsemaine = new JTextField();
+        textnewsemaine.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textnewsemaine);
+
+        JLabel newdate = new JLabel("Nouvelle date : ");
+        deplacer.add(newdate);
+         
+        JTextField textnewdate = new JTextField();
+        textnewdate.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textnewdate);
+
+        JLabel newheuredeb = new JLabel("Nouvelle heure début : ");
+        deplacer.add(newheuredeb);
+         
+        JTextField textnewheuredeb = new JTextField();
+        textnewheuredeb.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textnewheuredeb);
+
+        JLabel newheurefin = new JLabel("Nouvelle heure fin : ");
+        deplacer.add(newheurefin);
+         
+        JTextField textnewheurefin = new JTextField();
+        textnewheurefin.setPreferredSize(new Dimension(80, 20));
+        deplacer.add(textnewheurefin);
+
+
+        JButton move = new JButton("Déplacer");
+        deplacer.add(move); 
+
+       move.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            String ssemaine = textsemaine.getText();
+            int isemaine = Integer.parseInt(ssemaine);
+            String sdate = textdate.getText();
+            String sheuredeb = textheuredeb.getText();
+            String snom = textnom.getText();
+            String snsemaine = textnewsemaine.getText();
+            int insemaine = Integer.parseInt(snsemaine);
+            String snewdate = textnewdate.getText();
+            String snewheuredeb = textnewheuredeb.getText();
+            String snewheurefin = textnewheurefin.getText();
+            //System.out.println("le résultat est : " + testr);
+            DEPLACER_SEANCE depp = new DEPLACER_SEANCE();
+            String depla = depp.DEPLACER_SEANCE_INSTANCE(isemaine, sdate, sheuredeb, snom, insemaine, snewdate, snewheuredeb, snewheurefin);
+            JOptionPane jop2 = new JOptionPane();
+            jop2.showMessageDialog(null, depla, "Ajout", JOptionPane.INFORMATION_MESSAGE);
+           }
+        });
+
+        return deplacer;
+}
+
+public JPanel modifier(){
+    JPanel modif = new JPanel();
+
+        JLabel semaine = new JLabel("Semaine : ");
+        modif.add(semaine);
+
+        JTextField textsemaine = new JTextField();
+        textsemaine.setPreferredSize(new Dimension(80, 20));
+        modif.add(textsemaine);
+
+        JLabel date = new JLabel("Date : ");
+        modif.add(date);
+         
+        JTextField textdate = new JTextField();
+        textdate.setPreferredSize(new Dimension(80, 20));
+        modif.add(textdate);
+
+        JLabel heuredeb = new JLabel("Heure de début : ");
+        modif.add(heuredeb);
+         
+        JTextField textheuredeb = new JTextField();
+        textheuredeb.setPreferredSize(new Dimension(80, 20));
+        modif.add(textheuredeb);
+
+        JLabel nom = new JLabel("Nom de la salle : ");
+        modif.add(nom);
+         
+        JTextField textnom = new JTextField();
+        textnom.setPreferredSize(new Dimension(80, 20));
+        modif.add(textnom);
+
+        JLabel type = new JLabel("Etat : ");
+        modif.add(type);
+         
+        JTextField texttype = new JTextField();
+        texttype.setPreferredSize(new Dimension(80, 20));
+        modif.add(texttype);
+
+        JButton move = new JButton("Modifier");
+        modif.add(move); 
+
+       move.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            String ssemaine = textsemaine.getText();
+            int isemaine = Integer.parseInt(ssemaine);
+            String sdate = textdate.getText();
+            String sheuredeb = textheuredeb.getText();
+            String snom = textnom.getText();
+            String stype = texttype.getText();
+            int itype = Integer.parseInt(stype);
+            
+            //System.out.println("le résultat est : " + testr);
+            MODIFIER_ETAT_SEANCE mod = new MODIFIER_ETAT_SEANCE();
+            String modi = mod.MODIFIER_ETAT_SEANCE(isemaine, sdate, sheuredeb, snom, itype);
+            JOptionPane jop2 = new JOptionPane();
+            jop2.showMessageDialog(null, modi, "Ajout", JOptionPane.INFORMATION_MESSAGE);
+           }
+        });
+
+        return modif;
+}
 
     public JPanel getPan(){
         return principal;

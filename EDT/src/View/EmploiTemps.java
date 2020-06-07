@@ -112,12 +112,18 @@ public class EmploiTemps {
     
     public Object[][] emploidutempsenseignant(UTILISATEUR enseignant, int semaine){
         ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
-        edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM());
+        edtenseignant.voirENSEIGNANT_EDT(enseignant.getNOM(),semaine);
         listSEANCE = edtenseignant.getlistSEANCE();
         listSALLE = edtenseignant.getListSALLE();
         listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
         listeCOURS = edtenseignant.getListCOURS();
         listeENSEIGNANT = edtenseignant.getlistENSEIGNANT();
+        
+        for(SALLE salle : listSALLE)
+        {
+            System.out.println(salle.getNOM());
+        }
+        
         compteur=0;
 
     //Données du tableau
@@ -143,6 +149,89 @@ public class EmploiTemps {
             compteur++;
         }
     }
+    return data;
+    }
+
+    public Object[][] voiremploidutempsenseignant(String enseignant, int semaine){
+        ENSEIGNANT_EDT edtenseignant = new ENSEIGNANT_EDT();
+        edtenseignant.voirENSEIGNANT_EDT(enseignant,semaine);
+        listSEANCE = edtenseignant.getlistSEANCE();
+        listSALLE = edtenseignant.getListSALLE();
+        listeTYPE_COURS = edtenseignant.getListTYPE_COURS();
+        listeCOURS = edtenseignant.getListCOURS();
+        listeENSEIGNANT = edtenseignant.getlistENSEIGNANT();
+        compteur=0;
+
+    //Données du tableau
+    Object[][] data = remplissage();
+    for(SEANCE i : listSEANCE) {
+        if(i.getSEMAINE() == semaine)
+        {
+            Coordonnees coordo = findJour(i);
+            
+            //On verifie que le cours n'est pas annulé
+            if(i.getETAT()==1){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" en salle " + listSALLE.get(compteur).getNOM()+ groupe(sgroup.getlistGROUPE());
+            }
+            compteur++;
+        }
+    }
+    return data;
+    }
+
+    public Object[][] voiremploidutempsetudiant(String nomet, int semaine){
+        
+        //Creation de l'objet qui contient les données de l'etudiant
+    studentEDT.voirETUDIANT_SEANCE(nomet, semaine);
+    //Recuperation des données sur les cours de l'etudiant dans la classe
+    listSEANCE = studentEDT.getlistSEANCE();
+    listSALLE = studentEDT.getListSALLE();
+    listeTYPE_COURS = studentEDT.getListTYPE_COURS();
+    listeCOURS = studentEDT.getListCOURS();
+    listeENSEIGNANT = studentEDT.getlistENSEIGNANT();
+    compteur=0;
+
+    //Données du tableau
+    Object[][] data = remplissage();
+    
+    for(SEANCE i : listSEANCE) {
+        if(i.getSEMAINE() == semaine)
+        {
+            Coordonnees coordo = findJour(i);
+            //On verifie que le cours n'est pas annulé
+            if(i.getETAT()==1){
+                data[coordo.gety()][coordo.getx()] = "Le cours de " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" a lieu en salle " + listSALLE.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM();
+            }
+            compteur++;
+        }
+    }
+    return data;
+    }
+
+    public Object[][] voiremploidutempssalle(String salle, int semaine){
+        SALLE_EDT edtsalle = new SALLE_EDT();
+        edtsalle.voirSALLE_EDT(salle);
+        listSEANCE = edtsalle.getlistSEANCE();
+        listeTYPE_COURS = edtsalle.getListTYPE_COURS();
+        listeCOURS = edtsalle.getListCOURS();
+        listeENSEIGNANT = edtsalle.getlistENSEIGNANT();
+        compteur=0;
+
+    //Données du tableau
+    Object[][] data = remplissage();
+    for(SEANCE i : listSEANCE) {
+        if(i.getSEMAINE() == semaine)
+        {
+            Coordonnees coordo = findJour(i);
+            //On verifie que le cours n'est pas annulé
+            if(i.getETAT()==1){
+                SEANCE_GROUPE sgroup = new SEANCE_GROUPE(i.getID());
+                data[coordo.gety()][coordo.getx()] = "Cours " + listeCOURS.get(compteur).getNOM()+" en "+ listeTYPE_COURS.get(compteur).getNOM()+" avec " + listeENSEIGNANT.get(compteur).getNOM()+" et "+ groupe(listGROUPE) ;
+            }
+            compteur++;
+        }
+        }
     return data;
     }
     

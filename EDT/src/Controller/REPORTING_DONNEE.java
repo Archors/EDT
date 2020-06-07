@@ -56,6 +56,8 @@ public class REPORTING_DONNEE extends UTILISATEURDAO{
    public REPORTING_DONNEE (){}
 private List<UTILISATEUR> listENSEIGNANT =new ArrayList<UTILISATEUR>();
 private List <Integer> nbSeance =new ArrayList<Integer>();
+private List<COURS> listCOURS =new ArrayList<COURS>();
+
 
 
 
@@ -82,9 +84,28 @@ private List <Integer> nbSeance =new ArrayList<Integer>();
                 nbSeance.add(0);
             }
             else{
+            
+            
+            PreparedStatement recupnomcours= this.connection.prepareStatement("SELECT DISTINCT e.ID_COURS FROM ENSEIGNANT e JOIN SEANCE_ENSEIGNANT se ON se.ID_ENSEIGNANT=e.ID_UTILISATEUR JOIN SEANCE s ON s.ID=se.ID_SEANCE WHERE s.ID=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            recupnomcours.setInt(1,resultnbcours.getInt("ID_SEANCE"));
+            ResultSet recupnomcoursfinal = recupnomcours.executeQuery();
+            if(recupnomcoursfinal.first()==false)
+            {}
+            else{
+            COURS cours = new COURS();
+            DAO <COURS> coursdao = new COURSDAO();
+            cours=coursdao.find(recupnomcoursfinal.getInt("ID_COURS"));
+            listCOURS.add(cours);
+            
+            
                 resultnbcours.last();
-                nbSeance.add(resultnbcours.getRow()); 
+                nbSeance.add(resultnbcours.getRow());
+                
             }
+            }
+    
+        
+            
         }
         
         
@@ -108,6 +129,15 @@ private List <Integer> nbSeance =new ArrayList<Integer>();
     
         public List getnbSeance(){
         return nbSeance;
+    }
+        
+        
+         public List<COURS> getlistCOURS(){
+        return listCOURS;
+    }
+             public void addCOURS (COURS cours){
+        if(this.listCOURS.contains(cours)!=true)
+            this.listCOURS.add(cours);
     }
    
 }

@@ -69,7 +69,7 @@ public class Panneau extends JFrame{
     principal.setLayout(new BorderLayout());
     intermediaire.setLayout(new BorderLayout());
     intermediaire.add(new JScrollPane(semaine()),BorderLayout.NORTH);
-    intermediaire.add(edt(),BorderLayout.CENTER);
+    //intermediaire.add(edt(),BorderLayout.CENTER);
     principal.add(intermediaire, BorderLayout.CENTER);
     principal.add(menu(), BorderLayout.NORTH);
   }
@@ -80,6 +80,8 @@ public class Panneau extends JFrame{
     combo.addItem("En grille");
     combo.addItem("En liste");
     combo.addActionListener(new ItemAction());
+
+
     return pan1;
 }
 
@@ -94,6 +96,7 @@ public JPanel semaine(){
         public void actionPerformed(ActionEvent event){
             semaine = btnsemaine;
             edt().removeAll();
+         
             intermediaire.add(edt(),BorderLayout.CENTER);
             principal.add(intermediaire, BorderLayout.CENTER);
            }
@@ -104,17 +107,30 @@ public JPanel semaine(){
 
 public JPanel edt(){
     //Permet de compter le nombre de seance afin de lier la seance avec le bon prof et la bonne salle
-    EmploiTemps edtutilisateur = new EmploiTemps();
+
+    //calendrier.removeAll();
     int ID=2;
+
     
-    REPORTING_DONNEE report = new REPORTING_DONNEE();
-    report.REPORTING_DONNEE();
+
+
+    int compteurSALLE=0;
+
+    String infoSEANCE = "";
+
+    EmploiTemps edtutilisateur = new EmploiTemps();
+    
+    
+
+    
+    
+    
 
     
   //  DEPLACER_SEANCE dep =new DEPLACER_SEANCE();
  //   dep.DEPLACER_SEANCE_INSTANCE(1, "LUNDI", "10h15", "104", 1, "MERCREDI", "10h15", "11h30");
     
-    int compteurSALLE=0;
+    //int compteurSALLE=0;
     List <GROUPE> listGROUPE = new ArrayList<>();
 
 
@@ -131,7 +147,8 @@ public JPanel edt(){
 //AJOUTER_GROUPE ajout = new AJOUTER_GROUPE();
 //System.out.println(ajout.AJOUTER_GROUPE_INSTANCE (1, "Jeudi", "15h30", "105", "TD02", "2022"));
 
-    String infoSEANCE = "";
+    //String infoSEANCE = "";
+
 
 
 
@@ -254,7 +271,7 @@ public JPanel edt(){
     tableauMe.setRowHeight(125);
     //Changement de la taille des colonnes
      //setWidthAsPercentages(tableauL, 0.04, 0.196, 0.196,0.196,0.196,0.196);
-    
+    //calendrier.removeAll();
     calendrier1.add(new JScrollPane(tableauMe),BorderLayout.SOUTH);
     }
     calendrier.add(calendrier1, BorderLayout.NORTH);
@@ -350,16 +367,22 @@ class ItemAction implements ActionListener{
 
       if(combo.getSelectedItem() == "En grille")
       {
+      edt().removeAll();
         COUNT=0;
+        //intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+      //principal.add(intermediaire, BorderLayout.CENTER);
       }
 
       else if(combo.getSelectedItem() == "En liste")
       {
-        COUNT=1;
-      }
       edt().removeAll();
-      intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
-      principal.add(intermediaire, BorderLayout.CENTER);
+        COUNT=1;
+        //intermediaire.add(new JScrollPane(edt()),BorderLayout.CENTER);
+        //principal.add(intermediaire, BorderLayout.CENTER);
+      }
+       //calendrier.removeAll();
+      
+      
     }
   }
 
